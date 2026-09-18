@@ -28,6 +28,8 @@ if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 	return;
 }
 
+define( 'ALMICAHEALING_SEED_CARDS_DIR', get_template_directory() . '/assets/img/cards/' );
+
 /**
  * Inserts or updates a post by its stable seed key.
  *
@@ -77,6 +79,45 @@ function almicahealing_seed_post( $seed_key, array $postarr, array $meta = array
 	}
 
 	return $post_id;
+}
+
+/**
+ * Sets a post's featured image from a theme asset, if it doesn't already
+ * have one. The card photography lives in the theme (assets/img/cards/)
+ * so it travels with the code instead of only existing in whichever
+ * database it was first uploaded to.
+ *
+ * @param int    $post_id Post to attach the image to.
+ * @param string $file    Absolute path to the source image.
+ * @param string $title   Attachment title.
+ */
+function almicahealing_seed_thumbnail( $post_id, $file, $title ) {
+	if ( has_post_thumbnail( $post_id ) || ! file_exists( $file ) ) {
+		return;
+	}
+
+	$filetype = wp_check_filetype( basename( $file ), null );
+	$contents = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	$upload   = wp_upload_bits( basename( $file ), null, $contents );
+
+	if ( $upload['error'] ) {
+		WP_CLI::warning( "Could not seed thumbnail for post {$post_id}: {$upload['error']}" );
+		return;
+	}
+
+	$attachment_id = wp_insert_attachment(
+		array(
+			'post_mime_type' => $filetype['type'],
+			'post_title'     => $title,
+			'post_status'    => 'inherit',
+		),
+		$upload['file'],
+		$post_id
+	);
+
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $upload['file'] ) );
+	set_post_thumbnail( $post_id, $attachment_id );
 }
 
 /**
@@ -159,7 +200,7 @@ function almicahealing_seed_run() {
 		array( 'limpieza-conexion-emocional-personas', 'Limpieza y Conexión Emocional con Personas', false ),
 	);
 	foreach ( $servicios as $order => list( $key, $title, $featured ) ) {
-		almicahealing_seed_post(
+		$servicio_id = almicahealing_seed_post(
 			"servicio-{$key}",
 			array(
 				'post_type'   => 'servicio',
@@ -168,6 +209,11 @@ function almicahealing_seed_run() {
 				'menu_order'  => $order + 1,
 			),
 			array( '_almicahealing_featured' => $featured ? '1' : '' )
+		);
+		almicahealing_seed_thumbnail(
+			$servicio_id,
+			ALMICAHEALING_SEED_CARDS_DIR . "servicio-{$key}.jpg",
+			$title
 		);
 	}
 
@@ -178,7 +224,7 @@ function almicahealing_seed_run() {
 		array( 'lo-que-nadie-nos-enseno', 'Lo Que Nadie Nos Enseñó', 'Herramientas prácticas para afrontar los desafíos cotidianos con mayor conciencia y equilibrio.' ),
 	);
 	foreach ( $cursos as $order => list( $key, $title, $excerpt ) ) {
-		almicahealing_seed_post(
+		$curso_id = almicahealing_seed_post(
 			"curso-{$key}",
 			array(
 				'post_type'    => 'curso',
@@ -187,6 +233,11 @@ function almicahealing_seed_run() {
 				'post_status'  => 'publish',
 				'menu_order'   => $order + 1,
 			)
+		);
+		almicahealing_seed_thumbnail(
+			$curso_id,
+			ALMICAHEALING_SEED_CARDS_DIR . "curso-{$key}.jpg",
+			$title
 		);
 	}
 
