@@ -24,3 +24,5 @@ require ALMICAHEALING_CORE_DIR . 'includes/contact/validation.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/leads.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/mail.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/handler.php';
+
+require ALMICAHEALING_CORE_DIR . 'includes/cli/seed.php';
