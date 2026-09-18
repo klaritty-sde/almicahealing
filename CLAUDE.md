@@ -104,4 +104,6 @@ No CI/deploy pipeline exists yet (Phase 9 of the plan). Until it does, **do not*
 
 ## Issue tracking
 
-<yt-project> — fill in once the YouTrack project for this site is created (Phase 4.3 of the plan).
+Work on this repo is tracked in YouTrack, project **Klaritty Work** (short name `KW`), filtered by the **Klaritty Client** custom field set to **Almica**. When creating, searching, or updating issues for this codebase, scope them to that project/client rather than asking which one to use.
+
+YouTrack MCP connectivity is configured via `.ai/mcp/mcp.json` (git-ignored — it holds a bearer token), symlinked to `.mcp.json` at this repo's root so Claude Code's project-scoped MCP config and any other tool reading `.ai/mcp/mcp.json` stay in sync. The server must be approved once per machine (`claude mcp list` shows pending/connected status).
