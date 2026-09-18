@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		@apply bg-cream text-dark-green font-body;
+	}
+	h1, h2, h3 {
+		@apply font-heading font-normal;
+	}
+}
+
+@layer components {
+	.button {
+		@apply inline-flex items-center justify-center rounded-full px-5 py-2 font-body font-semibold transition-colors;
+	}
+	.button--gold {
+		@apply bg-gold text-dark-green hover:bg-dark-green hover:text-cream;
+	}
+
+	.site-header {
+		@apply bg-dark-green text-cream border-b border-gold/10;
+	}
+	.site-header__inner {
+		@apply mx-auto flex max-w-6xl items-center justify-between px-8 py-5;
+	}
+	.site-nav__list {
+		@apply flex list-none gap-8;
+	}
+
+	.hero--dark {
+		@apply bg-dark-green text-cream;
+	}
+	.hero__inner {
+		@apply mx-auto max-w-3xl px-8 py-24 text-center;
+	}
+	.hero__title {
+		@apply text-4xl md:text-5xl;
+	}
+	.hero__subtitle {
+		@apply mt-4 text-cream/70;
+	}
+
+	.services__inner,
+	.courses__inner,
+	.contact__inner {
+		@apply mx-auto max-w-6xl px-8 py-20;
+	}
+	.services__grid,
+	.courses__grid {
+		@apply mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3;
+	}
+	.service-card,
+	.course-card {
+		@apply rounded-2xl bg-dark-green/5 p-6;
+	}
+
+	.site-footer {
+		@apply bg-dark-green text-cream;
+	}
+	.site-footer__inner {
+		@apply mx-auto grid max-w-6xl gap-10 px-8 py-16 sm:grid-cols-2 lg:grid-cols-4;
+	}
+	.site-footer__list {
+		@apply mt-3 list-none space-y-2 text-cream/70;
+	}
+	.site-footer__bottom {
+		@apply border-t border-cream/10 py-6 text-center text-sm text-cream/50;
+	}
+}
