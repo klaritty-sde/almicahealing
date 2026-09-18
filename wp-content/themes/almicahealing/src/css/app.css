@@ -57,7 +57,7 @@
 		@apply absolute inset-0 bg-dark-green bg-cover bg-center;
 	}
 	.hero__inner {
-		@apply relative mx-auto max-w-3xl px-8 py-24 text-left;
+		@apply relative mx-auto max-w-6xl px-8 py-24 text-left;
 	}
 	.hero__eyebrow {
 		@apply font-body text-sm font-semibold uppercase tracking-[0.2em] text-gold;
