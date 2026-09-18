@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 <header class="site-header">
 	<div class="site-header__inner">
 		<a class="site-header__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<?php bloginfo( 'name' ); ?>
+			<img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo_almica.svg' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="80" height="49">
 		</a>
 
 		<?php
