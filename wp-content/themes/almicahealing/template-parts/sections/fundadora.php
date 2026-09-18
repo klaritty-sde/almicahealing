@@ -1,8 +1,7 @@
 <?php
 /**
  * Founder profile — Alma Solís (Figma "Fundadora" frame, node-id
- * 146-513). Photo is a placeholder — replace with the client-approved
- * portrait once available.
+ * 146-513).
  *
  * @package AlmicaHealing
  */
@@ -11,7 +10,11 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <section class="fundadora">
 	<div class="fundadora__inner">
-		<div class="fundadora__photo" aria-hidden="true"></div>
+		<div
+			class="fundadora__photo"
+			aria-hidden="true"
+			style="background-image: url(<?php echo esc_url( get_theme_file_uri( 'assets/img/acerca-de-fundadora.jpg' ) ); ?>);"
+		></div>
 		<div class="fundadora__bio">
 			<h3 class="fundadora__name"><?php esc_html_e( 'Alma Solís', 'almicahealing' ); ?></h3>
 			<p class="fundadora__role"><?php esc_html_e( 'Fundadora y Directora', 'almicahealing' ); ?></p>

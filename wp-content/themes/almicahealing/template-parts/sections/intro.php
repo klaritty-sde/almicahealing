@@ -1,8 +1,7 @@
 <?php
 /**
  * "Todo comienza cuando volvemos a conectar" intro (Figma "Intro" frame,
- * node-id 146-32). Photo is a placeholder — replace with client-approved
- * photography once available.
+ * node-id 146-32).
  *
  * @package AlmicaHealing
  */
@@ -25,6 +24,10 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 			<a class="button button--outline" href="<?php echo esc_url( home_url( '/acerca-de/' ) ); ?>"><?php esc_html_e( 'Conoce Álmica', 'almicahealing' ); ?></a>
 		</div>
-		<div class="intro__media" aria-hidden="true"></div>
+		<div
+			class="intro__media"
+			aria-hidden="true"
+			style="background-image: url(<?php echo esc_url( get_theme_file_uri( 'assets/img/home-intro.jpg' ) ); ?>);"
+		></div>
 	</div>
 </section>

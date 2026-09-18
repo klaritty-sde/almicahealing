@@ -54,7 +54,7 @@
 		@apply relative overflow-hidden bg-dark-green text-cream;
 	}
 	.hero__media {
-		@apply absolute inset-0 bg-gradient-to-br from-dark-green via-dark-green/90 to-dark-green/70;
+		@apply absolute inset-0 bg-dark-green bg-cover bg-center;
 	}
 	.hero__inner {
 		@apply relative mx-auto max-w-3xl px-8 py-24 text-left;
@@ -95,7 +95,7 @@
 		@apply mt-8;
 	}
 	.intro__media {
-		@apply aspect-[4/3] rounded-[999px_999px_24px_24px] bg-gradient-to-b from-gold/40 to-dark-green/20;
+		@apply aspect-[4/3] rounded-[999px_999px_24px_24px] bg-dark-green/10 bg-cover bg-center;
 	}
 
 	/* Services — Figma "Services" frame, node-id 146-34. */
@@ -161,7 +161,7 @@
 		@apply relative flex min-h-[420px] items-center justify-center overflow-hidden bg-dark-green px-8 py-24 text-center text-cream;
 	}
 	.quote-interlude__media {
-		@apply absolute inset-0 bg-gradient-to-t from-dark-green via-dark-green/60 to-dark-green/30;
+		@apply absolute inset-0 bg-dark-green bg-cover bg-center;
 	}
 	.quote-interlude__quote {
 		@apply relative max-w-2xl font-heading text-2xl md:text-3xl;
@@ -250,7 +250,7 @@
 		@apply mx-auto flex max-w-3xl flex-col gap-6 px-8 pb-20 sm:flex-row;
 	}
 	.fundadora__photo {
-		@apply h-24 w-24 shrink-0 rounded-full bg-gradient-to-br from-gold/50 to-dark-green/20;
+		@apply h-24 w-24 shrink-0 rounded-full bg-dark-green/10 bg-cover bg-center;
 	}
 	.fundadora__name {
 		@apply text-2xl;
