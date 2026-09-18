@@ -1,7 +1,8 @@
 <?php
 /**
- * Services teaser grid. Pulls from the `servicio` CPT registered in
- * almicahealing-core; falls back to nothing if that plugin isn't active.
+ * Services teaser grid (Figma "Services" frame, node-id 146-34). Pulls
+ * from the `servicio` CPT registered in almicahealing-core; falls back to
+ * nothing if that plugin isn't active or no services exist yet.
  *
  * @package AlmicaHealing
  */
@@ -15,7 +16,7 @@ if ( ! post_type_exists( 'servicio' ) ) {
 $almicahealing_services = new WP_Query(
 	array(
 		'post_type'      => 'servicio',
-		'posts_per_page' => -1,
+		'posts_per_page' => 6,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
 	)
@@ -27,7 +28,9 @@ if ( ! $almicahealing_services->have_posts() ) {
 ?>
 <section class="services" id="servicios">
 	<div class="services__inner">
-		<h2 class="services__title"><?php esc_html_e( 'Servicios', 'almicahealing' ); ?></h2>
+		<p class="section-eyebrow"><?php esc_html_e( 'Servicios', 'almicahealing' ); ?></p>
+		<h2 class="services__title"><?php esc_html_e( 'Distintos caminos. Un mismo propósito: volver a ti.', 'almicahealing' ); ?></h2>
+		<p class="section-subtitle"><?php esc_html_e( 'Explora distintas herramientas de acompañamiento y encuentra la que conecta con el momento que estás viviendo.', 'almicahealing' ); ?></p>
 
 		<div class="services__grid">
 			<?php
@@ -35,15 +38,23 @@ if ( ! $almicahealing_services->have_posts() ) {
 				$almicahealing_services->the_post();
 				?>
 				<article class="service-card">
-					<?php if ( has_post_thumbnail() ) : ?>
-						<div class="service-card__media">
-							<?php the_post_thumbnail( 'almicahealing-card' ); ?>
-						</div>
-					<?php endif; ?>
-					<h3 class="service-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+					<a class="service-card__link" href="<?php the_permalink(); ?>">
+						<span class="service-card__media" aria-hidden="true">
+							<?php if ( has_post_thumbnail() ) : ?>
+								<?php the_post_thumbnail( 'almicahealing-card' ); ?>
+							<?php endif; ?>
+						</span>
+						<span class="service-card__body">
+							<span class="service-card__title"><?php the_title(); ?></span>
+							<span class="button button--gold service-card__cta"><?php esc_html_e( 'Ver más', 'almicahealing' ); ?></span>
+						</span>
+					</a>
 				</article>
 			<?php endwhile; ?>
 		</div>
+
+		<?php $almicahealing_services_page = get_page_by_path( 'servicios' ); ?>
+		<a class="button button--dark services__all" href="<?php echo esc_url( $almicahealing_services_page ? get_permalink( $almicahealing_services_page ) : home_url( '/servicios/' ) ); ?>"><?php esc_html_e( 'Ver todos los servicios', 'almicahealing' ); ?></a>
 	</div>
 </section>
 <?php

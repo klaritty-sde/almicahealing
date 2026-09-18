@@ -1,1 +1,1 @@
-(()=>{})();
+(()=>{document.querySelectorAll("[data-almicahealing-slider]").forEach(r=>{let a=r.querySelectorAll(".testimonial-slide"),s=r.querySelectorAll(".testimonials__dot");if(a.length<2)return;let c=e=>{a.forEach((t,l)=>{t.hidden=l!==e}),s.forEach((t,l)=>{t.setAttribute("aria-current",l===e?"true":"false")})};s.forEach(e=>{e.addEventListener("click",()=>{c(parseInt(e.dataset.index,10))})}),c(0)});})();

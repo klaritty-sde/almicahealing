@@ -13,47 +13,212 @@
 
 @layer components {
 	.button {
-		@apply inline-flex items-center justify-center rounded-full px-5 py-2 font-body font-semibold transition-colors;
+		@apply inline-flex items-center justify-center rounded-full px-7 py-3 font-body font-semibold transition-colors;
 	}
 	.button--gold {
 		@apply bg-gold text-dark-green hover:bg-dark-green hover:text-cream;
 	}
+	.button--outline {
+		@apply border border-dark-green/30 bg-transparent text-dark-green hover:border-dark-green hover:bg-dark-green hover:text-cream;
+	}
+	.button--dark {
+		@apply bg-dark-green text-cream hover:bg-gold hover:text-dark-green;
+	}
+
+	.section-eyebrow {
+		@apply font-body text-sm font-semibold uppercase tracking-[0.2em] text-gold;
+	}
+	.section-subtitle {
+		@apply mt-4 max-w-xl text-dark-green/70;
+	}
 
 	.site-header {
-		@apply bg-dark-green text-cream border-b border-gold/10;
-	}
-	.site-header__inner {
-		@apply mx-auto flex max-w-6xl items-center justify-between px-8 py-5;
-	}
-	.site-nav__list {
-		@apply flex list-none gap-8;
-	}
-
-	.hero--dark {
 		@apply bg-dark-green text-cream;
 	}
-	.hero__inner {
-		@apply mx-auto max-w-3xl px-8 py-24 text-center;
+	.site-header__inner {
+		@apply mx-auto flex max-w-6xl items-center justify-between px-8 py-6;
 	}
-	.hero__title {
-		@apply text-4xl md:text-5xl;
+	.site-header__logo {
+		@apply font-heading text-lg tracking-wide text-cream;
 	}
-	.hero__subtitle {
-		@apply mt-4 text-cream/70;
+	.site-nav__list {
+		@apply flex list-none gap-8 text-sm;
 	}
 
+	/* Hero — Figma "Hero" frame, node-id 146-377. */
+	.hero {
+		@apply relative overflow-hidden bg-dark-green text-cream;
+	}
+	.hero__media {
+		@apply absolute inset-0 bg-gradient-to-br from-dark-green via-dark-green/90 to-dark-green/70;
+	}
+	.hero__inner {
+		@apply relative mx-auto max-w-3xl px-8 py-24 text-left;
+	}
+	.hero__eyebrow {
+		@apply font-body text-sm font-semibold uppercase tracking-[0.2em] text-gold;
+	}
+	.hero__title {
+		@apply mt-4 text-4xl md:text-5xl;
+	}
+	.hero__subtitle {
+		@apply mt-6 max-w-xl text-cream/80;
+	}
+	.hero__inner .button {
+		@apply mt-8;
+	}
+
+	/* Intro — Figma "Intro" frame, node-id 146-32. */
+	.intro__inner {
+		@apply mx-auto grid max-w-6xl gap-16 px-8 py-20 md:grid-cols-2 md:items-center;
+	}
+	.intro__title {
+		@apply text-3xl md:text-4xl;
+	}
+	.intro__copy p {
+		@apply mt-4 text-dark-green/70;
+	}
+	.intro__copy em {
+		@apply not-italic text-dark-green;
+	}
+	.intro__copy .button {
+		@apply mt-8;
+	}
+	.intro__media {
+		@apply aspect-[4/3] rounded-[999px_999px_24px_24px] bg-gradient-to-b from-gold/40 to-dark-green/20;
+	}
+
+	/* Services — Figma "Services" frame, node-id 146-34. */
 	.services__inner,
-	.courses__inner,
-	.contact__inner {
-		@apply mx-auto max-w-6xl px-8 py-20;
+	.how-it-works__inner,
+	.courses__inner {
+		@apply mx-auto max-w-6xl px-8 py-20 text-center;
 	}
-	.services__grid,
+	.services__title,
+	.how-it-works__title {
+		@apply mt-3 text-3xl md:text-4xl;
+	}
+	.services__inner .section-subtitle {
+		@apply mx-auto;
+	}
+	.services__grid {
+		@apply mt-12 grid gap-8 text-left sm:grid-cols-2 lg:grid-cols-3;
+	}
+	.service-card__link {
+		@apply relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-dark-green p-6 text-cream;
+	}
+	.service-card__media {
+		@apply absolute inset-0 bg-dark-green/60;
+	}
+	.service-card__media img {
+		@apply h-full w-full object-cover;
+	}
+	.service-card__body {
+		@apply relative flex flex-col items-start gap-4;
+	}
+	.service-card__title {
+		@apply font-heading text-xl;
+	}
+	.services__all {
+		@apply mt-12;
+	}
+
+	/* How it works — Figma "HowItWorks" frame, node-id 146-171. */
+	.how-it-works {
+		@apply bg-dark-green text-cream;
+	}
+	.how-it-works__grid {
+		@apply mt-12 grid gap-8 text-left sm:grid-cols-3;
+	}
+	.step-card {
+		@apply rounded-2xl bg-cream/5 p-8;
+	}
+	.step-card__number {
+		@apply font-heading text-2xl text-gold;
+	}
+	.step-card__title {
+		@apply mt-4 font-heading text-xl;
+	}
+	.step-card__body {
+		@apply mt-3 text-cream/70;
+	}
+
+	/* Quote interlude — Figma "QuoteInterlude" frame, node-id 146-197. */
+	.quote-interlude {
+		@apply relative flex min-h-[420px] items-center justify-center overflow-hidden bg-dark-green px-8 py-24 text-center text-cream;
+	}
+	.quote-interlude__media {
+		@apply absolute inset-0 bg-gradient-to-t from-dark-green via-dark-green/60 to-dark-green/30;
+	}
+	.quote-interlude__quote {
+		@apply relative max-w-2xl font-heading text-2xl md:text-3xl;
+	}
+	.quote-interlude__quote em {
+		@apply not-italic text-cream/80;
+	}
+
+	/* Courses — Figma "Courses" frame, node-id 146-200. */
+	.courses__header {
+		@apply grid gap-8 text-left md:grid-cols-2 md:items-end;
+	}
+	.courses__title {
+		@apply mt-3 text-3xl md:text-4xl;
+	}
+	.courses__intro {
+		@apply text-dark-green/70;
+	}
 	.courses__grid {
-		@apply mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3;
+		@apply mt-12 grid gap-8 text-left sm:grid-cols-2 lg:grid-cols-3;
 	}
-	.service-card,
-	.course-card {
-		@apply rounded-2xl bg-dark-green/5 p-6;
+	.course-card__media {
+		@apply aspect-[4/5] overflow-hidden rounded-2xl;
+	}
+	.course-card__media img {
+		@apply h-full w-full object-cover;
+	}
+	.course-card__number {
+		@apply mt-4 block font-heading text-sm text-gold;
+	}
+	.course-card__title {
+		@apply mt-1 font-heading text-xl;
+	}
+	.course-card__title a {
+		@apply hover:text-gold;
+	}
+	.course-card__excerpt {
+		@apply mt-2 text-dark-green/70;
+	}
+
+	/* Testimonials — Figma "Testimonials" frame, node-id 146-279. */
+	.testimonials {
+		@apply bg-gold/20;
+	}
+	.testimonials__inner {
+		@apply mx-auto max-w-3xl px-8 py-20 text-center;
+	}
+	.testimonials__title {
+		@apply text-3xl md:text-4xl;
+	}
+	.testimonial-slide {
+		@apply mt-8;
+	}
+	.testimonial-slide__quote {
+		@apply font-heading text-xl italic text-dark-green md:text-2xl;
+	}
+	.testimonial-slide__meta {
+		@apply mt-6;
+	}
+	.testimonial-slide__name {
+		@apply block font-body font-semibold not-italic text-dark-green;
+	}
+	.testimonial-slide__label {
+		@apply block text-sm text-gold;
+	}
+	.testimonials__dots {
+		@apply mt-8 flex justify-center gap-2;
+	}
+	.testimonials__dot {
+		@apply h-2 w-2 rounded-full bg-dark-green/30 transition-colors aria-[current=true]:bg-gold;
 	}
 
 	.site-footer {
@@ -65,7 +230,16 @@
 	.site-footer__list {
 		@apply mt-3 list-none space-y-2 text-cream/70;
 	}
+	.site-footer__social {
+		@apply mt-4 flex list-none gap-3;
+	}
+	.site-footer__social a {
+		@apply flex h-8 w-8 items-center justify-center rounded-full border border-cream/20 text-xs text-cream/70 hover:border-gold hover:text-gold;
+	}
 	.site-footer__bottom {
-		@apply border-t border-cream/10 py-6 text-center text-sm text-cream/50;
+		@apply flex flex-col items-center justify-between gap-2 border-t border-cream/10 px-8 py-6 text-center text-sm text-cream/50 sm:mx-auto sm:max-w-6xl sm:flex-row sm:text-left;
+	}
+	.site-footer__tagline {
+		@apply font-heading italic text-gold/80;
 	}
 }

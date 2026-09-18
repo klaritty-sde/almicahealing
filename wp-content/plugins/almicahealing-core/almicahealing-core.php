@@ -16,6 +16,7 @@ define( 'ALMICAHEALING_CORE_URI', plugin_dir_url( __FILE__ ) );
 
 require ALMICAHEALING_CORE_DIR . 'includes/cpt/servicio.php';
 require ALMICAHEALING_CORE_DIR . 'includes/cpt/curso.php';
+require ALMICAHEALING_CORE_DIR . 'includes/cpt/testimonio.php';
 
 require ALMICAHEALING_CORE_DIR . 'includes/contact/countries.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/fields.php';

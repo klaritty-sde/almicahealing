@@ -29,13 +29,20 @@ if ( ! $almicahealing_courses->have_posts() ) {
 ?>
 <section class="courses" id="cursos">
 	<div class="courses__inner">
-		<h2 class="courses__title"><?php esc_html_e( 'El conocimiento también transforma.', 'almicahealing' ); ?></h2>
-		<p class="courses__intro"><?php esc_html_e( 'Creemos que comprender es parte del proceso de sanar. Por eso compartimos reflexiones, recursos y contenido pensado para acompañar tu camino de autoconocimiento.', 'almicahealing' ); ?></p>
+		<div class="courses__header">
+			<div>
+				<p class="section-eyebrow"><?php esc_html_e( 'Aprende · Profundiza · Transforma', 'almicahealing' ); ?></p>
+				<h2 class="courses__title"><?php esc_html_e( 'El conocimiento también transforma.', 'almicahealing' ); ?></h2>
+			</div>
+			<p class="courses__intro"><?php esc_html_e( 'Creemos que comprender es parte del proceso de sanar. Por eso compartimos reflexiones, recursos y contenido pensado para acompañar tu camino de autoconocimiento, más allá de cada sesión. Porque la claridad también se construye con lo que aprendemos en el camino.', 'almicahealing' ); ?></p>
+		</div>
 
 		<div class="courses__grid">
 			<?php
+			$almicahealing_course_index = 0;
 			while ( $almicahealing_courses->have_posts() ) :
 				$almicahealing_courses->the_post();
+				++$almicahealing_course_index;
 				?>
 				<article class="course-card">
 					<?php if ( has_post_thumbnail() ) : ?>
@@ -43,9 +50,9 @@ if ( ! $almicahealing_courses->have_posts() ) {
 							<?php the_post_thumbnail( 'almicahealing-card' ); ?>
 						</div>
 					<?php endif; ?>
-					<h3 class="course-card__title"><?php the_title(); ?></h3>
+					<span class="course-card__number"><?php echo esc_html( sprintf( '%02d', $almicahealing_course_index ) ); ?></span>
+					<h3 class="course-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 					<p class="course-card__excerpt"><?php the_excerpt(); ?></p>
-					<a class="button button--gold" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Ver más', 'almicahealing' ); ?></a>
 				</article>
 			<?php endwhile; ?>
 		</div>

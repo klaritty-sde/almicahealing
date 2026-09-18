@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="site-footer__inner">
 		<div class="site-footer__brand">
 			<p class="site-footer__logo"><?php bloginfo( 'name' ); ?></p>
-			<p><?php esc_html_e( 'Bienestar integral para un camino de conexión, claridad y transformación.', 'almicahealing' ); ?></p>
+			<p><?php esc_html_e( 'Bienestar integral para un proceso de conexión, claridad y transformación.', 'almicahealing' ); ?></p>
 		</div>
 
 		<nav class="site-footer__col" aria-label="<?php esc_attr_e( 'Navegación', 'almicahealing' ); ?>">
@@ -54,10 +54,26 @@ defined( 'ABSPATH' ) || exit;
 				<li><?php echo esc_html( almicahealing_brand( 'phone' ) ); ?></li>
 				<li><?php echo esc_html( almicahealing_brand( 'location' ) ); ?></li>
 			</ul>
+
+			<?php
+			$almicahealing_social = array_filter( almicahealing_brand( 'social' ) );
+			?>
+			<?php if ( $almicahealing_social ) : ?>
+				<ul class="site-footer__social">
+					<?php foreach ( $almicahealing_social as $almicahealing_network => $almicahealing_url ) : ?>
+						<li>
+							<a href="<?php echo esc_url( $almicahealing_url ); ?>" aria-label="<?php echo esc_attr( ucfirst( $almicahealing_network ) ); ?>" target="_blank" rel="noopener noreferrer">
+								<?php echo esc_html( strtoupper( substr( $almicahealing_network, 0, 2 ) ) ); ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 		</div>
 	</div>
 
 	<div class="site-footer__bottom">
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Todos los derechos reservados.', 'almicahealing' ); ?></p>
+		<p class="site-footer__tagline"><?php esc_html_e( 'El equilibrio que da origen a todo', 'almicahealing' ); ?></p>
 	</div>
 </footer>
