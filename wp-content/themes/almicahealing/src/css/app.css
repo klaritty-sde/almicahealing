@@ -44,6 +44,10 @@
 	.site-nav__list {
 		@apply flex list-none gap-8 text-sm;
 	}
+	.site-nav__list .current-menu-item > a,
+	.site-nav__list .current_page_item > a {
+		@apply text-gold;
+	}
 
 	/* Hero — Figma "Hero" frame, node-id 146-377. */
 	.hero {
@@ -66,6 +70,12 @@
 	}
 	.hero__inner .button {
 		@apply mt-8;
+	}
+	.hero--short .hero__inner {
+		@apply py-32;
+	}
+	.hero__inner--center {
+		@apply mx-auto max-w-2xl text-center;
 	}
 
 	/* Intro — Figma "Intro" frame, node-id 146-32. */
@@ -219,6 +229,66 @@
 	}
 	.testimonials__dot {
 		@apply h-2 w-2 rounded-full bg-dark-green/30 transition-colors aria-[current=true]:bg-gold;
+	}
+
+	/* Historia — Figma "Historia" frame, node-id 146-488. */
+	.historia__inner {
+		@apply mx-auto max-w-3xl px-8 py-20;
+	}
+	.historia__title {
+		@apply mt-3 text-3xl md:text-4xl;
+	}
+	.historia__inner p {
+		@apply mt-6 text-dark-green/70;
+	}
+
+	/* Fundadora — Figma "Fundadora" frame, node-id 146-513. */
+	.fundadora__inner {
+		@apply mx-auto flex max-w-3xl flex-col gap-6 px-8 pb-20 sm:flex-row;
+	}
+	.fundadora__photo {
+		@apply h-24 w-24 shrink-0 rounded-full bg-gradient-to-br from-gold/50 to-dark-green/20;
+	}
+	.fundadora__name {
+		@apply text-2xl;
+	}
+	.fundadora__role {
+		@apply mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-gold;
+	}
+	.fundadora__bio p {
+		@apply mt-6 text-dark-green/70;
+	}
+
+	/* Formación — Figma "Formacion" frame, node-id 146-… */
+	.formacion {
+		@apply bg-gold text-cream;
+	}
+	.formacion__inner {
+		@apply mx-auto max-w-3xl px-8 py-20;
+	}
+	.formacion__title {
+		@apply text-3xl md:text-4xl;
+	}
+	.formacion__list {
+		@apply mt-10 divide-y divide-cream/20;
+	}
+	.formacion-item {
+		@apply py-8 first:pt-0 last:pb-0;
+	}
+	.formacion-item__head {
+		@apply flex items-baseline justify-between gap-4;
+	}
+	.formacion-item__title {
+		@apply font-heading text-xl;
+	}
+	.formacion-item__year {
+		@apply shrink-0 text-sm text-cream/70;
+	}
+	.formacion-item__institution {
+		@apply mt-1 italic text-cream/80;
+	}
+	.formacion-item__body {
+		@apply mt-3 text-cream/80;
 	}
 
 	.site-footer {
