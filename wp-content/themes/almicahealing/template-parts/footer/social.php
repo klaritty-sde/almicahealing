@@ -11,7 +11,9 @@ defined( 'ABSPATH' ) || exit;
 <footer class="site-footer">
 	<div class="site-footer__inner">
 		<div class="site-footer__brand">
-			<p class="site-footer__logo"><?php bloginfo( 'name' ); ?></p>
+			<a class="site-header__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo_almica.svg' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="80" height="49">
+			</a>
 			<p><?php esc_html_e( 'Bienestar integral para un proceso de conexión, claridad y transformación.', 'almicahealing' ); ?></p>
 		</div>
 

@@ -297,6 +297,9 @@
 	.site-footer {
 		@apply bg-dark-green text-cream;
 	}
+	.site-footer__brand {
+		@apply flex flex-col items-center justify-center gap-4;
+	}
 	.site-footer__inner {
 		@apply mx-auto grid max-w-6xl gap-10 px-8 py-16 sm:grid-cols-2 lg:grid-cols-4;
 	}
