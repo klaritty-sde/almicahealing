@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+#
+# almicahealing-sync — pull a theme (or plugin) from the almicahealing production server
+# on Cloudways down into the local VVV site.
+#
+# PULL ONLY. This script never writes to production.
+#
+# Usage:
+#   almicahealing-sync                        # pull the almicahealing theme
+#   almicahealing-sync -n                     # dry run: show what would change
+#   almicahealing-sync some-other-theme       # pull a different theme
+#   almicahealing-sync --plugin my-plugin     # pull a plugin instead
+#   almicahealing-sync --delete               # also delete local files gone from prod
+#   almicahealing-sync --refresh              # re-detect the remote WordPress root
+#   almicahealing-sync -- --exclude='dist/'   # everything after -- goes to rsync
+#
+# Overridable via env:
+#   ALMICAHEALING_REMOTE_HOST      default: cloudways-almica-prod (see ~/.ssh/config)
+#   ALMICAHEALING_REMOTE_WP_ROOT   default: auto-detected, then cached
+#   ALMICAHEALING_LOCAL_WP_ROOT    default: the project root (this script's parent dir)
+
+set -euo pipefail
+
+REMOTE_HOST="${ALMICAHEALING_REMOTE_HOST:-cloudways-almica-prod}"
+# This script lives in <project>/bin/. Resolve the project root from its own
+# location so it works via the ~/.local/bin symlink and survives a project move.
+resolve_script_dir() {
+  src="${BASH_SOURCE[0]}"
+  while [ -L "$src" ]; do
+    dir=$(cd -P "$(dirname "$src")" && pwd)
+    src=$(readlink "$src")
+    case "$src" in /*) ;; *) src="$dir/$src" ;; esac
+  done
+  cd -P "$(dirname "$src")" && pwd
+}
+PROJECT_ROOT=$(cd "$(resolve_script_dir)/.." && pwd)
+LOCAL_WP_ROOT="${ALMICAHEALING_LOCAL_WP_ROOT:-$PROJECT_ROOT}"
+DEFAULT_THEME="almicahealing"
+CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/almicahealing-sync.env"
+
+EXCLUDES=( '.git/' 'node_modules/' '.DS_Store' '.idea/' )
+
+SSH_OPTS=( -o ControlMaster=auto -o "ControlPath=$HOME/.ssh/cm-almicahealing-%r@%h:%p" -o ControlPersist=120 )
+SSH_CMD="ssh -o ControlMaster=auto -o ControlPath=$HOME/.ssh/cm-almicahealing-%r@%h:%p -o ControlPersist=120"
+
+die() { printf '\033[31merror:\033[0m %s\n' "$*" >&2; exit 1; }
+info() { printf '\033[36m%s\033[0m\n' "$*"; }
+
+usage() { awk 'NR>=3 { if (!/^#/) exit; sub(/^# ?/, ""); print }' "$0"; }
+
+cleanup() { ssh "${SSH_OPTS[@]}" -O exit "$REMOTE_HOST" 2>/dev/null || true; }
+trap cleanup EXIT
+
+kind="themes"
+name=""
+dry_run=0
+delete=0
+refresh=0
+extra=()
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -n|--dry-run) dry_run=1; shift ;;
+    --delete)     delete=1; shift ;;
+    --plugin)     kind="plugins"; shift ;;
+    --theme)      kind="themes"; shift ;;
+    --refresh)    refresh=1; shift ;;
+    --host)       REMOTE_HOST="$2"; shift 2 ;;
+    -h|--help)    usage; exit 0 ;;
+    --)           shift; extra=( "$@" ); break ;;
+    -*)           die "unknown option: $1 (use --help)" ;;
+    *)            name="$1"; shift ;;
+  esac
+done
+
+if [ -z "$name" ]; then
+  [ "$kind" = "themes" ] || die "a plugin slug is required: almicahealing-sync --plugin <slug>"
+  name="$DEFAULT_THEME"
+fi
+
+# --- Resolve the remote WordPress root (cached after the first successful run).
+
+[ "$refresh" -eq 1 ] && rm -f "$CACHE_FILE"
+# shellcheck disable=SC1090
+[ -f "$CACHE_FILE" ] && . "$CACHE_FILE"
+
+if [ -z "${ALMICAHEALING_REMOTE_WP_ROOT:-}" ]; then
+  info "Detecting the WordPress root on $REMOTE_HOST ..."
+  roots=()
+  while IFS= read -r line; do
+    [ -n "$line" ] && roots+=( "$line" )
+  done < <(ssh "${SSH_OPTS[@]}" "$REMOTE_HOST" '
+    for d in "$HOME/public_html" "$HOME"/applications/*/public_html; do
+      [ -d "$d" ] && printf "%s\n" "$d"
+    done' 2>/dev/null || true)
+
+  case "${#roots[@]}" in
+    0) die "no WordPress root found on $REMOTE_HOST. Set it by hand, e.g.:
+         ALMICAHEALING_REMOTE_WP_ROOT=/home/master/applications/<app>/public_html almicahealing-sync" ;;
+    1) ALMICAHEALING_REMOTE_WP_ROOT="${roots[0]}" ;;
+    *) printf 'Several candidates found:\n' >&2
+       printf '  %s\n' "${roots[@]}" >&2
+       die "pick one and re-run with ALMICAHEALING_REMOTE_WP_ROOT=<path>" ;;
+  esac
+
+  mkdir -p "$(dirname "$CACHE_FILE")"
+  printf 'ALMICAHEALING_REMOTE_WP_ROOT=%s\n' "$ALMICAHEALING_REMOTE_WP_ROOT" > "$CACHE_FILE"
+  info "Remote root: $ALMICAHEALING_REMOTE_WP_ROOT  (cached in $CACHE_FILE)"
+fi
+
+remote_src="$ALMICAHEALING_REMOTE_WP_ROOT/wp-content/$kind/$name"
+local_dst="$LOCAL_WP_ROOT/wp-content/$kind/$name"
+
+[ -d "$LOCAL_WP_ROOT/wp-content/$kind" ] \
+  || die "local path does not exist: $LOCAL_WP_ROOT/wp-content/$kind"
+
+# --- Verify the source exists before rsync silently creates nothing.
+
+if ! ssh "${SSH_OPTS[@]}" "$REMOTE_HOST" "test -d '$remote_src'"; then
+  printf '\033[31merror:\033[0m %s not found on production.\n' "wp-content/$kind/$name" >&2
+  printf 'Available %s there:\n' "$kind" >&2
+  ssh "${SSH_OPTS[@]}" "$REMOTE_HOST" "ls -1 '$ALMICAHEALING_REMOTE_WP_ROOT/wp-content/$kind'" 2>/dev/null \
+    | sed 's/^/  /' >&2
+  exit 1
+fi
+
+# --- Build and run the pull.
+
+args=( -avh --progress )
+[ "$dry_run" -eq 1 ] && args+=( --dry-run )
+[ "$delete" -eq 1 ] && args+=( --delete )
+for e in "${EXCLUDES[@]}"; do args+=( --exclude="$e" ); done
+args+=( -e "$SSH_CMD" )
+args+=( ${extra[@]+"${extra[@]}"} )
+
+printf '\n\033[1mPULL  production → local%s\033[0m\n' "$([ "$dry_run" -eq 1 ] && printf '  (dry run)')"
+printf '  from  %s:%s/\n' "$REMOTE_HOST" "$remote_src"
+printf '  to    %s/\n\n' "$local_dst"
+
+if [ "$delete" -eq 1 ] && [ "$dry_run" -eq 0 ]; then
+  printf '\033[33m--delete will REMOVE local files that no longer exist on production.\033[0m\n'
+  printf 'Type "yes" to continue: '
+  read -r reply
+  [ "$reply" = "yes" ] || die "aborted"
+fi
+
+mkdir -p "$local_dst"
+rsync "${args[@]}" "$REMOTE_HOST:$remote_src/" "$local_dst/"
+
+printf '\n\033[32mDone.\033[0m %s\n' "$local_dst"

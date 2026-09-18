@@ -13,16 +13,16 @@
 
 !/wp-content/themes/
 /wp-content/themes/*
-!/wp-content/themes/<slug>/
+!/wp-content/themes/almicahealing/
 
 !/wp-content/plugins/
 /wp-content/plugins/*
-!/wp-content/plugins/<slug>-core/
+!/wp-content/plugins/almicahealing-core/
 
 !/wp-content/mu-plugins/
 /wp-content/mu-plugins/*
-!/wp-content/mu-plugins/<slug>-analytics.php
-!/wp-content/mu-plugins/<slug>-environment.php
+!/wp-content/mu-plugins/almicahealing-analytics.php
+!/wp-content/mu-plugins/almicahealing-environment.php
 
 **/node_modules/
 **/.DS_Store
