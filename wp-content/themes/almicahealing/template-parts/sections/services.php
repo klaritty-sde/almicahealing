@@ -4,6 +4,11 @@
  * from the `servicio` CPT registered in almicahealing-core; falls back to
  * nothing if that plugin isn't active or no services exist yet.
  *
+ * Only services with the `_almicahealing_featured` custom field set to
+ * `1` are shown here — the full catalog lives on the Servicios page
+ * (see page-servicios.php). Toggle it from a servicio's Custom Fields
+ * panel to control what appears in this teaser.
+ *
  * @package AlmicaHealing
  */
 
@@ -19,6 +24,8 @@ $almicahealing_services = new WP_Query(
 		'posts_per_page' => 6,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
+		'meta_key'       => '_almicahealing_featured',
+		'meta_value'     => '1',
 	)
 );
 

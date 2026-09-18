@@ -132,6 +132,9 @@
 	.services__all {
 		@apply mt-12;
 	}
+	.services-catalog__inner {
+		@apply mx-auto max-w-6xl px-8 py-20;
+	}
 
 	/* How it works — Figma "HowItWorks" frame, node-id 146-171. */
 	.how-it-works {

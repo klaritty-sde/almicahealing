@@ -29,7 +29,7 @@ function almicahealing_register_servicio() {
 			'show_in_rest'  => true,
 			'menu_icon'     => 'dashicons-universal-access-alt',
 			'menu_position' => 20,
-			'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
+			'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'custom-fields' ),
 			'rewrite'       => array( 'slug' => 'servicios' ),
 		)
 	);
