@@ -2,7 +2,8 @@
 
 > Status: **proposal — nothing here is implemented yet.**
 > Source analysed: Figma file *Álmica-Healing*, page **Website - MV1** (`node-id=146-30`), inspected 2026-09-18.
-> Also consulted for context only: pages *Mapa de sitio* and *Website - MV2* (see [Open Questions](#open-questions)).
+> Also consulted for context only: pages *Mapa de sitio* and *Website - MV2*. **Phase 1 = MV1 only**; everything else is deferred (see [Decisions](#decisions-2026-09-19)).
+> Field plugin: **Secure Custom Fields (SCF)**, free. ACF Pro is out of budget.
 > Machine-readable companion: [`content-model.yaml`](content-model.yaml).
 
 ## Executive Summary
@@ -34,10 +35,11 @@ wrong data in the design: frames with the wrong name, the wrong photo or another
 is the strongest argument for making Profesional a relationship target rather than repeating it inside
 each service.
 
-A fifth entity, **Producto** (candles and workbooks), appears only in the sitemap and in MV2. It's
-documented here as provisional and is outside MV1 scope.
+Phase 1 is MV1 only. The shop (**Producto**, candles and workbooks), the Contáctanos page and
+booking appear only in the sitemap or MV2 and are **deferred**; they are listed under
+[Deferred](#deferred-out-of-phase-1) and are not part of this model.
 
-No taxonomy is needed for MV1. The one real taxonomy candidate is product category (MV2).
+No taxonomy is needed in phase 1.
 
 ## Figma Pattern Analysis
 
@@ -70,13 +72,13 @@ No taxonomy is needed for MV1. The one real taxonomy candidate is product catego
 2. Hero: **program label pill** ("CURSO INTERMEDIO DE CANALIZACIÓN Y SANACIÓN"), **title**, **tagline**
 3. "SOBRE EL CURSO": **description** (2 paragraphs)
 4. Numbered list box. **The heading varies**: "OBJETIVOS" (Clantanra), "BENEFICIOS" (Riutunmi), "TEMAS" (Lo Que Nadie Nos Enseñó)
-5. Sidebar: "INVERSIÓN" card (**price** and **duration**, e.g. "$5,900 MXN / 2 meses"), omitted when the price is on request (Clantanra); "FACILITADOR/A" card (**professional** photo and name); "¿TE INTERESA ESTE PROGRAMA?" card (**global** copy and the courses email)
+5. Sidebar: "INVERSIÓN" card (**price** and **duration**, e.g. "$5,900 MXN / 2 meses"), omitted when the price is on request (Clantanra); "FACILITADOR/A" card (**professional** photo and name); "¿TE INTERESA ESTE PROGRAMA?" card (**global** copy and the contact email)
 6. "OTROS PROGRAMAS": the other courses (image, level, title)
 7. Footer (global)
 
 ### Site-wide components (not content types)
 
-- **Header**: logo plus the primary menu (Inicio, Acerca de, Servicios, Cursos; MV2 adds Tienda).
+- **Header**: logo plus the primary menu (Inicio, Acerca de, Servicios, Cursos; Tienda is deferred).
 - **Footer**: logo and blurb; NAVEGACIÓN (Acerca de, Servicios, Cursos, Tienda, Contáctanos); LEGAL (Términos y condiciones, Aviso de privacidad); CONTACTO (email, phone, "México · sesiones virtuales", IG/FB/TK); copyright; tagline "El equilibrio que da origen a todo".
 - **Service card**: used by the Home teaser, the Servicios grid and "Otros servicios".
 - **Course card**: used by the Home teaser, the Cursos grid and "Otros programas".
@@ -91,7 +93,7 @@ No taxonomy is needed for MV1. The one real taxonomy candidate is product catego
 | Therapist block repeated on every service they deliver | one `profesional` post |
 | Founder on Acerca de **and** "Facilitador/a" on every course | one `profesional` post (Alma Solís) |
 | Course level badge on listing cards, "Otros programas" cards, Home teaser | `curso.level` |
-| Courses email on 3 course pages | global `courses_email` |
+| Contact email on course pages, legal pages and footer | global `contact_email` |
 | Footer contact block on every frame | global settings |
 
 ## Domain Model
@@ -106,8 +108,6 @@ erDiagram
     TESTIMONIO }o--o| SERVICIO : "sobre"
     TESTIMONIO }o--o| CURSO : "sobre"
     PAGINA_ACERCA_DE }o--|| PROFESIONAL : "fundadora"
-    SERVICIO }o--o| PRODUCTO : "incluye cuadernillo (provisional)"
-    PRODUCTO }o--|| CATEGORIA_PRODUCTO : "provisional, MV2"
 ```
 
 | Entity | Independent lifecycle | Reused | Own URL | Decision |
@@ -120,9 +120,7 @@ erDiagram
 | Punto de programa | no | no | no | repeater on Curso |
 | Credencial | no | no | no | repeater on Profesional |
 | Nivel de curso | n/a | 3 fixed values, no listing per level | no | select field, **not** a taxonomy |
-| Modalidad | n/a | fixed values, no filtering | no | checkbox field |
-| Producto | yes | shop listing, maybe linked from services | TBD | provisional CPT (MV2) |
-| Categoría de producto | n/a | tab filter with counts | TBD | provisional taxonomy (MV2) |
+| Modalidad | n/a | fixed values, no filtering | no | select field (enum) |
 
 Why these are fields rather than taxonomies: level and modality have a few fixed values, no archive
 page, and nothing in the design filters by them. A taxonomy would add admin screens and term
@@ -135,6 +133,7 @@ Conventions:
 - Post-type keys stay **Spanish**, as already registered (`servicio`, `curso`, `testimonio`). Renaming
   them would orphan existing content and permalinks.
 - Field names are **English snake_case semantic names**.
+- Source `SCF` = a custom field registered with Secure Custom Fields (see [Field groups](#field-groups-secure-custom-fields)).
 - "Rec. limit" means a layout-driven recommendation, not a business rule. Enforce it softly (character
   counter or warning), not as a hard block, unless marked otherwise.
 
@@ -148,19 +147,19 @@ page. WordPress object: **CPT `servicio`** (exists). Editor-managed: yes. Reusab
 | title | `post_title` | text | ✔ | 1 | — | Rec. ≤ 60 chars. Some titles wrap to 2 lines in the hero, and the design allows that |
 | slug | `post_name` | slug | ✔ | 1 | from title | Stable import ID. URL `/servicios/{slug}/` |
 | summary | `post_excerpt` | textarea | ✔ | 1 | — | Rec. ≤ 160 chars. Hero subtitle unless `tagline` is set; also used as the meta description |
-| tagline | ACF | text | – | 0..1 | falls back to `summary` | Hero subtitle override |
+| tagline | SCF | text | – | 0..1 | falls back to `summary` | Hero subtitle override |
 | description | `post_content` | rich text | ✔ | 1 | — | "Sobre este servicio", 1–3 paragraphs, no headings |
 | card_image | featured image | image | ✔ | 1 | — | Service card and "Otros servicios". Min 800×1000, portrait crop |
-| hero_image | ACF | image | – | 0..1 | falls back to featured image | Figma uses a different photo in the hero than on the card for several services |
-| price | ACF | number | ✔ | 1 | — | ≥ 0, 2 decimals, MXN. Shown as "$1,150.00 MXN" |
-| price_basis | ACF | text | – | 0..1 | global `service_price_basis` ("por sesión individual") | Override only when a service isn't priced per session |
-| duration_minutes | ACF | number | ✔ | 1 | 60 | Integer 15–480. Rendered in **both** the hero chip and the Inversión card |
-| modality | ACF | checkbox | ✔ | 1..2 | `presencial` | `presencial`, `virtual`. ⚠ see Open Questions Q3 |
-| benefits | ACF | repeater | ✔ | 1..6 | — | See Beneficio. Observed 1–5 per service |
-| professionals | ACF | relationship → `profesional` | ✔ | 1..3 | — | "Quién imparte". Observed exactly 1 per service. More than one renders stacked cards |
-| related_services | ACF | relationship → `servicio` | – | 0..3 | automatic (see Q5) | "Otros servicios". Leave empty to fill automatically |
-| is_featured | ACF | true/false | – | 1 | false | Shown in the Home teaser (6 slots). Replaces the existing `_almicahealing_featured` meta |
-| includes_workbook | ACF | true/false | – | 1 | false | From the Figma sticky note. ⚠ Q6 |
+| hero_image | SCF | image | – | 0..1 | falls back to featured image | Figma uses a different photo in the hero than on the card for several services |
+| price | SCF | number | ✔ | 1 | — | ≥ 0, 2 decimals, MXN. Shown as "$1,150.00 MXN" |
+| price_basis | SCF | text | – | 0..1 | global `service_price_basis` ("por sesión individual") | Override only when a service isn't priced per session |
+| duration_minutes | SCF | number | ✔ | 1 | 60 | Integer 15–480. Rendered in **both** the hero chip and the Inversión card |
+| modality | SCF | select (enum) | ✔ | 1 | `presencial` | `presencial` "Presencial", `virtual` "Virtual", `hibrida` "Presencial y virtual". All 11 frames show Presencial |
+| benefits | SCF | repeater | ✔ | 1..6 | — | See Beneficio. Observed 1–5 per service |
+| professionals | SCF | relationship → `profesional` | – | 0..3 | empty | "Quién imparte". Observed 1 per service. Leave empty when the therapist isn't confirmed; the section is then hidden. More than one renders stacked cards |
+| related_services | SCF | relationship → `servicio` | – | 0..3 | automatic (see Q5) | "Otros servicios". Leave empty to fill automatically |
+| is_featured | SCF | true/false | – | 1 | false | Shown in the Home teaser (6 slots). Replaces the existing `_almicahealing_featured` meta |
+| includes_workbook | SCF | true/false | – | 1 | false | From the Figma sticky note. ⚠ Q6 |
 | order | `menu_order` | number | – | 1 | 0 | Order in every listing |
 
 **Beneficio** (repeater row, embedded)
@@ -181,16 +180,16 @@ Editor-managed: yes. Reusable: yes.
 | title | `post_title` | text | ✔ | 1 | — | |
 | slug | `post_name` | slug | ✔ | 1 | — | URL `/cursos/{slug}/` |
 | summary | `post_excerpt` | textarea | ✔ | 1 | — | Listing card and Home teaser text. Rec. ≤ 160 chars. **Differs** from the hero tagline in Figma |
-| tagline | ACF | text | – | 0..1 | falls back to `summary` | Hero subtitle |
+| tagline | SCF | text | – | 0..1 | falls back to `summary` | Hero subtitle |
 | description | `post_content` | rich text | ✔ | 1 | — | "Sobre el curso" |
 | image | featured image | image | ✔ | 1 | — | Card, hero and "Otros programas" all use the same photo in Figma |
-| program_label | ACF | text | ✔ | 1 | — | Hero pill, e.g. "Curso intermedio de canalización y sanación". Rec. ≤ 50 chars |
-| level | ACF | select | ✔ | 1 | — | `basico` "Básico", `intermedio` "Intermedio", `abierto` "Abierto a todos". ⚠ Q9 |
-| price | ACF | number | – | 0..1 | empty = "price on request" | ≥ 0, whole MXN. Shown as "$5,900 MXN". When empty, show the global `price_on_request_text` and hide the Inversión card |
-| duration | ACF | text | ✔ if price set | 0..1 | — | Free text: "2 meses", "3 meses". Rec. ≤ 30 chars |
-| outcomes_heading | ACF | select | ✔ | 1 | `objetivos` | `objetivos`, `beneficios`, `temas` |
-| outcomes | ACF | repeater | ✔ | 1..10 | — | One `text` subfield (≤ 160 chars). Rendered as a numbered list. Numbers are generated automatically, never typed (Figma has a duplicated "4") |
-| facilitators | ACF | relationship → `profesional` | ✔ | 1..2 | — | "Facilitador/a" card |
+| program_label | SCF | text | ✔ | 1 | — | Hero pill, e.g. "Curso intermedio de canalización y sanación". Rec. ≤ 50 chars |
+| level | SCF | select | ✔ | 1 | — | `basico` "Básico", `intermedio` "Intermedio", `abierto` "Abierto a todos". ⚠ Q9 |
+| price | SCF | number | – | 0..1 | empty = "price on request" | ≥ 0, whole MXN. Shown as "$5,900 MXN". When empty, show the global `price_on_request_text` and hide the Inversión card |
+| duration | SCF | text | ✔ if price set | 0..1 | — | Free text: "2 meses", "3 meses". Rec. ≤ 30 chars |
+| outcomes_heading | SCF | select | ✔ | 1 | `objetivos` | `objetivos`, `beneficios`, `temas` |
+| outcomes | SCF | repeater | ✔ | 1..10 | — | One `text` subfield (≤ 160 chars). Rendered as a numbered list. Numbers are generated automatically, never typed (Figma has a duplicated "4") |
+| facilitators | SCF | relationship → `profesional` | ✔ | 1..2 | — | "Facilitador/a" card |
 | order | `menu_order` | number | – | 1 | 0 | |
 
 "Otros programas" isn't a field: it shows all other published courses (there are only 3).
@@ -205,18 +204,18 @@ pages; see Q7). Editor-managed: yes. Reusable: yes (this is the main reason it e
 |---|---|---|---|---|---|---|
 | name | `post_title` | text | ✔ | 1 | — | Full display name |
 | slug | `post_name` | slug | ✔ | 1 | — | Stable import ID (e.g. `gabriela-dominguez`) |
-| role | ACF | text | ✔ | 1 | — | Gold line under the name, e.g. "Terapeuta Holística. Especialista en Terapia Centrada en Soluciones". Rec. ≤ 100 chars |
+| role | SCF | text | ✔ | 1 | — | Gold line under the name, e.g. "Terapeuta Holística. Especialista en Terapia Centrada en Soluciones". Rec. ≤ 100 chars |
 | bio | `post_content` | rich text | ✔ | 1 | — | 1–3 paragraphs |
 | photo | featured image | image | ✔ | 1 | — | Square, min 400×400, shown as a circle |
-| credentials | ACF | repeater | – | 0..n | — | "Formación" on Acerca de. See Credencial |
+| credentials | SCF | repeater | – | 0..n | — | "Formación" on Acerca de. See Credencial |
 | order | `menu_order` | number | – | 1 | 0 | |
 
 **Credencial** (repeater row): `title` (text, ✔), `year` (number, 4 digits, –), `institution`
 (text, –), `description` (textarea, –).
 
-Instances observed in Figma: Alma Solís (founder, all 3 courses), Elizabeth de las Casas (Arteterapia),
-Gabriela Domínguez (3 services), Tonathiu Muñoz (5 services), Perla Berrones (1 service; placeholder
-data, see Q2).
+Instances to seed (4): Alma Solís (founder, all 3 courses), Elizabeth de las Casas (Arteterapia),
+Gabriela Domínguez (3 services), Tonathiu Muñoz (5 services). "Perla Berrones" appears on one frame
+with placeholder data and is **not** seeded (decision D4).
 
 ### Testimonio
 
@@ -226,7 +225,7 @@ Purpose: a client quote on Home. WordPress object: **CPT `testimonio`** (exists;
 |---|---|---|---|---|---|
 | client_name | `post_title` | text | ✔ | 1 | Display form, e.g. "Valentina R.". Editorial rule: first name plus initial |
 | quote | `post_content` | textarea | ✔ | 1 | Rec. ≤ 300 chars |
-| about | ACF | post object → `servicio` \| `curso` | – | 0..1 | Label under the name comes from the related post's title. **Replaces** today's free-text excerpt ("Biodescodificación"), which drifts when a service is renamed |
+| about | SCF | post object → `servicio` \| `curso` | – | 0..1 | Label under the name comes from the related post's title. **Replaces** today's free-text excerpt ("Biodescodificación"), which drifts when a service is renamed |
 | order | `menu_order` | number | – | 1 | |
 
 ### Pages (WordPress Page, not CPT)
@@ -254,10 +253,8 @@ value for long legal text and would make it harder to paste in text from a lawye
 | Curso | CPT | `curso` (exists) | title, editor, excerpt, thumbnail, page-attributes | public, `has_archive=false` | `cursos` |
 | Profesional | CPT | `profesional` (**new**) | title, editor, thumbnail, page-attributes | `public=false`, `show_ui=true` | none |
 | Testimonio | CPT | `testimonio` (exists) | title, editor, page-attributes (drop `excerpt` after migration) | not public | none |
-| Global settings | ACF options page | `almica-ajustes` | — | — | — |
+| Global settings | SCF options page | `almica-ajustes` | — | — | — |
 | Nav menus | native menus | `primary`, `footer` (exist) | — | — | — |
-| *(MV2)* Producto | CPT | `producto` | title, excerpt, thumbnail, page-attributes | TBD (Q10) | TBD |
-| *(MV2)* Categoría | taxonomy | `categoria_producto` | — | TBD | TBD |
 
 Having both a `servicios` Page and `servicio` singles under `/servicios/{slug}/` already works today,
 and the same pattern applies to `cursos`.
@@ -273,15 +270,42 @@ and the same pattern applies to `cursos`.
 | featured image | card image | image | photo | — |
 | `menu_order` | listing order | listing order | order | slider order |
 
-### ACF field groups
+### Field groups (Secure Custom Fields)
 
-Register the field groups in code inside `almicahealing-core`, using `acf_add_local_field_group()` or
-`acf-json/` committed to the repo. That keeps the schema versioned and deployable (see Q11 for which
-ACF edition).
+**Plugin choice (decision D2).** ACF Pro is out of budget. Use
+[Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) (SCF), the free fork of ACF
+maintained on WordPress.org. It includes the ACF Pro field types this model needs: repeater,
+relationship, and options pages. As of this writing it's at v6.9.5, tested up to WordPress 7.1.1, and
+requires PHP 7.4+ (the site runs WP 7.1 / PHP 8.2).
 
-| Group | Location | Fields (ACF type) |
+Because SCF is an ACF fork, it keeps ACF's PHP API (`acf_add_local_field_group()`, `get_field()`,
+`acf_add_options_page()`). Confirm those three calls work when the plugin is installed (Ticket 1).
+The field types below use ACF/SCF type names.
+
+- Register every group **in code** inside `almicahealing-core` (`acf_add_local_field_group()`), so the
+  schema is versioned and deploys with the plugin; don't define fields through the admin UI.
+- Wrap all reads in theme helpers (`almicahealing_field( $key, $post )`) instead of calling
+  `get_field()` directly in templates. This keeps the theme working if SCF is inactive, and makes a
+  later switch to hand-coded meta a contained change.
+- SCF is installed as a normal plugin. The `.gitignore` allowlist keeps it out of this repo, the
+  same as `query-monitor`. Install it on production before deploying code that depends on it.
+
+**Fallback if SCF is ruled out: code it ourselves.** Only a few fields in this model are hard without a
+plugin:
+
+| Feature | Hand-coded approach | Effort |
 |---|---|---|
-| `group_servicio` "Servicio" | post_type == servicio | `tagline` (text), `hero_image` (image, return ID), `price` (number, step 0.01, min 0), `price_basis` (text, placeholder = global), `duration_minutes` (number, min 15, max 480, step 15, default 60), `modality` (checkbox: presencial, virtual), `benefits` (repeater: `icon` select, `title` text, `description` textarea; min 1, max 6, layout block), `professionals` (relationship → profesional, min 1, max 3, return ID), `related_services` (relationship → servicio, max 3), `is_featured` (true_false, ui), `includes_workbook` (true_false) |
+| Scalars (text, number, select, boolean) | `register_post_meta()` + a meta box or a block-editor sidebar panel | low |
+| Relationships | Meta storing post IDs + a searchable multi-select | medium |
+| Repeaters (benefits, outcomes, credentials, process steps) | Serialized JSON meta + a small React list control | high; this is the main cost |
+| Options page | Settings API page | low |
+
+Estimate the hand-coded route at a few extra days, mostly spent on the repeater UI. Take it only if a
+free plugin is unacceptable for policy reasons.
+
+| Group | Location | Fields (SCF type) |
+|---|---|---|
+| `group_servicio` "Servicio" | post_type == servicio | `tagline` (text), `hero_image` (image, return ID), `price` (number, step 0.01, min 0), `price_basis` (text, placeholder = global), `duration_minutes` (number, min 15, max 480, step 15, default 60), `modality` (select: presencial, virtual, hibrida), `benefits` (repeater: `icon` select, `title` text, `description` textarea; min 1, max 6, layout block), `professionals` (relationship → profesional, min 0, max 3, return ID), `related_services` (relationship → servicio, max 3), `is_featured` (true_false, ui), `includes_workbook` (true_false) |
 | `group_curso` "Curso" | post_type == curso | `tagline` (text), `program_label` (text), `level` (select), `price` (number, min 0), `duration` (text), `outcomes_heading` (select), `outcomes` (repeater: `text` text; min 1, max 10), `facilitators` (relationship → profesional, min 1, max 2) |
 | `group_profesional` "Profesional" | post_type == profesional | `role` (text), `credentials` (repeater: `title` text, `year` number, `institution` text, `description` textarea) |
 | `group_testimonio` "Testimonio" | post_type == testimonio | `about` (post_object → servicio, curso; allow null) |
@@ -357,8 +381,8 @@ inspection.
 | 16 | Conexión con Seres Trascendidos (Servicio - limpieza energética) | 245-473 | `servicio`: $1,300, 2 benefits, Tonathiu Muñoz | `single-servicio.php` | instance | no |
 | 17 | Conexión con Registros | — | `servicio`: $1,300, 2 benefits, Tonathiu Muñoz | `single-servicio.php` | instance | no |
 | 18 | Futuros Posibles (Servicio - limpieza energética) | — | `servicio`: $1,300, 2 benefits (title only), Tonathiu Muñoz | `single-servicio.php` | instance | no |
-| 19 | Limpieza y Conexión con Personas (Servicio - limpieza energética) | 268-5817 † | `servicio`: $1,150, 2 benefits (title only), therapist ⚠ Q2 | `single-servicio.php` | instance | no |
-| 20 | Limpieza y Conexión Emocional con Personas (Servicio - limpieza energética) | 268-6039 | `servicio`: $1,150, 3 benefits (title only), "Perla Berrones" ⚠ Q2 | `single-servicio.php` | instance | no |
+| 19 | Limpieza y Conexión con Personas (Servicio - limpieza energética) | 268-5817 † | `servicio`: $1,150, 2 benefits (title only), professionals **blank** (D4) | `single-servicio.php` | instance | no |
+| 20 | Limpieza y Conexión Emocional con Personas (Servicio - limpieza energética) | 268-6039 | `servicio`: $1,150, 3 benefits (title only), professionals **blank** (D4) | `single-servicio.php` | instance | no |
 | — | Sticky: "incluir que se descarga cuadernillo cuando contratan el servicio" | — | `servicio.includes_workbook` (Q6) | — | annotation | no → open question |
 | — | Text ×3: "reemplazar foto terapeuta" | — | `profesional.photo` (content task) | — | annotation | no → content task |
 
@@ -383,12 +407,13 @@ All 11 service frames share one hero duration value (60 min) and one modality ("
 | List heading Objetivos / Beneficios / Temas | frames 5–7 | `outcomes_heading` |
 | Active legal tab | frames 8–9 | Derived from the current page |
 | Nav "Cursos" highlighted on course pages | frames 5–7 | `current-menu-*` classes on the primary menu |
+| No confirmed therapist → no "Quién imparte" section | frames 19–20 | `professionals` empty |
 
 ### Content defects in Figma (fix during population and QA; don't implement them)
 
 1. **Limpieza Energética de Lugares**: the description is a copy of Armonización Energética Laboral's text.
-2. **Limpieza y Conexión con Personas**: the card is named "Elizabeth de las Casas", but it has Gabriela's photo, Tonathiu's bio and the role "Acompañante Terapéutico".
-3. **Limpieza y Conexión Emocional con Personas**: the card is named "Perla Berrones", but it has Gabriela's photo and Tonathiu's bio.
+2. **Limpieza y Conexión con Personas**: the card is named "Elizabeth de las Casas", but it has Gabriela's photo, Tonathiu's bio and the role "Acompañante Terapéutico". → Leave `professionals` blank (D4).
+3. **Limpieza y Conexión Emocional con Personas**: the card is named "Perla Berrones", but it has Gabriela's photo and Tonathiu's bio. → Leave `professionals` blank (D4).
 4. **"Otros servicios"** shows the same 3 services on every page, including on the Biodecodificación page itself.
 5. **Lo Que Nadie Nos Enseñó**: the hero pill says "Curso básico de canalización", but the level badge says "Abierto a todos". The Temas list numbers "4" twice.
 6. Conexión con Seres Trascendidos, Conexión con Registros, Futuros Posibles and both Limpieza y Conexión frames reuse the same hero photo.
@@ -445,8 +470,6 @@ All 11 service frames share one hero duration value (60 min) and one modality ("
 
 **`ajustes`**: `key`, `value` (one row per global setting; see below)
 
-*(MV2, provisional)* **`productos`**: `slug`, `title`, `category` (term slug), `intention_label`, `summary`, `price`, `image`, `order`
-
 ### Import order
 
 `profesionales` → `profesional_formacion` → `servicios` → `servicio_beneficios` → `cursos` →
@@ -457,19 +480,18 @@ a report rather than importing partially.
 ## Global Content
 
 Store these once on the options page **Ajustes de Álmica** (today most of them are hard-coded in
-`inc/brand.php` or in templates). Section labels such as "Lo que esta sesión puede ofrecerte",
+`inc/brand.php` or in templates). **The contact values in the current `inc/brand.php` are canonical**
+(decision D3); the differing addresses in Figma (hola@, cursos@, contacto@almica.mx) are not used. Section labels such as "Lo que esta sesión puede ofrecerte",
 "Quién imparte" and "Otros servicios" stay **translatable theme strings**. They are part of the
 design, not per-site content, and exposing them as fields invites inconsistency.
 
-| Key | Type | Value seen in Figma | Used by |
+| Key | Type | Value | Used by |
 |---|---|---|---|
-| `contact_email` | email | ⚠ inconsistent (Q4) | Footer |
-| `courses_email` | email | cursos@almica.mx | Course sidebar card |
-| `privacy_email` | email | contacto@almica.mx | Legal pages |
-| `phone` | text | ⚠ Figma footer and `brand.php` differ (Q4) | Footer |
-| `whatsapp` | text/URL | — (mentioned in legal and MV2 shop copy) | Legal note, shop |
-| `location_label` | text | México · sesiones virtuales | Footer |
-| `social_instagram` / `social_facebook` / `social_tiktok` | URL | IG / FB / TK buttons, no URLs | Footer |
+| `contact_email` | email | almicahealing@gmail.com (current `brand.php`) | Footer, course sidebar card, legal contact note: one address everywhere |
+| `phone` | text | +52 81 7008 8058 (current `brand.php`) | Footer |
+| `whatsapp` | text/URL | — blank for now (the legal note mentions WhatsApp) | Legal note; hidden while empty |
+| `location_label` | text | México · sesiones virtuales (current `brand.php`) | Footer |
+| `social_instagram` / `social_facebook` / `social_tiktok` | URL | blank in current `brand.php` | Footer; empty values hide their buttons |
 | `footer_blurb` | textarea | Bienestar integral para un proceso de conexión, claridad y transformación. | Footer |
 | `footer_tagline` | text | El equilibrio que da origen a todo | Footer |
 | `currency_label` | text | MXN | All prices |
@@ -477,79 +499,112 @@ design, not per-site content, and exposing them as fields invites inconsistency.
 | `price_on_request_text` | text | Escríbenos para conocer el precio | Course card and detail |
 | `course_inquiry_title` / `course_inquiry_body` | text / textarea | ¿Te interesa este programa? / Escríbenos directamente y con gusto te damos más información. | Course sidebar |
 | `legal_contact_note` | textarea | Para cualquier duda relacionada con este documento… | Legal pages |
-| Primary / footer menus | native menus | Inicio, Acerca de, Servicios, Cursos (+ Tienda); footer adds Contáctanos | Header, footer |
+| Primary / footer menus | native menus | Inicio, Acerca de, Servicios, Cursos. Tienda and Contáctanos are deferred and stay out of the menus in phase 1 | Header, footer |
+
+## Decisions (2026-09-19)
+
+Resolved by the project owner. IDs match the original open-question numbers so earlier references
+still make sense.
+
+| # | Question | Decision | Effect on the model |
+|---|---|---|---|
+| D1 (Q1) | MV1 or MV2? | **MV1 is phase 1.** Everything else is deferred. | Producto, product category, Tienda and the MV2 Home shop teaser are removed from the model (see [Deferred](#deferred-out-of-phase-1)) |
+| D2 (Q11) | Custom-fields plugin | **No ACF Pro** (no budget). Use a free equivalent or code it. | Secure Custom Fields, registered in code. The hand-coded route is documented as a fallback in [Field groups](#field-groups-secure-custom-fields) |
+| D3 (Q4) | Canonical contact data | **The current implementation (`inc/brand.php`) is correct.** | A single `contact_email`; the Figma @almica.mx addresses are dropped. `courses_email` and `privacy_email` are removed |
+| D4 (Q2) | Therapists for the two "Limpieza y Conexión" services | **Leave blank if unclear.** | `servicio.professionals` becomes optional (0..3); the "Quién imparte" section is hidden when empty; Perla Berrones isn't seeded |
+| D5 (Q3) | Modality | **An enum is fine.** | `modality` is a single-select enum: `presencial`, `virtual`, `hibrida`. Default `presencial` |
+| D6 (Q12) | Booking and payment | **Skip for now.** | No booking entity, field or CTA in phase 1 |
 
 ## Open Questions
 
+Still open. None of them block phase 1; each has a default that the implementation can use.
+
 | # | Unknown | Why it matters | Recommended default | What changes |
 |---|---|---|---|---|
-| Q1 | **Is MV1 or MV2 the source of truth?** MV2 exists with Tienda frames and a longer Home (shop teaser "Herramientas para acompañar tu camino"). | Scope, entities (Producto) and the Home field list | Build MV1 now and treat MV2 additions as a later phase | If MV2 wins: add Producto + Categoría, a Tienda page, and a Home shop teaser before launch |
-| Q2 | **Who delivers Limpieza y Conexión con Personas and Limpieza y Conexión Emocional con Personas?** Who is Perla Berrones? | The relationship data and the professional roster | Leave `professionals` empty and don't publish these two services until confirmed | Possibly a new `profesional` row |
-| Q3 | **Modality.** Every service says "Presencial", but the brand copy says "clínica virtual" and "México · sesiones virtuales". | A field on every service; possibly a filter | Checkbox field, defaulting to what the client confirms per service | If some services are both → show "Presencial / Virtual". If it becomes filterable → promote to taxonomy |
-| Q4 | **Canonical contact data.** Figma footers use different emails (hola@almica.mx on service frames, a Gmail address on others); `brand.php` has another email and a phone number that doesn't match the Figma footer. | Global settings | Ask the client for one list (general, courses, privacy, phone, WhatsApp) | Only the values change |
 | Q5 | **How are "Otros servicios" chosen?** | Whether `related_services` is required | Automatic: 3 other services by `menu_order` (next 3, wrapping around), with an optional manual override | If the client wants curation → make the field required |
-| Q6 | **Workbook ("cuadernillo") note.** What is downloaded, when, and by whom? | Could be a flag, a file field, or a link to a Producto (MV2 "Libretas") | `includes_workbook` true/false plus a display line; no file delivery | Delivering the file after purchase needs payments/booking (Q12). If it's a Producto → relationship field |
+| Q6 | **Workbook ("cuadernillo") note.** What is downloaded, when, and by whom? | Could be a flag or a file field | `includes_workbook` true/false plus a display line; no file delivery (booking and shop are deferred) | Delivering the file needs the deferred booking/shop work |
 | Q7 | **Do professionals get public profile pages?** | CPT visibility, a template, SEO | `public=false` for now | Flip to public plus `single-profesional.php`, with no data migration needed |
 | Q8 | **Benefit icon set.** Figma uses a small set of line icons (heart, waves, sprout, eye, rings…). | Validation of `benefits.icon` | A fixed list of ~10 SVGs shipped in the theme, chosen by slug | If editors need free icons → an image field (inconsistent style risk) |
 | Q9 | **Course level vs program label.** Lo Que Nadie Nos Enseñó is "Abierto a todos" but its pill says "básico". | Whether `program_label` can be derived from `level` | Keep them as two fields | If the label is always "Curso {level} de {discipline}" → derive it and drop the field |
-| Q10 | **Shop mechanics (MV2).** Orders are "coordinated by WhatsApp or email" per the MV2 copy. | Whether WooCommerce is needed | Catalog-only CPT with a WhatsApp/email CTA, no cart | A real checkout → WooCommerce products, which replaces the `producto` CPT |
-| Q11 | **Custom-fields plugin.** No custom-fields plugin is installed. Repeaters and options pages need ACF Pro, or Secure Custom Fields (verify its current feature set). | Licensing and deployment | Pick one before Ticket 1 and register fields in code | Native `register_post_meta` + blocks is possible, but repeaters get costly |
-| Q12 | **Booking and payment.** Home says "Reserva tu sesión — selecciona disponibilidad", but no service page shows a booking CTA. | A booking URL per service? External tool? | A global booking CTA (URL or WhatsApp) on every service; no booking entity | An external scheduler per service → add `booking_url` to Servicio |
-| Q13 | **Contáctanos page.** It's in the sitemap and footer, but MV1 has no frame for it. The contact form already exists. | Whether a page/template is needed | A simple Page using the existing form partial | A dedicated design → its own ticket |
 | Q14 | **Course schedule.** Start dates, sessions and modality aren't in the design. | Possible date fields and "upcoming" logic | Leave out; `duration` is free text | Adding cohorts → a repeater of editions on Curso |
+
+## Deferred (out of phase 1)
+
+Recorded so the model can be extended later without rework. Not part of this model or the YAML.
+
+| Item | Source | Notes for later |
+|---|---|---|
+| **Tienda / Producto** | Sitemap; MV2 "Tienda - Velas" frames (node 256-3748) | Catalog of candles and workbooks: image, intention label (e.g. "Protección energética"), name, short description, price. Category tabs Velas / Libretas → a `categoria_producto` taxonomy. MV2 copy says orders are coordinated by WhatsApp or email, which suggests a catalog CPT rather than WooCommerce (former Q10) |
+| **Home shop teaser** | MV2 Home ("Herramientas para acompañar tu camino") | Add to `group_home` when the shop lands |
+| **Contáctanos page** | Sitemap, footer | No MV1 frame. The contact form already exists and could be placed on a simple Page (former Q13) |
+| **Booking and payment** | Home step "Reserva tu sesión" | Decision D6. Revisit together with the workbook delivery (Q6) |
 
 ## Implementation Recommendations
 
-Not implemented; this is the proposed order.
+Not implemented; this is the proposed order. Ticket numbers are in italics; see [YouTrack Tickets](#youtrack-tickets).
 
-1. **Decide Q1, Q11, Q4.** These block the schema and the globals.
-2. **Field framework and options page.** Register field groups in `almicahealing-core` code, not the database.
-3. **Profesional CPT and data.** Everything else references it.
-4. **Servicio fields and the migration** of `_almicahealing_featured`. Extend `wp almicahealing seed` to migrate idempotently.
-5. **`single-servicio.php`**, built against frame 10 (Arteterapia) and verified against frames 11–20.
-6. **Curso fields, `single-curso.php`, and the `page-cursos.php` listing.** Point the "Cursos" menu item to `/cursos/` instead of `/#cursos`.
-7. **Legal template** hero and tabs.
-8. **Globals refactor**: header, footer and course sidebar read from the options page. Delete `inc/brand.php`.
-9. **Page fields for Home and Acerca de.** Lowest priority: the copy rarely changes, and the current hard-coded version works.
-10. **CSV importer** (`wp almicahealing import <dir>`), reusing the seed helpers (`almicahealing_seed_post`, `almicahealing_seed_thumbnail`).
-11. **Content population** from the client spreadsheet, then per-instance QA against Figma.
+1. **Install Secure Custom Fields** locally and on production, and confirm the ACF-compatible API (D2). *KW-147*
+2. **Field framework and options page.** Register field groups in `almicahealing-core` code, not the database; add the theme read helpers. *KW-147*
+3. **Profesional CPT and data.** Everything else references it. *KW-148*
+4. **Servicio fields and the migration** of `_almicahealing_featured`. Extend `wp almicahealing seed` to migrate idempotently. *KW-149*
+5. **`single-servicio.php`**, built against frame 10 (Arteterapia) and verified against frames 11–20. *KW-120, then KW-121–KW-130*
+6. **Curso fields, `single-curso.php`, and the `page-cursos.php` listing.** Point the "Cursos" menu item to `/cursos/` instead of `/#cursos`. *KW-150, KW-132, KW-131, KW-116*
+7. **Legal template** hero and tabs. *KW-152, then KW-139/KW-140*
+8. **Globals refactor**: header, footer, course sidebar and legal note read from the options page, seeded with the current `inc/brand.php` values (D3). Then delete `inc/brand.php`. *KW-151*
+9. **Page fields for Home and Acerca de.** Lowest priority: the copy rarely changes, and the current hard-coded version works. *KW-154*
+10. **CSV importer** (`wp almicahealing import <dir>`), reusing the seed helpers (`almicahealing_seed_post`, `almicahealing_seed_thumbnail`). *KW-155*
+11. **Content population** from the client spreadsheet, then per-instance QA against Figma. *KW-104, KW-156*
 
-## YouTrack Recommendations
+## YouTrack Tickets
 
-Scope: project **KW**, Klaritty Client = **Almica**. These are suggestions only; no issues were created.
+Project **KW**, Klaritty Client = **Almica**. Everything hangs under **KW-105** ("Implement website
+design using provided Figma file"). Updated 2026-09-19.
 
-| # | Title | Purpose | Scope | Acceptance criteria |
+### Data-layer tickets (created from this model)
+
+| Ticket | Title | Est. | Depends on | Unblocks |
 |---|---|---|---|---|
-| 1 | Custom fields framework and "Ajustes de Álmica" options page | Foundation for every structured field | Choose ACF Pro or SCF (Q11); register all field groups from `content-model.yaml` in `almicahealing-core`; options page with the global keys | Field groups are loaded from code; a fresh DB shows them without manual setup; options page saves and reads every global key |
-| 2 | Profesional content type | A single source for therapist/facilitator data | Register `profesional` (non-public); `role` and `credentials` fields; seed the 5 known professionals | Admin can create, edit and order professionals; the seed is idempotent; the profile isn't reachable by URL |
-| 3 | Servicio structured fields and migration | Replace hard-coded service data with fields | Add the `group_servicio` fields; migrate `_almicahealing_featured` → `is_featured`; the Home teaser reads `is_featured` | All 11 services editable; the Home teaser is unchanged after migration; the contact-form "Servicio de interés" still lists all services |
-| 4 | Service detail template (`single-servicio.php`) | One template for all 11 service pages | Hero, back link, about and Inversión card, benefit grid (1–6), Quién imparte (1–3 professionals), Otros servicios (auto with optional override) | Matches Figma frame 10; renders frames 11–20 correctly with 1, 2, 3 and 5 benefits, benefits without descriptions, and 2-line titles; no layout breaks when optional fields are empty |
-| 5 | Course detail template and fields | One template for all 3 course pages | `group_curso` fields; hero pill; numbered outcomes with a selectable heading; Inversión card hidden when there's no price; facilitator card; inquiry card from globals; Otros programas | Matches frame 5; renders frames 6–7; price-on-request state works |
-| 6 | Cursos listing page | Missing page from Figma (the "Set Typography Styles" frame) | `page-cursos.php`, shared course card (level badge, summary, price/duration or on-request text); update the menu link | `/cursos/` renders 3 cards in `menu_order`; the Home teaser uses the same card partial |
-| 7 | Legal template: hero and tabs | Shared legal layout | Hero "Información legal y de privacidad."; tab bar linking both legal pages with an active state; H2 sections numbered automatically; contact note from globals | Both legal pages render from `post_content` alone; the active tab matches the current page |
-| 8 | Header/footer from global settings | Remove hard-coded brand data | Footer contact, social, blurb and tagline come from options; delete `inc/brand.php` | Changing a value in the options page updates every page; empty social URLs hide their buttons |
-| 9 | Testimonio → service/course relationship | Keep testimonial labels in sync with service names | `about` field; migrate the existing excerpt label | The label under the name follows the related post's title; the existing testimonial is migrated |
-| 10 | Editable Home and Acerca de copy | Editors can change page copy without a deploy | `group_page_hero`, `group_home`, `group_acerca_de`; the founder block and Formación come from the related professional | No visual regression against frames 1–2; all copy is editable in admin |
-| 11 | Spreadsheet import command | Load client content in bulk, repeatably | `wp almicahealing import <dir>` for the sheets in this document; validates slugs; idempotent | Re-running changes nothing; an unknown slug aborts with a report; images are attached once |
+| [KW-147](https://257.youtrack.cloud/issue/KW-147) | Custom fields: Secure Custom Fields setup + "Ajustes de Álmica" options page | 4h | — | everything below |
+| [KW-148](https://257.youtrack.cloud/issue/KW-148) | Profesional content type | 3h | KW-147 | KW-149, KW-150, KW-154 |
+| [KW-149](https://257.youtrack.cloud/issue/KW-149) | Servicio structured fields + migration | 3h | KW-147, KW-148 | KW-120, KW-155 |
+| [KW-150](https://257.youtrack.cloud/issue/KW-150) | Curso structured fields | 2h | KW-147, KW-148 | KW-131, KW-132, KW-155 |
+| [KW-151](https://257.youtrack.cloud/issue/KW-151) | Header/footer/legal/course sidebar from global settings (retire `inc/brand.php`) | 2h | KW-147 | — (relates to KW-116) |
+| [KW-152](https://257.youtrack.cloud/issue/KW-152) | Legal template: shared hero + Aviso/Términos tabs | 2h | — | KW-139, KW-140 |
+| [KW-153](https://257.youtrack.cloud/issue/KW-153) | Testimonio → service/course relationship | 1h | KW-147 | — |
+| [KW-154](https://257.youtrack.cloud/issue/KW-154) | Editable Home and Acerca de copy (page fields) | 4h | KW-148 | — |
+| [KW-155](https://257.youtrack.cloud/issue/KW-155) | Spreadsheet import command (`wp almicahealing import`) | 6h | KW-149, KW-150 | — (relates to KW-104) |
+| [KW-156](https://257.youtrack.cloud/issue/KW-156) | Content corrections found in Figma during content-model review | 1h | — | — (relates to KW-104) |
 
-### Content population and QA items (not development tickets)
+**Critical path:** KW-147 → KW-148 → KW-149 / KW-150 → KW-120 / KW-132 → the per-page tickets.
 
-These Figma frames need **content entry and a visual check** against the template, not new code:
+### Existing tickets and how they map to the model
 
-- **Services (10):** Biodecodificación, Constelación Familiar para el Trabajo, Armonización Energética
-  Laboral y Bloqueos Relacionados, Limpieza Energética de Lugares, Escaneo y Balance Energético en
-  Personas, Conexión con Seres Trascendidos, Conexión con Registros, Futuros Posibles, Limpieza y
-  Conexión con Personas, Limpieza y Conexión Emocional con Personas.
-- **Courses (2):** Riutunmi, Lo Que Nadie Nos Enseñó.
-- **Legal (1):** Términos y condiciones (plus the final legal copy for both pages from the client).
-- **Content tasks:**
-  - Fix the Figma defects listed above.
-  - Confirm the therapists for 2 services (Q2).
-  - Replace the placeholder therapist photos (the "reemplazar foto terapeuta" notes).
-  - Give each service its own hero photo.
+These were already in the project, one per Figma frame. They're kept and are now linked to the
+data-layer tickets they depend on.
 
-Suggested grouping: one **"Content: services (11)"** ticket, one **"Content: courses (3)"**, one
-**"Content: professionals (5)"** and one **"Content: legal pages"**, each with a per-instance checklist.
-Don't create one ticket per instance.
+| Ticket | Role in the model |
+|---|---|
+| KW-120 Servicios: Arteterapia | **Builds `single-servicio.php`** (reference instance). Depends on KW-149 |
+| KW-121 – KW-130 (10 services) | Content + QA only. Each already depends on KW-120 |
+| KW-132 Cursos: Clantanra | **Builds `single-curso.php`** (reference instance). Depends on KW-150 |
+| KW-133, KW-134 (Riutunmi, Lo Que Nadie Nos Enseñó) | Content + QA only. Depend on KW-132 |
+| KW-131 Cursos – Main Page & Listing | Builds `page-cursos.php`. Depends on KW-150 |
+| KW-139, KW-140 (Términos, Aviso de privacidad) | Content only. Depend on KW-152 |
+| KW-116 Site Structure & Global Navigation | Menus. Description updated: no Tienda or Contáctanos in phase 1; Cursos links to `/cursos/` |
+| KW-104 Populate website content from spreadsheet | Content population; uses KW-155, and KW-156 as the QA checklist |
 
-**Blocked, not yet ticketed:** Tienda / Producto (Q1, Q10), Contáctanos page (Q13), booking (Q12).
+### Deferred (not phase 1)
+
+Summaries are prefixed with **[Deferred]**, and each has a comment citing decision D1 or D6. The
+project has no "Deferred" state, and the `deferred` tag doesn't exist yet. The state was left
+unchanged rather than set to "Obsolete", because these are postponed, not cancelled.
+
+| Ticket | Reason |
+|---|---|
+| KW-135, KW-136, KW-137 (Tienda: main page, Velas, Cuadernillos) | D1: shop is MV2 / sitemap only |
+| KW-138 Contáctanos Page | D1: no MV1 frame |
+| KW-141 Utilidades | D1: not in MV1 |
+| KW-142 User Authentication & Security | D1: MV1 has no accounts |
+| KW-143 Shopping Cart & Checkout | D1: shop deferred |
+| KW-144 Service Booking & Inquiry | D6: booking skipped |
+| KW-145 Course Enrollment & Management | D1: MV1 courses use the email inquiry card only |

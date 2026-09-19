@@ -8,12 +8,30 @@
 # Conventions
 #   source: native WP field the value lives in (post_title, post_name,
 #           post_excerpt, post_content, featured_image, menu_order);
-#           omitted = custom field (ACF).
+#           omitted = custom field (Secure Custom Fields, ACF-compatible API).
 #   limit:  layout recommendation (soft), not a business rule.
 #   open_question: id in content-model.md#open-questions.
 
-version: 0.1.0
+version: 0.2.0
 status: proposal
+phase: 1   # MV1 only; see `deferred`.
+
+decisions:   # 2026-09-19, see content-model.md#decisions-2026-09-19
+  D1: MV1 is phase 1; shop, Contáctanos page and booking deferred.
+  D2: No ACF Pro. Secure Custom Fields (free), fields registered in code; hand-coded meta as fallback.
+  D3: Contact data from current inc/brand.php is canonical; one contact_email.
+  D4: Unconfirmed therapists left blank; servicio.professionals optional.
+  D5: servicio.modality is a single-select enum.
+  D6: Booking skipped.
+
+field_plugin:
+  name: Secure Custom Fields
+  slug: secure-custom-fields
+  license: free (GPL)
+  api: acf_compatible   # acf_add_local_field_group, get_field, acf_add_options_page
+  registration: code    # almicahealing-core; never via admin UI
+  fallback: hand_coded_post_meta
+
 source:
   figma_file: wcICEZt3AHW63rtHEdVUxW
   figma_page: "Website - MV1"
@@ -58,12 +76,11 @@ content_types:
         step: 15
         note: Rendered twice (hero chip + Inversión card); stored once.
       modality:
-        type: checkbox
+        type: select
         required: true
-        cardinality: 1..2
-        default: [presencial]
-        options: { presencial: Presencial, virtual: Virtual }
-        open_question: Q3
+        default: presencial
+        options: { presencial: Presencial, virtual: Virtual, hibrida: Presencial y virtual }
+        decision: D5
       benefits:
         type: repeater
         required: true
@@ -75,8 +92,10 @@ content_types:
       professionals:
         type: relationship
         target: profesional
-        required: true
-        cardinality: 1..3
+        required: false
+        cardinality: 0..3
+        empty_behaviour: hide "Quién imparte" section
+        decision: D4
       related_services:
         type: relationship
         target: servicio
@@ -195,34 +214,7 @@ content_types:
         note: Replaces legacy free-text post_excerpt label.
       order:       { source: menu_order, type: number, default: 0 }
 
-  # --- Provisional: MV2 / sitemap only, outside MV1 scope (Q1, Q10) ---
-  producto:
-    label: Producto
-    status: provisional
-    purpose: Catalog item (candles, workbooks); orders via WhatsApp/email.
-    wordpress_type: post_type
-    post_type: producto
-    exists: false
-    public: tbd
-    supports: [title, excerpt, thumbnail, page-attributes]
-    fields:
-      title:           { source: post_title, type: text, required: true }
-      slug:            { source: post_name, type: slug, required: true, identifier: true }
-      intention_label: { type: text, required: false, example: "Protección energética" }
-      summary:         { source: post_excerpt, type: textarea, required: true }
-      price:           { type: number, required: true, min: 0, unit: MXN }
-      image:           { source: featured_image, type: image, required: true }
-      category:        { type: taxonomy, taxonomy: categoria_producto, required: true, cardinality: 1 }
-      order:           { source: menu_order, type: number }
-
-taxonomies:
-  categoria_producto:
-    status: provisional
-    label: Categoría de producto
-    object_types: [producto]
-    hierarchical: false
-    terms: { velas: Velas, libretas: Libretas }
-    note: Only taxonomy in the model; drives the shop tab filter (MV2).
+taxonomies: {}   # none in phase 1 (categoria_producto deferred with the shop)
 
 pages:
   home:
@@ -299,15 +291,14 @@ settings:
   key: almica-ajustes
   label: Ajustes de Álmica
   fields:
-    contact_email:          { type: email, required: true, open_question: Q4 }
-    courses_email:          { type: email, required: true, figma: cursos@almica.mx }
-    privacy_email:          { type: email, required: true, figma: contacto@almica.mx }
-    phone:                  { type: text, required: true, open_question: Q4 }
-    whatsapp:               { type: text, required: false }
-    location_label:         { type: text, figma: "México · sesiones virtuales" }
-    social_instagram:       { type: url }
-    social_facebook:        { type: url }
-    social_tiktok:          { type: url }
+    contact_email:          { type: email, required: true, initial: almicahealing@gmail.com, decision: D3,
+                              used_by: [footer, course_inquiry_card, legal_contact_note] }
+    phone:                  { type: text, required: true, initial: "+52 81 7008 8058", decision: D3 }
+    whatsapp:               { type: text, required: false, initial: "", hide_when_empty: true }
+    location_label:         { type: text, initial: "México · sesiones virtuales", decision: D3 }
+    social_instagram:       { type: url, initial: "", hide_when_empty: true }
+    social_facebook:        { type: url, initial: "", hide_when_empty: true }
+    social_tiktok:          { type: url, initial: "", hide_when_empty: true }
     footer_blurb:           { type: textarea }
     footer_tagline:         { type: text, figma: "El equilibrio que da origen a todo" }
     currency_label:         { type: text, default: MXN }
@@ -319,12 +310,11 @@ settings:
   menus: [primary, footer]   # native WP nav menus
 
 relationships:
-  - { from: servicio.professionals,   to: profesional, cardinality: "n:m", required: true }
+  - { from: servicio.professionals,   to: profesional, cardinality: "n:m", required: false }
   - { from: servicio.related_services, to: servicio,   cardinality: "n:m", required: false }
   - { from: curso.facilitators,       to: profesional, cardinality: "n:m", required: true }
   - { from: testimonio.about,         to: [servicio, curso], cardinality: "n:1", required: false }
   - { from: page.acerca_de.founder,   to: profesional, cardinality: "1:1", required: true }
-  - { from: producto.category,        to: categoria_producto, cardinality: "n:1", status: provisional }
 
 import:
   identifier: slug
@@ -365,10 +355,6 @@ import:
     ajustes:
       maps_to: settings
       columns: [key, value]
-    productos:
-      status: provisional
-      maps_to: producto
-      columns: [slug, title, category, intention_label, summary, price, image, order]
 
 figma_coverage:
   page_node: "146-30"
@@ -395,8 +381,14 @@ figma_coverage:
     - { n: 16, title: Conexión con Seres Trascendidos, node: "245-473", layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance }
     - { n: 17, title: Conexión con Registros, maps_to: servicio, kind: instance }
     - { n: 18, title: Futuros Posibles, layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance }
-    - { n: 19, title: Limpieza y Conexión con Personas, node: "268-5817", node_inferred: true, layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance, open_question: Q2 }
-    - { n: 20, title: Limpieza y Conexión Emocional con Personas, node: "268-6039", layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance, open_question: Q2 }
+    - { n: 19, title: Limpieza y Conexión con Personas, node: "268-5817", node_inferred: true, layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance, professionals: blank, decision: D4 }
+    - { n: 20, title: Limpieza y Conexión Emocional con Personas, node: "268-6039", layer_name: "Servicio - limpieza energética", maps_to: servicio, kind: instance, professionals: blank, decision: D4 }
   annotations:
     - { text: "incluir que se descarga cuadernillo cuando contratan el servicio", maps_to: servicio.includes_workbook, open_question: Q6 }
     - { text: "reemplazar foto terapeuta", count: 3, maps_to: profesional.photo, kind: content_task }
+
+deferred:   # D1 / D6 — not part of the phase 1 model
+  - { item: producto, source: "MV2 Tienda - Velas (256-3748)", note: "catalog CPT + categoria_producto (velas, libretas); orders via WhatsApp/email" }
+  - { item: home_shop_teaser, source: "MV2 Home" }
+  - { item: contactanos_page, source: sitemap, note: "existing contact form on a simple Page" }
+  - { item: booking, source: "Home 'Reserva tu sesión'", decision: D6 }
