@@ -547,9 +547,9 @@ Not implemented; this is the proposed order. Ticket numbers are in italics; see 
 2. **Field framework and options page.** Register field groups in `almicahealing-core` code, not the database; add the theme read helpers. *KW-147*
 3. **Profesional CPT and data.** Everything else references it. *KW-148*
 4. **Servicio fields and the migration** of `_almicahealing_featured`. Extend `wp almicahealing seed` to migrate idempotently. *KW-149*
-5. **`single-servicio.php`**, built against frame 10 (Arteterapia) and verified against frames 11–20. *KW-120, then KW-121–KW-130*
+5. **`single-servicio.php`**, built against frame 10 (Arteterapia) and verified against frames 11–20. *KW-120*
 6. **Curso fields, `single-curso.php`, and the `page-cursos.php` listing.** Point the "Cursos" menu item to `/cursos/` instead of `/#cursos`. *KW-150, KW-132, KW-131, KW-116*
-7. **Legal template** hero and tabs. *KW-152, then KW-139/KW-140*
+7. **Legal template** hero and tabs. *KW-152* (the copy for both pages lands with KW-104)
 8. **Globals refactor**: header, footer, course sidebar and legal note read from the options page, seeded with the current `inc/brand.php` values (D3). Then delete `inc/brand.php`. *KW-151*
 9. **Page fields for Home and Acerca de.** Lowest priority: the copy rarely changes, and the current hard-coded version works. *KW-154*
 10. **CSV importer** (`wp almicahealing import <dir>`), reusing the seed helpers (`almicahealing_seed_post`, `almicahealing_seed_thumbnail`). *KW-155*
@@ -558,7 +558,7 @@ Not implemented; this is the proposed order. Ticket numbers are in italics; see 
 ## YouTrack Tickets
 
 Project **KW**, Klaritty Client = **Almica**. Everything hangs under **KW-105** ("Implement website
-design using provided Figma file"). Updated 2026-09-19.
+design using provided Figma file"). Updated 2026-09-20.
 
 ### Data-layer tickets (created from this model)
 
@@ -579,19 +579,37 @@ design using provided Figma file"). Updated 2026-09-19.
 
 ### Existing tickets and how they map to the model
 
-These were already in the project, one per Figma frame. They're kept and are now linked to the
-data-layer tickets they depend on.
+These were already in the project, one per Figma frame. The ones that build something are kept and
+linked to the data-layer tickets they depend on.
 
 | Ticket | Role in the model |
 |---|---|
-| KW-120 Servicios: Arteterapia | **Builds `single-servicio.php`** (reference instance). Depends on KW-149 |
-| KW-121 – KW-130 (10 services) | Content + QA only. Each already depends on KW-120 |
-| KW-132 Cursos: Clantanra | **Builds `single-curso.php`** (reference instance). Depends on KW-150 |
-| KW-133, KW-134 (Riutunmi, Lo Que Nadie Nos Enseñó) | Content + QA only. Depend on KW-132 |
+| KW-120 Servicio detail template | **Builds `single-servicio.php`** (reference instance: Arteterapia). Depends on KW-149 |
+| KW-132 Curso detail template | **Builds `single-curso.php`** (reference instance: Clantanra). Depends on KW-150 |
 | KW-131 Cursos – Main Page & Listing | Builds `page-cursos.php`. Depends on KW-150 |
-| KW-139, KW-140 (Términos, Aviso de privacidad) | Content only. Depend on KW-152 |
 | KW-116 Site Structure & Global Navigation | Menus. Description updated: no Tienda or Contáctanos in phase 1; Cursos links to `/cursos/` |
 | KW-104 Populate website content from spreadsheet | Content population; uses KW-155, and KW-156 as the QA checklist |
+
+### Closed as Obsolete: per-frame content cards (2026-09-20)
+
+16 of the 20 frames are content instances of 3 templates, so the project had 14 cards that were not
+development work at all — each one is a **row in an import sheet**, not a page to build. They were
+resolved as **Obsolete** (absorbed, not cancelled), each with a comment carrying its sheet row and a
+`relates to` link to KW-104 and KW-156.
+
+| Closed | Was | Now |
+|---|---|---|
+| KW-121 – KW-130 | "Servicios: …" ×10 | Rows in the `servicios` + `servicio_beneficios` sheets |
+| KW-133, KW-134 | Cursos: Riutunmi, Lo Que Nadie Nos Enseñó | Rows in the `cursos` + `curso_puntos` sheets |
+| KW-139, KW-140 | Globales: Términos, Aviso de privacidad | Prose pasted into `post_content`; **not** a sheet row |
+
+Obsolete rather than deleted: the cards carry the Figma frame mapping and the per-instance content
+defects, KW-120 still has its `is required for` links, and this document references the IDs. Deleting
+them would break all three.
+
+Two dependencies moved onto KW-104 with the legal cards, neither of which is in the client
+spreadsheet: **the legal copy itself**, and **replacement therapist photos** (three "reemplazar foto
+terapeuta" annotations plus the four services sharing one hero photo, defect 6).
 
 ### Deferred (not phase 1)
 
