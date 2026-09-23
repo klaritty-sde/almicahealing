@@ -16,7 +16,7 @@ get_template_part(
 	null,
 	array(
 		'eyebrow'  => __( 'Formación', 'almicahealing' ),
-		'title'    => __( 'Crecer desde adentro.', 'almicahealing' ),
+		'title'    => __( 'Programas para crecer desde adentro.', 'almicahealing' ),
 		'subtitle' => __( 'Cursos diseñados para quienes buscan herramientas reales de transformación interior, a su propio ritmo.', 'almicahealing' ),
 	)
 );

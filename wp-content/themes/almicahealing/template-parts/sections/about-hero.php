@@ -13,7 +13,7 @@ get_template_part(
 	array(
 		'eyebrow'  => __( 'Álmica Healing', 'almicahealing' ),
 		'title'    => __( 'Acerca de Álmica', 'almicahealing' ),
-		'subtitle' => __( 'Somos un espacio que te brinda Terapias de sanación en donde unes pasado y presente para un futuro equilibrado.', 'almicahealing' ),
+		'subtitle' => __( 'Somos un espacio que te brinda herramientas de bienestar y sanación en donde unes pasado y presente para construir un futuro en equilibrio.', 'almicahealing' ),
 		'image'    => get_theme_file_uri( 'assets/img/acerca-de-hero.jpg' ),
 	)
 );

@@ -37,7 +37,7 @@ $almicahealing_intro = is_array( $almicahealing_intro ) ? $almicahealing_intro :
 				<p class="section-eyebrow"><?php echo esc_html( $almicahealing_intro['eyebrow'] ?? __( 'Aprende · Profundiza · Transforma', 'almicahealing' ) ); ?></p>
 				<h2 class="courses__title"><?php echo esc_html( $almicahealing_intro['title'] ?? __( 'El conocimiento también transforma.', 'almicahealing' ) ); ?></h2>
 			</div>
-			<p class="courses__intro"><?php echo esc_html( $almicahealing_intro['body'] ?? __( 'Creemos que comprender es parte del proceso de sanar. Por eso compartimos reflexiones, recursos y contenido pensado para acompañar tu camino de autoconocimiento, más allá de cada sesión. Porque la claridad también se construye con lo que aprendemos en el camino.', 'almicahealing' ) ); ?></p>
+			<p class="courses__intro"><?php echo esc_html( $almicahealing_intro['body'] ?? __( 'Espacios de aprendizaje creados para profundizar en distintas herramientas de bienestar, consciencia y desarrollo personal.', 'almicahealing' ) ); ?></p>
 		</div>
 
 		<div class="courses__grid">
