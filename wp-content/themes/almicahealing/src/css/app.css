@@ -88,8 +88,11 @@
 	.intro__inner {
 		@apply mx-auto grid max-w-6xl gap-16 px-8 py-20 md:grid-cols-2 md:items-center;
 	}
+	.intro__rule {
+		@apply block h-px w-8 bg-gold;
+	}
 	.intro__title {
-		@apply text-3xl md:text-4xl;
+		@apply mt-10 text-3xl md:text-4xl;
 	}
 	.intro__copy p {
 		@apply mt-4 text-dark-green/70;

@@ -11,6 +11,7 @@ defined( 'ABSPATH' ) || exit;
 <section class="intro">
 	<div class="intro__inner">
 		<div class="intro__copy">
+			<span class="intro__rule" aria-hidden="true"></span>
 			<h2 class="intro__title"><?php esc_html_e( 'Todo comienza cuando volvemos a conectar.', 'almicahealing' ); ?></h2>
 			<p><?php esc_html_e( 'Álmica Healing es un espacio de bienestar integral que reúne distintas herramientas y terapias para acompañar procesos de conexión, claridad y transformación.', 'almicahealing' ); ?></p>
 			<p>
