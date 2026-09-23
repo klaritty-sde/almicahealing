@@ -1,13 +1,11 @@
 <?php
 /**
- * Services teaser grid (Figma "Services" frame, node-id 146-34). Pulls
- * from the `servicio` CPT registered in almicahealing-core; falls back to
- * nothing if that plugin isn't active or no services exist yet.
+ * Services teaser grid (Figma "Services" frame, node-id 146-34). Shows
+ * the services flagged `is_featured`; the full catalog lives on the
+ * Servicios page.
  *
- * Only services with the `_almicahealing_featured` custom field set to
- * `1` are shown here — the full catalog lives on the Servicios page
- * (see page-servicios.php). Toggle it from a servicio's Custom Fields
- * panel to control what appears in this teaser.
+ * Section copy comes from the `services_intro` group on the Home page,
+ * falling back to the copy the design shipped with.
  *
  * @package AlmicaHealing
  */
@@ -24,7 +22,7 @@ $almicahealing_services = new WP_Query(
 		'posts_per_page' => 6,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
-		'meta_key'       => '_almicahealing_featured',
+		'meta_key'       => 'is_featured',
 		'meta_value'     => '1',
 	)
 );
@@ -32,37 +30,31 @@ $almicahealing_services = new WP_Query(
 if ( ! $almicahealing_services->have_posts() ) {
 	return;
 }
+
+$almicahealing_intro = almicahealing_field( 'services_intro', get_the_ID(), array() );
+$almicahealing_intro = is_array( $almicahealing_intro ) ? $almicahealing_intro : array();
 ?>
 <section class="services" id="servicios">
 	<div class="services__inner">
-		<p class="section-eyebrow"><?php esc_html_e( 'Servicios', 'almicahealing' ); ?></p>
-		<h2 class="services__title"><?php esc_html_e( 'Distintos caminos. Un mismo propósito: volver a ti.', 'almicahealing' ); ?></h2>
-		<p class="section-subtitle"><?php esc_html_e( 'Explora distintas herramientas de acompañamiento y encuentra la que conecta con el momento que estás viviendo.', 'almicahealing' ); ?></p>
+		<p class="section-eyebrow"><?php echo esc_html( $almicahealing_intro['eyebrow'] ?? __( 'Servicios', 'almicahealing' ) ); ?></p>
+		<h2 class="services__title"><?php echo esc_html( $almicahealing_intro['title'] ?? __( 'Distintos caminos. Un mismo propósito: volver a ti.', 'almicahealing' ) ); ?></h2>
+		<p class="section-subtitle"><?php echo esc_html( $almicahealing_intro['subtitle'] ?? __( 'Explora distintas herramientas de acompañamiento y encuentra la que conecta con el momento que estás viviendo.', 'almicahealing' ) ); ?></p>
 
 		<div class="services__grid">
 			<?php
 			while ( $almicahealing_services->have_posts() ) :
 				$almicahealing_services->the_post();
-				?>
-				<article class="service-card">
-					<a class="service-card__link" href="<?php the_permalink(); ?>">
-						<span class="service-card__media" aria-hidden="true">
-							<?php if ( has_post_thumbnail() ) : ?>
-								<?php the_post_thumbnail( 'almicahealing-card' ); ?>
-							<?php endif; ?>
-						</span>
-						<span class="service-card__body">
-							<span class="service-card__title"><?php the_title(); ?></span>
-							<span class="button button--gold service-card__cta"><?php esc_html_e( 'Ver más', 'almicahealing' ); ?></span>
-						</span>
-					</a>
-				</article>
-			<?php endwhile; ?>
+
+				get_template_part(
+					'template-parts/cards/servicio',
+					null,
+					array( 'post_id' => get_the_ID() )
+				);
+			endwhile;
+			wp_reset_postdata();
+			?>
 		</div>
 
-		<?php $almicahealing_services_page = get_page_by_path( 'servicios' ); ?>
-		<a class="button button--dark services__all" href="<?php echo esc_url( $almicahealing_services_page ? get_permalink( $almicahealing_services_page ) : home_url( '/servicios/' ) ); ?>"><?php esc_html_e( 'Ver todos los servicios', 'almicahealing' ); ?></a>
+		<a class="button button--dark services__all" href="<?php echo esc_url( almicahealing_page_url( 'servicios' ) ); ?>"><?php esc_html_e( 'Ver todos los servicios', 'almicahealing' ); ?></a>
 	</div>
 </section>
-<?php
-wp_reset_postdata();

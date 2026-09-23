@@ -321,6 +321,289 @@
 		@apply mt-3 text-cream/80;
 	}
 
+	/* ---------------------------------------------------------------
+	 * Detail pages — single-servicio.php (Figma frames 10–20) and
+	 * single-curso.php (frames 5–7).
+	 * --------------------------------------------------------------- */
+
+	.detail-hero {
+		@apply relative flex min-h-[26rem] items-center overflow-hidden bg-dark-green text-cream;
+	}
+	.detail-hero__media {
+		@apply absolute inset-0 bg-dark-green bg-cover bg-center;
+	}
+	/* The photo sits under a green wash so the centred type stays legible
+	   whatever the image is — several services reuse the same photo. */
+	.detail-hero__scrim {
+		@apply absolute inset-0 bg-dark-green/70;
+	}
+	.detail-hero__inner {
+		@apply relative mx-auto w-full max-w-6xl px-8 py-20;
+	}
+	.detail-hero__back {
+		@apply inline-flex items-center gap-2 text-sm text-cream/70 hover:text-gold;
+	}
+	.detail-hero__content {
+		@apply mx-auto max-w-2xl pt-12 text-center;
+	}
+	.detail-hero__eyebrow {
+		@apply font-body text-xs font-semibold uppercase tracking-[0.3em] text-gold;
+	}
+	.detail-hero__title {
+		@apply mt-4 font-heading text-4xl leading-tight md:text-5xl;
+	}
+	.detail-hero__tagline {
+		@apply mx-auto mt-5 max-w-xl text-sm leading-relaxed text-cream/75;
+	}
+	.detail-hero__chips {
+		@apply mt-7 flex list-none flex-wrap justify-center gap-3;
+	}
+	/* The course programme pill sits above the title (frames 5–7). */
+	.detail-hero__chips--above {
+		@apply mb-6 mt-0;
+	}
+	.detail-hero__chip {
+		@apply inline-flex items-center gap-2 rounded-full border border-cream/25 bg-cream/10 px-4 py-1.5 text-xs text-cream/85;
+	}
+	/* The service chip reads "· 60 min" in sentence case; the course pill
+	   is the uppercase programme label. */
+	.detail-hero__chips:not(.detail-hero__chips--above) .detail-hero__chip::before {
+		content: "";
+		@apply h-1 w-1 rounded-full bg-gold;
+	}
+	.detail-hero__chips--above .detail-hero__chip {
+		@apply uppercase tracking-[0.18em];
+	}
+
+	.section-rule {
+		@apply mb-8 block h-px w-8 bg-gold;
+	}
+
+	/* "Sobre este servicio" / "Sobre el curso" + the sidebar. */
+	.detail-about__inner {
+		@apply mx-auto grid max-w-6xl gap-12 px-8 py-20 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] lg:gap-16;
+	}
+	.detail-about__text p {
+		@apply mt-5 text-sm leading-relaxed text-dark-green/75 first:mt-6;
+	}
+	.detail-about__workbook {
+		@apply mt-8 inline-block rounded-full bg-gold/15 px-4 py-2 text-sm text-dark-green;
+	}
+
+	.investment-card {
+		@apply self-start rounded-2xl bg-dark-green p-8 text-cream;
+	}
+	.investment-card__eyebrow {
+		@apply font-body text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-gold;
+	}
+	.investment-card__price {
+		@apply mt-4 font-heading text-3xl;
+	}
+	.investment-card__basis {
+		@apply mt-1 text-xs text-cream/50;
+	}
+	.investment-card__meta {
+		@apply mt-8 space-y-0;
+	}
+	.investment-card__row {
+		@apply flex items-baseline justify-between gap-4 border-t border-cream/10 py-3 text-sm;
+	}
+	.investment-card__row dt {
+		@apply text-cream/55;
+	}
+	.investment-card__row dd {
+		@apply font-semibold text-cream;
+	}
+
+	/* Beneficios — the gold band with hairline-separated tiles. */
+	.benefits {
+		@apply bg-gold text-dark-green;
+	}
+	.benefits__inner {
+		@apply mx-auto max-w-6xl px-8 py-20;
+	}
+	.benefits .section-eyebrow {
+		@apply text-[0.65rem] tracking-[0.3em] text-dark-green/55;
+	}
+	.benefits__title {
+		@apply mt-3 font-heading text-3xl md:text-4xl;
+	}
+	/* One auto-flow grid for every count: 5 tiles wrap to 3 + 2, a single
+	   tile just sits in the first cell. No per-count layouts. */
+	.benefit-grid {
+		@apply mt-12 grid list-none grid-cols-1 border-l border-t border-dark-green/15 sm:grid-cols-2 lg:grid-cols-3;
+	}
+	.benefit-tile {
+		@apply border-b border-r border-dark-green/15 bg-cream/10 p-7;
+	}
+	.benefit-tile__icon {
+		@apply block h-6 w-6 text-dark-green/70;
+	}
+	.benefit-tile__icon svg {
+		@apply h-full w-full;
+	}
+	.benefit-tile__title {
+		@apply mt-6 font-heading text-base leading-snug;
+	}
+	.benefit-tile__body {
+		@apply mt-2 text-xs leading-relaxed text-dark-green/65;
+	}
+
+	/* Quién imparte / Facilitador — shared professional block. */
+	.who-teaches__inner {
+		@apply mx-auto max-w-6xl px-8 py-20;
+	}
+	.profesional {
+		@apply mt-8 flex flex-col gap-8 sm:flex-row sm:gap-12;
+	}
+	.profesional__photo {
+		@apply h-32 w-32 shrink-0 rounded-full bg-dark-green/10 bg-cover bg-center;
+	}
+	.profesional__photo--empty {
+		@apply bg-dark-green/10;
+	}
+	.profesional__name {
+		@apply font-heading text-2xl;
+	}
+	.profesional__role {
+		@apply mt-1 text-xs uppercase tracking-[0.18em] text-gold;
+	}
+	.profesional__bio p {
+		@apply mt-5 text-sm leading-relaxed text-dark-green/75;
+	}
+	.profesional--compact {
+		@apply mt-4 flex-row items-center gap-4;
+	}
+	.profesional--compact .profesional__photo {
+		@apply h-12 w-12;
+	}
+	.profesional--compact .profesional__name {
+		@apply text-lg;
+	}
+
+	/* Course sidebar: facilitator, inversión and the contact card. */
+	.course-aside {
+		@apply flex flex-col gap-5 self-start;
+	}
+	.course-aside__card {
+		@apply rounded-2xl border border-dark-green/10 bg-cream p-6;
+	}
+	.course-aside__eyebrow {
+		@apply font-body text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-gold;
+	}
+	.course-aside__card--investment .course-aside__price {
+		@apply mt-3 font-heading text-2xl;
+	}
+	.course-aside__duration {
+		@apply mt-1 text-xs text-dark-green/55;
+	}
+	.course-aside__card--inquiry {
+		@apply border-transparent bg-dark-green text-cream;
+	}
+	.course-aside__body {
+		@apply mt-3 text-xs leading-relaxed text-cream/70;
+	}
+	.course-aside__on-request {
+		@apply mt-3 font-heading text-lg text-gold;
+	}
+	.course-aside__email {
+		@apply mt-4 inline-block text-xs text-gold hover:underline;
+	}
+
+	/* Objetivos / Beneficios / Temas — numbered from the markup, never
+	   from typed-in numbers (the design has a duplicated "4"). */
+	.outcomes__inner {
+		@apply mx-auto max-w-6xl px-8 pb-20;
+	}
+	.outcomes__box {
+		@apply rounded-2xl border border-dark-green/10 bg-gold/10 p-8 md:p-10;
+	}
+	.outcomes__list {
+		@apply mt-6 list-none space-y-4;
+		counter-reset: outcome;
+	}
+	.outcomes__item {
+		@apply relative pl-12 text-sm leading-relaxed text-dark-green/80;
+		counter-increment: outcome;
+	}
+	.outcomes__item::before {
+		content: counter(outcome);
+		@apply absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full border border-dark-green/20 text-xs text-dark-green/60;
+	}
+
+	/* Otros servicios / Otros programas. */
+	.related {
+		@apply bg-cream;
+	}
+	.related__inner {
+		@apply mx-auto max-w-6xl px-8 pb-20;
+	}
+	.related__inner .services__grid,
+	.related__inner .courses__grid {
+		@apply mt-8;
+	}
+	.courses__grid--related {
+		@apply lg:grid-cols-2;
+	}
+
+	.courses-catalog__inner {
+		@apply mx-auto max-w-6xl px-8 py-20;
+	}
+	.course-card__price {
+		@apply mt-3 text-sm font-semibold text-dark-green;
+	}
+	.course-card--compact .course-card__title {
+		@apply text-lg;
+	}
+
+	/* Legal pages — shared hero and tab bar (Figma frames 8–9). */
+	.legal-hero {
+		@apply bg-dark-green text-cream;
+	}
+	.legal-hero__inner {
+		@apply mx-auto max-w-6xl px-8 pb-0 pt-20;
+	}
+	.legal-hero__title {
+		@apply max-w-xl font-heading text-3xl leading-tight md:text-4xl;
+	}
+	.legal-tabs {
+		@apply mt-12 flex gap-8 border-b border-cream/15;
+	}
+	.legal-tabs__tab {
+		@apply -mb-px border-b-2 border-transparent pb-4 text-sm text-cream/60 hover:text-cream;
+	}
+	.legal-tabs__tab.is-active {
+		@apply border-gold text-gold;
+	}
+	.legal-content__inner {
+		@apply mx-auto max-w-3xl px-8 py-20;
+	}
+	/* Section numbering lives in CSS so editors paste plain headings. */
+	.legal-content__body {
+		counter-reset: legal-section;
+	}
+	.legal-content__body h2 {
+		@apply mt-12 font-heading text-xl first:mt-0;
+		counter-increment: legal-section;
+	}
+	.legal-content__body h2::before {
+		content: counter(legal-section) ". ";
+		@apply text-gold;
+	}
+	.legal-content__body p,
+	.legal-content__body li {
+		@apply mt-4 text-sm leading-relaxed text-dark-green/75;
+	}
+	.legal-content__body ul {
+		@apply mt-2 list-disc pl-6;
+	}
+	.legal-note {
+		@apply mt-16 rounded-2xl bg-gold/10 p-6 text-sm text-dark-green/75;
+	}
+	.legal-note a {
+		@apply text-gold hover:underline;
+	}
+
 	.site-footer {
 		@apply bg-dark-green text-cream;
 	}

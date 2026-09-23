@@ -26,15 +26,18 @@ $almicahealing_courses = new WP_Query(
 if ( ! $almicahealing_courses->have_posts() ) {
 	return;
 }
+
+$almicahealing_intro = almicahealing_field( 'courses_intro', get_the_ID(), array() );
+$almicahealing_intro = is_array( $almicahealing_intro ) ? $almicahealing_intro : array();
 ?>
 <section class="courses" id="cursos">
 	<div class="courses__inner">
 		<div class="courses__header">
 			<div>
-				<p class="section-eyebrow"><?php esc_html_e( 'Aprende · Profundiza · Transforma', 'almicahealing' ); ?></p>
-				<h2 class="courses__title"><?php esc_html_e( 'El conocimiento también transforma.', 'almicahealing' ); ?></h2>
+				<p class="section-eyebrow"><?php echo esc_html( $almicahealing_intro['eyebrow'] ?? __( 'Aprende · Profundiza · Transforma', 'almicahealing' ) ); ?></p>
+				<h2 class="courses__title"><?php echo esc_html( $almicahealing_intro['title'] ?? __( 'El conocimiento también transforma.', 'almicahealing' ) ); ?></h2>
 			</div>
-			<p class="courses__intro"><?php esc_html_e( 'Creemos que comprender es parte del proceso de sanar. Por eso compartimos reflexiones, recursos y contenido pensado para acompañar tu camino de autoconocimiento, más allá de cada sesión. Porque la claridad también se construye con lo que aprendemos en el camino.', 'almicahealing' ); ?></p>
+			<p class="courses__intro"><?php echo esc_html( $almicahealing_intro['body'] ?? __( 'Creemos que comprender es parte del proceso de sanar. Por eso compartimos reflexiones, recursos y contenido pensado para acompañar tu camino de autoconocimiento, más allá de cada sesión. Porque la claridad también se construye con lo que aprendemos en el camino.', 'almicahealing' ) ); ?></p>
 		</div>
 
 		<div class="courses__grid">
@@ -43,18 +46,17 @@ if ( ! $almicahealing_courses->have_posts() ) {
 			while ( $almicahealing_courses->have_posts() ) :
 				$almicahealing_courses->the_post();
 				++$almicahealing_course_index;
-				?>
-				<article class="course-card">
-					<?php if ( has_post_thumbnail() ) : ?>
-						<div class="course-card__media">
-							<?php the_post_thumbnail( 'almicahealing-card' ); ?>
-						</div>
-					<?php endif; ?>
-					<span class="course-card__number"><?php echo esc_html( sprintf( '%02d', $almicahealing_course_index ) ); ?></span>
-					<h3 class="course-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-					<p class="course-card__excerpt"><?php the_excerpt(); ?></p>
-				</article>
-			<?php endwhile; ?>
+
+				get_template_part(
+					'template-parts/cards/curso',
+					null,
+					array(
+						'post_id' => get_the_ID(),
+						'index'   => $almicahealing_course_index,
+					)
+				);
+			endwhile;
+			?>
 		</div>
 	</div>
 </section>

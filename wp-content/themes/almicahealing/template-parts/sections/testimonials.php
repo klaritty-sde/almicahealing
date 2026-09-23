@@ -5,6 +5,9 @@
  * CPT registered in almicahealing-core; falls back to nothing if that
  * plugin isn't active or no testimonials exist yet.
  *
+ * The label under each name is the title of the related servicio/curso
+ * (`about`), not free text, so renaming a service updates it here.
+ *
  * @package AlmicaHealing
  */
 
@@ -29,7 +32,7 @@ if ( ! $almicahealing_testimonials->have_posts() ) {
 ?>
 <section class="testimonials" data-almicahealing-slider>
 	<div class="testimonials__inner">
-		<h2 class="testimonials__title"><?php esc_html_e( 'Experiencias que dejan huella.', 'almicahealing' ); ?></h2>
+		<h2 class="testimonials__title"><?php echo esc_html( almicahealing_field( 'testimonials_title', get_the_ID(), __( 'Experiencias que dejan huella.', 'almicahealing' ) ) ); ?></h2>
 
 		<div class="testimonials__track">
 			<?php
@@ -41,8 +44,12 @@ if ( ! $almicahealing_testimonials->have_posts() ) {
 					<p class="testimonial-slide__quote">&ldquo;<?php the_content(); ?>&rdquo;</p>
 					<footer class="testimonial-slide__meta">
 						<cite class="testimonial-slide__name"><?php the_title(); ?></cite>
-						<?php if ( has_excerpt() ) : ?>
-							<span class="testimonial-slide__label"><?php the_excerpt(); ?></span>
+						<?php
+						$almicahealing_about = almicahealing_field( 'about', get_the_ID() );
+						$almicahealing_label = $almicahealing_about ? get_the_title( (int) $almicahealing_about ) : '';
+						?>
+						<?php if ( $almicahealing_label ) : ?>
+							<span class="testimonial-slide__label"><?php echo esc_html( $almicahealing_label ); ?></span>
 						<?php endif; ?>
 					</footer>
 				</blockquote>
