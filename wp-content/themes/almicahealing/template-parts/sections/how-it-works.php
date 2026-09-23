@@ -1,7 +1,7 @@
 <?php
 /**
  * "Tu proceso comienza aquí" — 3-step process (Figma "HowItWorks" frame,
- * node-id 146-171). Steps are static copy, not a CPT.
+ * node-id 146-142). Steps are static copy, not a CPT.
  *
  * @package AlmicaHealing
  */
@@ -10,14 +10,17 @@ defined( 'ABSPATH' ) || exit;
 
 $almicahealing_steps = array(
 	array(
+		'icon'  => 'proceso-elige.svg',
 		'title' => __( 'Elige lo que necesitas trabajar', 'almicahealing' ),
 		'body'  => __( 'Explora nuestros servicios y encuentra el acompañamiento que mejor responde a tu momento.', 'almicahealing' ),
 	),
 	array(
+		'icon'  => 'proceso-reserva.svg',
 		'title' => __( 'Reserva tu sesión', 'almicahealing' ),
 		'body'  => __( 'Selecciona disponibilidad y completa tu reserva de forma sencilla.', 'almicahealing' ),
 	),
 	array(
+		'icon'  => 'proceso-conecta.svg',
 		'title' => __( 'Conecta con tu experiencia', 'almicahealing' ),
 		'body'  => __( 'Un terapeuta especializado en ese servicio te acompañará durante tu sesión.', 'almicahealing' ),
 	),
@@ -32,6 +35,7 @@ $almicahealing_steps = array(
 			<?php foreach ( $almicahealing_steps as $almicahealing_index => $almicahealing_step ) : ?>
 				<div class="step-card">
 					<span class="step-card__number"><?php echo esc_html( sprintf( '%02d', $almicahealing_index + 1 ) ); ?></span>
+					<img class="step-card__icon" src="<?php echo esc_url( get_theme_file_uri( 'assets/img/icons/' . $almicahealing_step['icon'] ) ); ?>" alt="" width="40" height="40">
 					<h3 class="step-card__title"><?php echo esc_html( $almicahealing_step['title'] ); ?></h3>
 					<p class="step-card__body"><?php echo esc_html( $almicahealing_step['body'] ); ?></p>
 				</div>

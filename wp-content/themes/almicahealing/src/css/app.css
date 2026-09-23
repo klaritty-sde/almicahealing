@@ -109,12 +109,10 @@
 
 	/* Services — Figma "Services" frame, node-id 146-34. */
 	.services__inner,
-	.how-it-works__inner,
 	.courses__inner {
 		@apply mx-auto max-w-6xl px-8 py-20 text-center;
 	}
-	.services__title,
-	.how-it-works__title {
+	.services__title {
 		@apply mt-3 text-3xl md:text-4xl;
 	}
 	.services__inner .section-subtitle {
@@ -153,24 +151,36 @@
 		@apply mx-auto max-w-6xl px-8 py-20;
 	}
 
-	/* How it works — Figma "HowItWorks" frame, node-id 146-171. */
+	/* How it works — Figma "HowItWorks" frame, node-id 146-142. */
 	.how-it-works {
 		@apply bg-dark-green text-cream;
 	}
+	.how-it-works__inner {
+		@apply mx-auto max-w-6xl px-8 py-20 text-left;
+	}
+	.how-it-works .section-eyebrow {
+		@apply text-xs font-normal tracking-[0.3em];
+	}
+	.how-it-works__title {
+		@apply mt-6 text-3xl leading-tight md:text-[2.5rem];
+	}
 	.how-it-works__grid {
-		@apply mt-12 grid gap-8 text-left sm:grid-cols-3;
+		@apply mt-10 grid gap-8 md:grid-cols-3 lg:gap-16;
 	}
 	.step-card {
-		@apply rounded-2xl bg-cream/5 p-8;
+		@apply flex flex-col items-start rounded-[1.25rem] border border-gold/[.12] bg-gold/[.04] p-8;
 	}
 	.step-card__number {
-		@apply font-heading text-2xl text-gold;
+		@apply font-heading text-[3.5rem] leading-none text-gold/[.28];
+	}
+	.step-card__icon {
+		@apply mt-6 h-10 w-10;
 	}
 	.step-card__title {
-		@apply mt-4 font-heading text-xl;
+		@apply mt-5 text-xl leading-snug;
 	}
 	.step-card__body {
-		@apply mt-3 text-cream/70;
+		@apply mt-3 text-sm leading-relaxed text-cream/55;
 	}
 
 	/* Quote interlude — Figma "QuoteInterlude" frame, node-id 146-197. */
