@@ -129,6 +129,11 @@
 	.service-card__media {
 		@apply absolute inset-0 bg-dark-green/60;
 	}
+	/* Scrim behind the title/CTA — Figma node-id 146-70 (340px of a 433px card). */
+	.service-card__media::after {
+		content: "";
+		@apply absolute inset-x-0 bottom-0 h-[78.5%] bg-gradient-to-t from-dark-green/90 from-0% via-dark-green/30 via-55% to-dark-green/0 to-100% opacity-[.78];
+	}
 	.service-card__media img {
 		@apply h-full w-full object-cover;
 	}
