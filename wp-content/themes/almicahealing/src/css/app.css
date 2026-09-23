@@ -143,6 +143,9 @@
 	.service-card__title {
 		@apply font-heading text-xl;
 	}
+	.service-card__cta {
+		@apply w-full;
+	}
 	.services__all {
 		@apply mt-12;
 	}
