@@ -77,6 +77,9 @@
 	.hero__inner--center {
 		@apply mx-auto max-w-2xl text-center;
 	}
+	.hero__inner--half {
+		@apply px-8 py-60 md:mx-0 md:w-1/2;
+	}
 
 	/* Intro — Figma "Intro" frame, node-id 146-32. */
 	.intro__inner {
@@ -95,7 +98,7 @@
 		@apply mt-8;
 	}
 	.intro__media {
-		@apply aspect-[4/3] rounded-[999px_999px_24px_24px] bg-dark-green/10 bg-cover bg-center;
+		@apply aspect-[4/3] rounded-[120px_120px_24px_24px] bg-dark-green/10 bg-cover bg-center;
 	}
 
 	/* Services — Figma "Services" frame, node-id 146-34. */
