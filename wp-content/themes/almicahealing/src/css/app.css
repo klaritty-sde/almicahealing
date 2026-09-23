@@ -101,7 +101,7 @@
 		@apply mt-8;
 	}
 	.intro__media {
-		@apply aspect-[4/3] rounded-[120px_120px_24px_24px] bg-dark-green/10 bg-cover bg-center;
+		@apply aspect-[2.5/3] rounded-[120px_120px_24px_24px] bg-dark-green/10 bg-cover bg-center;
 	}
 
 	/* Services — Figma "Services" frame, node-id 146-34. */
