@@ -78,7 +78,10 @@
 		@apply mx-auto max-w-2xl text-center;
 	}
 	.hero__inner--half {
-		@apply px-8 py-60 md:mx-0 md:w-1/2;
+		@apply py-60;
+	}
+	.hero__inner--half .hero__content {
+		@apply md:w-1/2;
 	}
 
 	/* Intro — Figma "Intro" frame, node-id 146-32. */
