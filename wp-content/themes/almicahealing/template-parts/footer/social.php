@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 			<a class="site-header__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo_almica.svg' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="80" height="49">
 			</a>
-			<p><?php esc_html_e( 'Bienestar integral para un proceso de conexión, claridad y transformación.', 'almicahealing' ); ?></p>
+			<p><?php echo esc_html( almicahealing_setting( 'footer_blurb' ) ); ?></p>
 		</div>
 
 		<nav class="site-footer__col" aria-label="<?php esc_attr_e( 'Navegación', 'almicahealing' ); ?>">
@@ -52,13 +52,26 @@ defined( 'ABSPATH' ) || exit;
 		<div class="site-footer__col">
 			<h2><?php esc_html_e( 'Contacto', 'almicahealing' ); ?></h2>
 			<ul class="site-footer__list">
-				<li><a href="mailto:<?php echo esc_attr( almicahealing_brand( 'email' ) ); ?>"><?php echo esc_html( almicahealing_brand( 'email' ) ); ?></a></li>
-				<li><?php echo esc_html( almicahealing_brand( 'phone' ) ); ?></li>
-				<li><?php echo esc_html( almicahealing_brand( 'location' ) ); ?></li>
+				<?php $almicahealing_email = almicahealing_setting( 'contact_email' ); ?>
+				<?php if ( $almicahealing_email ) : ?>
+					<li><a href="mailto:<?php echo esc_attr( $almicahealing_email ); ?>"><?php echo esc_html( $almicahealing_email ); ?></a></li>
+				<?php endif; ?>
+				<?php if ( almicahealing_setting( 'phone' ) ) : ?>
+					<li><?php echo esc_html( almicahealing_setting( 'phone' ) ); ?></li>
+				<?php endif; ?>
+				<?php if ( almicahealing_setting( 'location_label' ) ) : ?>
+					<li><?php echo esc_html( almicahealing_setting( 'location_label' ) ); ?></li>
+				<?php endif; ?>
 			</ul>
 
 			<?php
-			$almicahealing_social = array_filter( almicahealing_brand( 'social' ) );
+			$almicahealing_social = array_filter(
+				array(
+					'instagram' => almicahealing_setting( 'social_instagram' ),
+					'facebook'  => almicahealing_setting( 'social_facebook' ),
+					'tiktok'    => almicahealing_setting( 'social_tiktok' ),
+				)
+			);
 			?>
 			<?php if ( $almicahealing_social ) : ?>
 				<ul class="site-footer__social">
@@ -76,6 +89,6 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="site-footer__bottom">
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Todos los derechos reservados.', 'almicahealing' ); ?></p>
-		<p class="site-footer__tagline"><?php esc_html_e( 'El equilibrio que da origen a todo', 'almicahealing' ); ?></p>
+		<p class="site-footer__tagline"><?php echo esc_html( almicahealing_setting( 'footer_tagline' ) ); ?></p>
 	</div>
 </footer>

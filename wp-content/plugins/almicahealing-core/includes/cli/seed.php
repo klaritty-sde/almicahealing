@@ -71,8 +71,13 @@ function almicahealing_seed_post( $seed_key, array $postarr, array $meta = array
 		$post_id = $existing[0];
 	} else {
 		$post_id = wp_insert_post( $postarr );
-		update_post_meta( $post_id, '_almicahealing_seed_key', $seed_key );
 	}
+
+	// Always stamp the key, not just on insert: a post adopted by the
+	// title fallback above would otherwise stay keyless and have to be
+	// re-matched by title on every run, which breaks as soon as it's
+	// renamed.
+	update_post_meta( $post_id, '_almicahealing_seed_key', $seed_key );
 
 	foreach ( $meta as $meta_key => $meta_value ) {
 		update_post_meta( $post_id, $meta_key, $meta_value );
@@ -183,6 +188,38 @@ function almicahealing_seed_run() {
 			'post_status' => 'publish',
 		)
 	);
+	$cursos_id    = almicahealing_seed_post(
+		'page-cursos',
+		array(
+			'post_type'   => 'page',
+			'post_title'  => 'Cursos',
+			'post_name'   => 'cursos',
+			'post_status' => 'publish',
+		)
+	);
+
+	// Legal pages share page-templates/legal.php, which renders the tab
+	// bar linking the two. The prose itself must come from the client.
+	$privacidad_id = almicahealing_seed_post(
+		'page-aviso-de-privacidad',
+		array(
+			'post_type'   => 'page',
+			'post_title'  => 'Aviso de privacidad',
+			'post_name'   => 'aviso-de-privacidad',
+			'post_status' => 'publish',
+		),
+		array( '_wp_page_template' => 'page-templates/legal.php' )
+	);
+	$terminos_id   = almicahealing_seed_post(
+		'page-terminos-y-condiciones',
+		array(
+			'post_type'   => 'page',
+			'post_title'  => 'Términos y condiciones',
+			'post_name'   => 'terminos-y-condiciones',
+			'post_status' => 'publish',
+		),
+		array( '_wp_page_template' => 'page-templates/legal.php' )
+	);
 
 	// Servicios — full catalog order (Figma "Servicios" frame, node-id
 	// 146-634); the featured six also appear in the Home teaser.
@@ -272,8 +309,8 @@ function almicahealing_seed_run() {
 				'object_id' => $servicios_id,
 			),
 			array(
-				'title' => 'Cursos',
-				'url'   => home_url( '/#cursos' ),
+				'title'     => 'Cursos',
+				'object_id' => $cursos_id,
 			),
 		)
 	);
@@ -290,11 +327,16 @@ function almicahealing_seed_run() {
 				'object_id' => $servicios_id,
 			),
 			array(
-				'title' => 'Cursos',
-				'url'   => home_url( '/#cursos' ),
+				'title'     => 'Cursos',
+				'object_id' => $cursos_id,
 			),
 		)
 	);
+
+	// Make sure the privacy page WordPress links to is our own Aviso de
+	// privacidad rather than the draft it ships with.
+	update_option( 'wp_page_for_privacy_policy', $privacidad_id );
+	unset( $terminos_id );
 
 	if ( '' === get_option( 'permalink_structure' ) ) {
 		update_option( 'permalink_structure', '/%postname%/' );

@@ -17,6 +17,15 @@ define( 'ALMICAHEALING_CORE_URI', plugin_dir_url( __FILE__ ) );
 require ALMICAHEALING_CORE_DIR . 'includes/cpt/servicio.php';
 require ALMICAHEALING_CORE_DIR . 'includes/cpt/curso.php';
 require ALMICAHEALING_CORE_DIR . 'includes/cpt/testimonio.php';
+require ALMICAHEALING_CORE_DIR . 'includes/cpt/profesional.php';
+
+require ALMICAHEALING_CORE_DIR . 'includes/fields/bootstrap.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/servicio.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/curso.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/profesional.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/testimonio.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/page.php';
+require ALMICAHEALING_CORE_DIR . 'includes/fields/ajustes.php';
 
 require ALMICAHEALING_CORE_DIR . 'includes/contact/countries.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/fields.php';
@@ -26,3 +35,4 @@ require ALMICAHEALING_CORE_DIR . 'includes/contact/mail.php';
 require ALMICAHEALING_CORE_DIR . 'includes/contact/handler.php';
 
 require ALMICAHEALING_CORE_DIR . 'includes/cli/seed.php';
+require ALMICAHEALING_CORE_DIR . 'includes/cli/seed-fields.php';
