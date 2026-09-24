@@ -606,6 +606,11 @@
 		content: counter(legal-section) ". ";
 		@apply text-gold;
 	}
+	/* Sub-sections (5.1, 5.2) carry their own number from the lawyer's
+	   document, so they are h3 and the counter must not touch them. */
+	.legal-content__body h3 {
+		@apply mt-8 font-heading text-base;
+	}
 	.legal-content__body p,
 	.legal-content__body li {
 		@apply mt-4 text-sm leading-relaxed text-dark-green/75;

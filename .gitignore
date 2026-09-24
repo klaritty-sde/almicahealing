@@ -34,3 +34,6 @@
 **/.idea/
 /.mcp.json
 /.ai/
+
+# Excel lock files
+**/~$*
