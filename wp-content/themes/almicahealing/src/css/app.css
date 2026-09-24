@@ -429,12 +429,15 @@
 		@apply mt-3 font-heading text-3xl md:text-4xl;
 	}
 	/* One auto-flow grid for every count: 5 tiles wrap to 3 + 2, a single
-	   tile just sits in the first cell. No per-count layouts. */
+	   tile just sits in the first cell. No per-count layouts.
+	   Measured off the BenefitCard node in Figma (frame 10): cards are
+	   separate rounded panels in a gapped grid, not cells divided by
+	   hairlines. */
 	.benefit-grid {
-		@apply mt-12 grid list-none grid-cols-1 border-l border-t border-dark-green/15 sm:grid-cols-2 lg:grid-cols-3;
+		@apply mt-12 grid list-none grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3;
 	}
 	.benefit-tile {
-		@apply border-b border-r border-dark-green/15 bg-cream/10 p-7;
+		@apply flex flex-col items-start rounded bg-cream/15 px-8 py-9;
 	}
 	.benefit-tile__icon {
 		@apply block h-6 w-6 text-dark-green/70;
@@ -443,10 +446,12 @@
 		@apply h-full w-full;
 	}
 	.benefit-tile__title {
-		@apply mt-6 font-heading text-base leading-snug;
+		@apply mt-6 font-heading text-lg font-normal leading-6 text-dark-green;
 	}
+	/* Cream, not a muted dark green: on the gold band the description is
+	   LIGHTER than the title, and it switches to the body face. */
 	.benefit-tile__body {
-		@apply mt-2 text-xs leading-relaxed text-dark-green/65;
+		@apply mt-2 max-w-[17rem] font-body text-[0.85rem] leading-relaxed text-cream;
 	}
 
 	/* Quién imparte / Facilitador — shared professional block. */
