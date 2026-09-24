@@ -65,25 +65,30 @@ defined( 'ABSPATH' ) || exit;
 			</ul>
 
 			<?php
-			$almicahealing_social = array_filter(
-				array(
-					'instagram' => almicahealing_setting( 'social_instagram' ),
-					'facebook'  => almicahealing_setting( 'social_facebook' ),
-					'tiktok'    => almicahealing_setting( 'social_tiktok' ),
-				)
+			/*
+			 * The three networks always render, so the footer matches the
+			 * design before the URLs are filled in on "Ajustes de Álmica".
+			 * An unset network falls back to "#".
+			 */
+			$almicahealing_social = array(
+				'social_instagram' => array( 'IG', __( 'Instagram', 'almicahealing' ) ),
+				'social_facebook'  => array( 'FB', __( 'Facebook', 'almicahealing' ) ),
+				'social_tiktok'    => array( 'TK', __( 'TikTok', 'almicahealing' ) ),
 			);
 			?>
-			<?php if ( $almicahealing_social ) : ?>
-				<ul class="site-footer__social">
-					<?php foreach ( $almicahealing_social as $almicahealing_network => $almicahealing_url ) : ?>
-						<li>
-							<a href="<?php echo esc_url( $almicahealing_url ); ?>" aria-label="<?php echo esc_attr( ucfirst( $almicahealing_network ) ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html( strtoupper( substr( $almicahealing_network, 0, 2 ) ) ); ?>
-							</a>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
+			<ul class="site-footer__social">
+				<?php foreach ( $almicahealing_social as $almicahealing_key => $almicahealing_network ) : ?>
+					<?php
+					list( $almicahealing_abbr, $almicahealing_label ) = $almicahealing_network;
+					$almicahealing_url                                = almicahealing_setting( $almicahealing_key );
+					?>
+					<li>
+						<a href="<?php echo $almicahealing_url ? esc_url( $almicahealing_url ) : '#'; ?>" aria-label="<?php echo esc_attr( $almicahealing_label ); ?>"<?php echo $almicahealing_url ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+							<?php echo esc_html( $almicahealing_abbr ); ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 	</div>
 
