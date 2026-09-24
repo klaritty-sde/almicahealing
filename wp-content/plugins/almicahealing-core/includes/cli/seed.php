@@ -311,6 +311,30 @@ function almicahealing_seed_run() {
 		)
 	);
 
+	almicahealing_seed_post(
+		'testimonio-camila-m',
+		array(
+			'post_type'    => 'testimonio',
+			'post_title'   => 'Camila M.',
+			'post_excerpt' => 'Arteterapia',
+			'post_content' => 'El proceso de arteterapia me abrió puertas que no sabía que existían. Es una experiencia que recomendaría sin dudar.',
+			'post_status'  => 'publish',
+			'menu_order'   => 2,
+		)
+	);
+
+	almicahealing_seed_post(
+		'testimonio-andres-t',
+		array(
+			'post_type'    => 'testimonio',
+			'post_title'   => 'Andrés T.',
+			'post_excerpt' => 'Constelación Familiar para el Trabajo',
+			'post_content' => 'La constelación familiar me ayudó a entender dinámicas en mi equipo de trabajo que llevaban años sin resolverse.',
+			'post_status'  => 'publish',
+			'menu_order'   => 3,
+		)
+	);
+
 	// Nav menus (only populated if empty — see almicahealing_seed_menu()).
 	almicahealing_seed_menu(
 		'primary',

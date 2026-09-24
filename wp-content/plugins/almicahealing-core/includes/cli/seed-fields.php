@@ -61,11 +61,13 @@ function almicahealing_seed_field( $name, $value, $post_id ) {
 }
 
 /**
- * Seeds the four professionals named in the design.
+ * Seeds the five professionals named in the design.
  *
- * Perla Berrones is deliberately absent: she appears on one frame with
- * another therapist's photo and bio, so decision D4 leaves that service
- * without a professional rather than seeding bad data.
+ * Perla Barrones was originally excluded under decision D4: the Figma
+ * frame showed her with another therapist's photo and bio, so seeding
+ * her would have published wrong data. The client has since supplied
+ * her own role and bio, so D4 no longer applies and she is seeded here.
+ * She still has no photo, which renders as an empty circle.
  *
  * @return array<string,int> Seed key suffix => post ID.
  */
@@ -120,6 +122,14 @@ function almicahealing_seed_profesionales() {
 			'order'       => 4,
 			'image'       => '',
 			'bio'         => '',
+			'credentials' => array(),
+		),
+		'perla-barrones'         => array(
+			'name'        => 'Perla Barrones',
+			'role'        => 'Lectora de Energía',
+			'order'       => 5,
+			'image'       => '',
+			'bio'         => 'El servicio de Perla ofrece una conexión profunda con el alma: una revisión general hacia el interior de cada persona. A través de un escaneo energético y emocional, revisa el estado actual del alma y el cuerpo energético para detectar bloqueos o cargas, y canaliza un mensaje del oráculo o de los guías, con la orientación necesaria para el momento de vida de cada quien. Perla tiene 32 años y se describe como un ser en constante aprendizaje, redescubriendo su interior a través de un salto hacia su propia alma y hacia el servicio a los demás. Su intención es sostener un espacio seguro y libre de juicios, donde cada persona pueda conectar con su propia sabiduría interna.',
 			'credentials' => array(),
 		),
 	);
@@ -217,6 +227,41 @@ function almicahealing_seed_servicio_fields( array $pros ) {
 	}
 
 	WP_CLI::log( 'Seeded Arteterapia (reference service instance).' );
+
+	almicahealing_seed_servicio_professional(
+		'servicio-limpieza-conexion-emocional-personas',
+		$pros,
+		'perla-barrones'
+	);
+}
+
+/**
+ * Assigns a single professional to a service, leaving the rest of the
+ * service's fields alone.
+ *
+ * Only writes when the service has no professional yet, so an editor's
+ * choice in wp-admin is never overwritten on a re-run.
+ *
+ * @param string            $seed_key Service seed key.
+ * @param array<string,int> $pros     Professional IDs by slug.
+ * @param string            $pro_slug Which professional to assign.
+ */
+function almicahealing_seed_servicio_professional( $seed_key, array $pros, $pro_slug ) {
+	$servicio_id = almicahealing_seeded_id( $seed_key, 'servicio' );
+
+	if ( ! $servicio_id || empty( $pros[ $pro_slug ] ) ) {
+		return;
+	}
+
+	$current = get_post_meta( $servicio_id, 'professionals', true );
+
+	if ( ! empty( $current ) ) {
+		return;
+	}
+
+	almicahealing_seed_field( 'professionals', array( $pros[ $pro_slug ] ), $servicio_id );
+
+	WP_CLI::log( "Assigned {$pro_slug} to {$seed_key}." );
 }
 
 /**
