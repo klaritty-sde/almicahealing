@@ -280,7 +280,11 @@
 
 	/* Fundadora — Figma "Fundadora" frame, node-id 146-513. */
 	.fundadora__inner {
-		@apply mx-auto flex max-w-3xl flex-col gap-6 px-8 pb-20 sm:flex-row;
+		@apply mx-auto max-w-3xl px-8 pb-20;
+	}
+	/* Hairline between the Historia copy and the founder card. */
+	.fundadora__rule {
+		@apply h-px border-0 bg-dark-green/10;
 	}
 	.fundadora__photo {
 		@apply h-24 w-24 shrink-0 rounded-full bg-dark-green/10 bg-cover bg-center;
@@ -306,25 +310,26 @@
 		@apply text-3xl md:text-4xl;
 	}
 	.formacion__list {
-		@apply mt-10 divide-y divide-cream/20;
+		@apply mt-10;
 	}
 	.formacion-item {
-		@apply py-8 first:pt-0 last:pb-0;
+		@apply border-b border-dark-green/[0.12] py-8;
 	}
 	.formacion-item__head {
 		@apply flex items-baseline justify-between gap-4;
 	}
+	/* Only the description sits in cream; the headings stay dark on gold. */
 	.formacion-item__title {
-		@apply font-heading text-xl;
+		@apply font-heading text-xl text-dark-green;
 	}
 	.formacion-item__year {
-		@apply shrink-0 text-sm text-cream/70;
+		@apply shrink-0 text-sm text-dark-green/75;
 	}
 	.formacion-item__institution {
-		@apply mt-1 italic text-cream/80;
+		@apply mt-1 text-sm leading-[1.5] tracking-[0.04em] text-dark-green/70;
 	}
 	.formacion-item__body {
-		@apply mt-3 text-cream/80;
+		@apply mt-3 text-cream;
 	}
 
 	/* ---------------------------------------------------------------

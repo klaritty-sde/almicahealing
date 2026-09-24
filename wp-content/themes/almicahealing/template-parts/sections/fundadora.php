@@ -19,6 +19,7 @@ if ( ! $almicahealing_founder ) {
 ?>
 <section class="fundadora">
 	<div class="fundadora__inner">
+		<hr class="fundadora__rule">
 		<?php
 		get_template_part(
 			'template-parts/parts/profesional',
