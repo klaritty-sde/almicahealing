@@ -34,7 +34,7 @@ if ( $almicahealing_rows ) {
 ?>
 <section class="how-it-works">
 	<div class="how-it-works__inner">
-		<p class="section-eyebrow"><?php esc_html_e( 'Proceso', 'almicahealing' ); ?></p>
+		<p class="section-eyebrow"><?php esc_html_e( 'Procesos', 'almicahealing' ); ?></p>
 		<h2 class="how-it-works__title"><?php esc_html_e( 'Tu proceso comienza aquí', 'almicahealing' ); ?></h2>
 
 		<div class="how-it-works__grid">
