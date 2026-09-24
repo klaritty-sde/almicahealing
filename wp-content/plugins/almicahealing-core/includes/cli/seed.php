@@ -198,6 +198,26 @@ function almicahealing_seed_run() {
 		)
 	);
 
+	// The Home copy lives on a real page so it has an edit screen: the
+	// `group_home` field group is located by `page_type == front_page`,
+	// which matches nothing while the site is showing posts on the front.
+	// front-page.php keeps rendering it either way.
+	$inicio_id = almicahealing_seed_post(
+		'page-inicio',
+		array(
+			'post_type'   => 'page',
+			'post_title'  => 'Inicio',
+			'post_name'   => 'inicio',
+			'post_status' => 'publish',
+		)
+	);
+
+	if ( 'page' !== get_option( 'show_on_front' ) || ! get_option( 'page_on_front' ) ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $inicio_id );
+		WP_CLI::log( 'Set "Inicio" as the static front page so the Home fields have an edit screen.' );
+	}
+
 	// Legal pages share page-templates/legal.php, which renders the tab
 	// bar linking the two. The prose itself must come from the client.
 	$privacidad_id = almicahealing_seed_post(

@@ -36,3 +36,4 @@ require ALMICAHEALING_CORE_DIR . 'includes/contact/handler.php';
 
 require ALMICAHEALING_CORE_DIR . 'includes/cli/seed.php';
 require ALMICAHEALING_CORE_DIR . 'includes/cli/seed-fields.php';
+require ALMICAHEALING_CORE_DIR . 'includes/cli/import.php';
