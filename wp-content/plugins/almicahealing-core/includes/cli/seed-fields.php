@@ -129,12 +129,12 @@ Es fundadora de El Arrullo, casa para la Antroposofía, A.C., y coordinadora del
 Su trabajo abarca tres líneas principales: la sanación energética a través de lectura, interpretación y rituales con velas; la biodescodificación, para liberar memorias y comprender los mensajes del cuerpo; y las configuraciones sistémicas empresariales, un enfoque que ayuda a líderes y organizaciones a desbloquear su potencial combinando metodologías de constelaciones organizacionales y gestión psicoemocional. A través de este trabajo, Gabriela ayuda a equipos y ejecutivos a alcanzar mayor claridad y cohesión, trabajando en la raíz invisible de los problemas que frenan el crecimiento de un negocio.',
 			'credentials' => array(),
 		),
-		'tonathiu-munoz'         => array(
-			'name'        => 'Tonathiu Muñoz',
+		'tonatiuh-munoz'         => array(
+			'name'        => 'Tonatiuh Muñoz',
 			'role'        => 'Acompañante Terapéutico',
 			'order'       => 4,
-			'image'       => get_template_directory() . '/assets/img/people/tonathiu-munoz.jpg',
-			'bio'         => 'Tonathiu se define como un ser en constante búsqueda de respuestas, crecimiento y sanación. A lo largo de su camino ha encontrado diversas técnicas, herramientas y conocimientos que le han ayudado a comprenderse mejor y a transformar aspectos importantes de su vida.
+			'image'       => get_template_directory() . '/assets/img/people/tonatiuh-munoz.jpg',
+			'bio'         => 'Tonatiuh se define como un ser en constante búsqueda de respuestas, crecimiento y sanación. A lo largo de su camino ha encontrado diversas técnicas, herramientas y conocimientos que le han ayudado a comprenderse mejor y a transformar aspectos importantes de su vida.
 
 Hoy comparte estas experiencias y aprendizajes con el propósito de acompañar a otras personas en sus propios procesos, ofreciendo un espacio de escucha, equilibrio y reconexión con sí mismas. Su intención es apoyar a quienes buscan bienestar, claridad y una relación más profunda con su esencia.',
 			'credentials' => array(),
@@ -493,12 +493,44 @@ function almicahealing_migrate_menus() {
 }
 
 /**
+ * Renames the Tonatiuh Muñoz record, first seeded as «Tonathiu» with
+ * the h transposed.
+ *
+ * This has to run BEFORE the professionals are seeded. They are matched
+ * on `_almicahealing_seed_key`, so with the key corrected in code but
+ * not yet in the database the seeder would match nothing, fall through
+ * to its title lookup — which the rename also breaks — and insert a
+ * SECOND professional rather than updating this one.
+ */
+function almicahealing_migrate_tonatiuh() {
+	$post_id = almicahealing_seeded_id( 'profesional-tonathiu-munoz', 'profesional' );
+
+	if ( ! $post_id ) {
+		return;
+	}
+
+	update_post_meta( $post_id, '_almicahealing_seed_key', 'profesional-tonatiuh-munoz' );
+
+	wp_update_post(
+		array(
+			'ID'         => $post_id,
+			'post_title' => 'Tonatiuh Muñoz',
+			'post_name'  => 'tonatiuh-munoz',
+		)
+	);
+
+	WP_CLI::log( 'Renamed «Tonathiu Muñoz» to «Tonatiuh Muñoz».' );
+}
+
+/**
  * Runs the field seed.
  */
 function almicahealing_seed_fields_run() {
 	if ( ! function_exists( 'update_field' ) ) {
 		WP_CLI::warning( 'Secure Custom Fields is not active — writing plain post meta, which the repeater fields cannot round-trip.' );
 	}
+
+	almicahealing_migrate_tonatiuh();
 
 	$pros = almicahealing_seed_profesionales();
 	WP_CLI::log( 'Seeded ' . count( $pros ) . ' profesionales.' );
