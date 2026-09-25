@@ -254,8 +254,12 @@
 	.testimonial-slide__mark {
 		@apply block font-heading text-[5rem] leading-[3.5rem] text-gold;
 	}
+	/* 1.57rem/2.55rem is Figma's measured value for the quote (node-id
+	   146-292, 162.5% leading), applied from md up because that frame is
+	   the desktop one; below it the quote keeps the smaller step so it
+	   does not crowd the 16px gutter. */
 	.testimonial-slide__quote {
-		@apply font-heading text-xl italic text-dark-green md:text-2xl;
+		@apply font-heading text-xl italic text-dark-green md:text-[1.57rem] md:leading-[2.55rem];
 	}
 	.testimonial-slide__meta {
 		@apply mt-6;
