@@ -1,15 +1,20 @@
 <?php
 /**
  * Course detail — the template all three courses render through.
- * Reference instance: Clantanra (Figma frame 5, node 177-748).
+ * Reference instance: Clantanra (Figma frame 5, node 177-748). Check
+ * anything to do with the Inversión card against Riutunmi (node
+ * 181-3772) instead: Clantanra hides that card, so its sidebar looks
+ * correct under orderings that are wrong on the other two courses.
  *
- * Section order: hero, "Sobre el curso" with a sidebar (facilitator,
- * inversión, contact card), the numbered outcomes box, and "Otros
- * programas".
+ * Section order: hero, then "Sobre el curso" as two columns, then
+ * "Otros programas". The left column holds the copy AND the numbered
+ * outcomes box — the box is only as wide as the copy, not a full-width
+ * band, and the sidebar runs alongside it. The sidebar's own order is
+ * Inversión, Facilitador/a, contact card.
  *
  * Clantanra has no price, which is the "price on request" variation:
  * the Inversión card is hidden and the global `price_on_request_text`
- * is shown on its card instead.
+ * is shown on the contact card instead.
  *
  * @package AlmicaHealing
  */
