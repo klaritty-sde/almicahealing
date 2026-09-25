@@ -484,11 +484,15 @@
 	.benefit-tile {
 		@apply flex flex-col items-start rounded bg-cream/15 px-8 py-9;
 	}
+	/* The delivered icons share a 24 height but not a width — `ondas` is
+	   43 wide, `brote` 18 — so the box is height-driven and the width
+	   follows the viewBox. Forcing a square here letterboxes the wide
+	   ones down to half height. */
 	.benefit-tile__icon {
-		@apply block h-6 w-6 text-dark-green/70;
+		@apply inline-flex h-6 items-center text-dark-green/70;
 	}
 	.benefit-tile__icon svg {
-		@apply h-full w-full;
+		@apply h-full w-auto;
 	}
 	.benefit-tile__title {
 		@apply mt-6 font-heading text-lg font-normal leading-6 text-dark-green;

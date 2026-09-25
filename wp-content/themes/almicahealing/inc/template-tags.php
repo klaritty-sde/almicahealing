@@ -29,6 +29,18 @@ function almicahealing_render_contact_form() {
  * line style stays consistent; an unknown slug renders nothing rather
  * than a broken image.
  *
+ * The set is mid-migration: the icons the designer has delivered are
+ * filled shapes on a 24-high, variable-width viewBox, while the slugs
+ * still awaiting art are the older 24x24 stroked drawings. Both are
+ * normalised to `currentColor` so `.benefit-tile__icon` keeps colouring
+ * them, and the allowlist below has to cover both shapes.
+ *
+ * Figma wraps every export in `<g clip-path>` + `<defs><clipPath><rect>`
+ * that only re-clips the full viewBox. Those are stripped on the way in
+ * (see the conversion note in assets/img/icons), so no `id` ever reaches
+ * the page and several icons can inline together without colliding —
+ * which is why `defs`, `clipPath` and `rect` are deliberately absent here.
+ *
  * @param string $slug Icon slug, e.g. 'corazon'.
  */
 function almicahealing_benefit_icon( $slug ) {
@@ -55,11 +67,25 @@ function almicahealing_benefit_icon( $slug ) {
 				'focusable'       => true,
 				'class'           => true,
 			),
-			'path'   => array( 'd' => true ),
+			'g'      => array(
+				'fill'   => true,
+				'stroke' => true,
+			),
+			'path'   => array(
+				'd'               => true,
+				'fill'            => true,
+				'fill-rule'       => true,
+				'clip-rule'       => true,
+				'stroke'          => true,
+				'stroke-width'    => true,
+				'stroke-linecap'  => true,
+				'stroke-linejoin' => true,
+			),
 			'circle' => array(
-				'cx' => true,
-				'cy' => true,
-				'r'  => true,
+				'cx'   => true,
+				'cy'   => true,
+				'r'    => true,
+				'fill' => true,
 			),
 		)
 	);
