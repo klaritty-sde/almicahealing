@@ -66,14 +66,19 @@ defined( 'ABSPATH' ) || exit;
 
 			<?php
 			/*
-			 * The three networks always render, so the footer matches the
+			 * Each network always renders, so the footer matches the
 			 * design before the URLs are filled in on "Ajustes de Álmica".
 			 * An unset network falls back to "#".
+			 *
+			 * TikTok is commented out rather than deleted: the client
+			 * confirmed the brand only uses Instagram and Facebook, and
+			 * leaving it in the array would render a dead "TK" link.
+			 * Restore this line if they open an account later.
 			 */
 			$almicahealing_social = array(
 				'social_instagram' => array( 'IG', __( 'Instagram', 'almicahealing' ) ),
 				'social_facebook'  => array( 'FB', __( 'Facebook', 'almicahealing' ) ),
-				'social_tiktok'    => array( 'TK', __( 'TikTok', 'almicahealing' ) ),
+				// 'social_tiktok'    => array( 'TK', __( 'TikTok', 'almicahealing' ) ),
 			);
 			?>
 			<ul class="site-footer__social">

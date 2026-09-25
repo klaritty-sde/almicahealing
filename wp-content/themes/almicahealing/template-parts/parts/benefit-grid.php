@@ -32,13 +32,28 @@ if ( ! $almicahealing_benefits ) {
 		if ( ! $almicahealing_benefit['title'] ) {
 			continue;
 		}
+
+		// Two tile shapes live in the design. Most have a title and a
+		// separate supporting sentence under it, in the body face. A few
+		// (Futuros Posibles, Limpieza y Conexión con Personas) are a
+		// single sentence that Figma draws as ONE text run whose colour
+		// turns from dark green to white part-way through — so there the
+		// description has to be inline, sharing the title's face and
+		// size, not a second block. A description opening in lower case
+		// is what marks it as a continuation.
+		$almicahealing_continues = almicahealing_starts_lowercase( $almicahealing_benefit['description'] );
 		?>
 		<li class="benefit-tile">
 			<?php if ( $almicahealing_benefit['icon'] ) : ?>
 				<span class="benefit-tile__icon"><?php almicahealing_benefit_icon( $almicahealing_benefit['icon'] ); ?></span>
 			<?php endif; ?>
-			<h3 class="benefit-tile__title"><?php echo esc_html( $almicahealing_benefit['title'] ); ?></h3>
-			<?php if ( $almicahealing_benefit['description'] ) : ?>
+			<h3 class="benefit-tile__title">
+				<?php echo esc_html( $almicahealing_benefit['title'] ); ?>
+				<?php if ( $almicahealing_continues ) : ?>
+					<span class="benefit-tile__cont"><?php echo esc_html( $almicahealing_benefit['description'] ); ?></span>
+				<?php endif; ?>
+			</h3>
+			<?php if ( $almicahealing_benefit['description'] && ! $almicahealing_continues ) : ?>
 				<p class="benefit-tile__body"><?php echo esc_html( $almicahealing_benefit['description'] ); ?></p>
 			<?php endif; ?>
 		</li>

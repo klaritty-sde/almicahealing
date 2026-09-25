@@ -135,6 +135,30 @@ function almicahealing_page_url( $slug ) {
 }
 
 /**
+ * Does this text open with a lower-case letter?
+ *
+ * Tells a benefit description that *continues* the title's sentence
+ * from one that starts a new sentence of its own — the two are drawn
+ * differently in Figma. Accented Spanish initials («énergetico») mean
+ * this has to be multibyte-aware, and the second comparison keeps
+ * digits and punctuation from counting as lower case.
+ *
+ * @param string $text Text to test.
+ * @return bool
+ */
+function almicahealing_starts_lowercase( $text ) {
+	$text = ltrim( (string) $text );
+
+	if ( '' === $text ) {
+		return false;
+	}
+
+	$first = mb_substr( $text, 0, 1 );
+
+	return mb_strtolower( $first ) === $first && mb_strtoupper( $first ) !== $first;
+}
+
+/**
  * Resolves the image to use for a detail-page hero: the explicit
  * `hero_image` field when set, otherwise the featured image.
  *

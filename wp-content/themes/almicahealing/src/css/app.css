@@ -459,6 +459,12 @@
 	.benefit-tile__title {
 		@apply mt-6 font-heading text-lg font-normal leading-6 text-dark-green;
 	}
+	/* When the description continues the title's sentence it is the same
+	   text run in Figma — same face, size and weight — and only the
+	   colour changes, to pure white rather than cream. */
+	.benefit-tile__cont {
+		@apply text-white;
+	}
 	/* Cream, not a muted dark green: on the gold band the description is
 	   LIGHTER than the title, and it switches to the body face. */
 	.benefit-tile__body {
