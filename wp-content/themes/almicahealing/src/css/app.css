@@ -541,12 +541,12 @@
 	}
 
 	/* Objetivos / Beneficios / Temas — numbered from the markup, never
-	   from typed-in numbers (the design has a duplicated "4"). */
-	.outcomes__inner {
-		@apply mx-auto max-w-6xl px-8 pb-20;
-	}
+	   from typed-in numbers (the design has a duplicated "4").
+	   The box sits INSIDE the left column, under "Sobre el curso", not
+	   as a band of its own: in Figma it is only as wide as the copy and
+	   the sidebar runs alongside it. */
 	.outcomes__box {
-		@apply rounded-2xl border border-dark-green/10 bg-gold/10 p-8 md:p-10;
+		@apply mt-12 rounded-2xl border border-dark-green/10 bg-gold/10 p-8 md:p-10;
 	}
 	.outcomes__list {
 		@apply mt-6 list-none space-y-4;

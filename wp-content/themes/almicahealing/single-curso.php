@@ -67,9 +67,35 @@ while ( have_posts() ) :
 				<span class="section-rule" aria-hidden="true"></span>
 				<p class="section-eyebrow"><?php esc_html_e( 'Sobre el curso', 'almicahealing' ); ?></p>
 				<div class="detail-about__text"><?php the_content(); ?></div>
+
+				<?php if ( $almicahealing_outcomes ) : ?>
+					<div class="outcomes__box">
+						<p class="section-eyebrow"><?php echo esc_html( $almicahealing_headings[ $almicahealing_heading_key ] ?? $almicahealing_heading_key ); ?></p>
+
+						<?php // Numbers come from the list itself — the design has a duplicated "4" that shouldn't be reproduced. ?>
+						<ol class="outcomes__list">
+							<?php foreach ( $almicahealing_outcomes as $almicahealing_outcome ) : ?>
+								<?php if ( empty( $almicahealing_outcome['text'] ) ) : ?>
+									<?php continue; ?>
+								<?php endif; ?>
+								<li class="outcomes__item"><?php echo esc_html( $almicahealing_outcome['text'] ); ?></li>
+							<?php endforeach; ?>
+						</ol>
+					</div>
+				<?php endif; ?>
 			</div>
 
 			<aside class="course-aside">
+				<?php if ( '' !== $almicahealing_price ) : ?>
+					<div class="course-aside__card course-aside__card--investment">
+						<p class="course-aside__eyebrow"><?php esc_html_e( 'Inversión', 'almicahealing' ); ?></p>
+						<p class="course-aside__price"><?php echo esc_html( almicahealing_price( $almicahealing_price, 0 ) ); ?></p>
+						<?php if ( $almicahealing_duration ) : ?>
+							<p class="course-aside__duration"><?php echo esc_html( $almicahealing_duration ); ?></p>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+
 				<?php foreach ( $almicahealing_facilitators as $almicahealing_facilitator ) : ?>
 					<div class="course-aside__card">
 						<p class="course-aside__eyebrow"><?php esc_html_e( 'Facilitador/a', 'almicahealing' ); ?></p>
@@ -86,16 +112,6 @@ while ( have_posts() ) :
 					</div>
 				<?php endforeach; ?>
 
-				<?php if ( '' !== $almicahealing_price ) : ?>
-					<div class="course-aside__card course-aside__card--investment">
-						<p class="course-aside__eyebrow"><?php esc_html_e( 'Inversión', 'almicahealing' ); ?></p>
-						<p class="course-aside__price"><?php echo esc_html( almicahealing_price( $almicahealing_price, 0 ) ); ?></p>
-						<?php if ( $almicahealing_duration ) : ?>
-							<p class="course-aside__duration"><?php echo esc_html( $almicahealing_duration ); ?></p>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
-
 				<div class="course-aside__card course-aside__card--inquiry">
 					<p class="course-aside__eyebrow"><?php echo esc_html( almicahealing_setting( 'course_inquiry_title' ) ); ?></p>
 					<p class="course-aside__body"><?php echo esc_html( almicahealing_setting( 'course_inquiry_body' ) ); ?></p>
@@ -111,26 +127,6 @@ while ( have_posts() ) :
 			</aside>
 		</div>
 	</section>
-
-	<?php if ( $almicahealing_outcomes ) : ?>
-		<section class="outcomes">
-			<div class="outcomes__inner">
-				<div class="outcomes__box">
-					<p class="section-eyebrow"><?php echo esc_html( $almicahealing_headings[ $almicahealing_heading_key ] ?? $almicahealing_heading_key ); ?></p>
-
-					<?php // Numbers come from the list itself — the design has a duplicated "4" that shouldn't be reproduced. ?>
-					<ol class="outcomes__list">
-						<?php foreach ( $almicahealing_outcomes as $almicahealing_outcome ) : ?>
-							<?php if ( empty( $almicahealing_outcome['text'] ) ) : ?>
-								<?php continue; ?>
-							<?php endif; ?>
-							<li class="outcomes__item"><?php echo esc_html( $almicahealing_outcome['text'] ); ?></li>
-						<?php endforeach; ?>
-					</ol>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
 
 	<?php if ( $almicahealing_others ) : ?>
 		<section class="related">
