@@ -587,9 +587,22 @@
 		@apply absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full border border-dark-green/20 text-xs text-dark-green/60;
 	}
 
-	/* Otros servicios / Otros programas. */
+	/* Otros servicios / Otros programas. The two are NOT the same band:
+	   "Otros servicios" stays on the cream page (Figma frames 10–20),
+	   while "Otros programas" sits on the dark ground — node-id 177-840
+	   is background #263B33 with padding 4rem 0, and its eyebrow takes
+	   the lifted gold the theme uses on dark. */
 	.related {
 		@apply bg-cream;
+	}
+	.related--dark {
+		@apply bg-dark-green py-16;
+	}
+	.related--dark .related__inner {
+		@apply pb-0;
+	}
+	.related--dark .section-eyebrow {
+		@apply text-gold-dark;
 	}
 	.related__inner {
 		@apply mx-auto max-w-6xl px-8 pb-20;

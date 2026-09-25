@@ -134,7 +134,7 @@ while ( have_posts() ) :
 	</section>
 
 	<?php if ( $almicahealing_others ) : ?>
-		<section class="related">
+		<section class="related related--dark">
 			<div class="related__inner">
 				<p class="section-eyebrow"><?php esc_html_e( 'Otros programas', 'almicahealing' ); ?></p>
 
