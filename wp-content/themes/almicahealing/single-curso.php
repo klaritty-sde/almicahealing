@@ -144,7 +144,10 @@ while ( have_posts() ) :
 						get_template_part(
 							'template-parts/cards/curso',
 							null,
-							array( 'post_id' => $almicahealing_other )
+							array(
+								'post_id' => $almicahealing_other,
+								'compact' => true,
+							)
 						);
 						?>
 					<?php endforeach; ?>

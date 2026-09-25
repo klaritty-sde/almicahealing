@@ -235,6 +235,32 @@
 		@apply mt-2 text-dark-green/70;
 	}
 
+	/* "Otros programas" — Figma node-id 177-848. The card is only the
+	   photo, 4:3 rather than the listing's 4:5, with the level and title
+	   sitting ON it. The scrim is the design's own three-stop gradient,
+	   not the service card's; the values are lifted verbatim. */
+	.course-card--compact .course-card__media {
+		@apply relative aspect-[4/3];
+	}
+	.course-card__scrim {
+		@apply absolute inset-0;
+		background: linear-gradient(
+			0deg,
+			rgba(38, 59, 51, 0.9) 0%,
+			rgba(38, 59, 51, 0.2) 60%,
+			rgba(38, 59, 51, 0) 100%
+		);
+	}
+	.course-card__overlay {
+		@apply absolute inset-x-0 bottom-0 flex flex-col items-start gap-1 p-6;
+	}
+	.course-card__level {
+		@apply font-body text-[0.625rem] uppercase leading-[0.9375rem] tracking-[0.15rem] text-gold-dark;
+	}
+	.course-card__overlay-title {
+		@apply font-heading text-xl leading-[1.625rem] text-cream;
+	}
+
 	/* Testimonials — Figma "Testimonials" frame, node-id 146-279. */
 	.testimonials {
 		@apply bg-gold/20;
@@ -581,9 +607,6 @@
 	}
 	.course-card__price {
 		@apply mt-3 text-sm font-semibold text-dark-green;
-	}
-	.course-card--compact .course-card__title {
-		@apply text-lg;
 	}
 
 	/* Legal pages — shared hero and tab bar (Figma frames 8–9). */
