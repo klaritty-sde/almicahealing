@@ -82,7 +82,7 @@ function almicahealing_seed_profesionales() {
 			'name'        => 'Alma Solís',
 			'role'        => 'Fundadora y Directora',
 			'order'       => 1,
-			'image'       => get_template_directory() . '/assets/img/acerca-de-fundadora.jpg',
+			'image'       => get_template_directory() . '/assets/img/people/alma-solis.jpg',
 			'bio'         => 'Alma Solís es una profesional comprometida con el desarrollo humano y el bienestar integral de las personas. Inició su formación académica en Ciencias de la Comunicación, disciplina que le permitió desarrollar una comprensión profunda de los procesos de interacción y expresión humana. En paralelo, comenzó su preparación como Consteladora Familiar, lo que despertó en ella un interés creciente por el acompañamiento terapéutico y el crecimiento personal.
 
 Impulsada por su vocación de servicio, cursó la Licenciatura en Psicología y continuó su especialización con una Maestría en Psicología Clínica y de la Salud. Su formación se ha enriquecido además con estudios complementarios en Bioneuroemoción con Enric Corbera, Canalización y Defensa Psíquica con Sol Ahimsa, y el programa Sana Tu Alma impartido por Abril Méndez.
@@ -113,7 +113,7 @@ A lo largo de varios años de consulta privada, Alma ha acompañado a personas e
 			'name'        => 'Elizabeth de las Casas',
 			'role'        => 'Arte Terapeuta Antroposófica',
 			'order'       => 2,
-			'image'       => get_template_directory() . '/assets/img/people/elizabeth-de-las-casas.png',
+			'image'       => get_template_directory() . '/assets/img/people/elizabeth-de-las-casas.jpg',
 			'bio'         => 'Elizabeth estudió Psicología y Arte, y es Arte Terapeuta Antroposófica por la escuela El Puente, en Barcelona, España. Es también Educadora Waldorf del primer septenio, Terapeuta en Polaridad y Craneosacral, y Terapeuta Floral certificada por CRISOL. Nació en la Ciudad de México y actualmente vive en Coatepec, Veracruz; su formación se ha enriquecido con maestros de India, Nepal, Inglaterra, Canadá, España y México.
 
 Es fundadora de El Arrullo, casa para la Antroposofía, A.C., y coordinadora del grupo de Arte Terapia Antroposófica de Hispanoamérica. Desde hace más de veinte años acompaña procesos de desarrollo humano y crecimiento personal a través de cursos, talleres y terapias grupales e individuales en México, Chile y Brasil. Practicante de budismo, Qi Gong y Chi Kung, mantiene una búsqueda constante por reconocer y expresar su propia verdad, acompañando a otros en el camino hacia su encuentro.',
@@ -123,7 +123,7 @@ Es fundadora de El Arrullo, casa para la Antroposofía, A.C., y coordinadora del
 			'name'        => 'Gabriela Domínguez',
 			'role'        => 'Terapeuta Holística. Especialista en Terapia Centrada en Soluciones',
 			'order'       => 3,
-			'image'       => get_template_directory() . '/assets/img/people/gabriela-dominguez.png',
+			'image'       => get_template_directory() . '/assets/img/people/gabriela-dominguez.jpg',
 			'bio'         => 'Gabriela trabaja terapias alternativas que se integran para ayudar a encontrar el equilibrio que cada persona busca. Su camino en esta área comenzó hace más de ocho años, con Diplomados en Constelaciones Sistémicas Empresariales, Biodescodificación y Relación de Pareja, así como formación en velas y péndulo. Cuenta con la Certificación EC1375 en prestación de servicios auxiliares para la recuperación de condiciones físicas y socioemocionales, y con la Certificación EC0548 en Consejería en Adicciones.
 
 Su trabajo abarca tres líneas principales: la sanación energética a través de lectura, interpretación y rituales con velas; la biodescodificación, para liberar memorias y comprender los mensajes del cuerpo; y las configuraciones sistémicas empresariales, un enfoque que ayuda a líderes y organizaciones a desbloquear su potencial combinando metodologías de constelaciones organizacionales y gestión psicoemocional. A través de este trabajo, Gabriela ayuda a equipos y ejecutivos a alcanzar mayor claridad y cohesión, trabajando en la raíz invisible de los problemas que frenan el crecimiento de un negocio.',
@@ -133,7 +133,7 @@ Su trabajo abarca tres líneas principales: la sanación energética a través d
 			'name'        => 'Tonathiu Muñoz',
 			'role'        => 'Acompañante Terapéutico',
 			'order'       => 4,
-			'image'       => get_template_directory() . '/assets/img/people/tonathiu-munoz.png',
+			'image'       => get_template_directory() . '/assets/img/people/tonathiu-munoz.jpg',
 			'bio'         => 'Tonathiu se define como un ser en constante búsqueda de respuestas, crecimiento y sanación. A lo largo de su camino ha encontrado diversas técnicas, herramientas y conocimientos que le han ayudado a comprenderse mejor y a transformar aspectos importantes de su vida.
 
 Hoy comparte estas experiencias y aprendizajes con el propósito de acompañar a otras personas en sus propios procesos, ofreciendo un espacio de escucha, equilibrio y reconexión con sí mismas. Su intención es apoyar a quienes buscan bienestar, claridad y una relación más profunda con su esencia.',
@@ -143,7 +143,7 @@ Hoy comparte estas experiencias y aprendizajes con el propósito de acompañar a
 			'name'        => 'Perla Barrones',
 			'role'        => 'Lectora de Energía',
 			'order'       => 5,
-			'image'       => get_template_directory() . '/assets/img/people/perla-barrones.png',
+			'image'       => get_template_directory() . '/assets/img/people/perla-barrones.jpg',
 			'bio'         => 'El servicio de Perla ofrece una conexión profunda con el alma: una revisión general hacia el interior de cada persona. A través de un escaneo energético y emocional, revisa el estado actual del alma y el cuerpo energético para detectar bloqueos o cargas, y canaliza un mensaje del oráculo o de los guías, con la orientación necesaria para el momento de vida de cada quien. Perla tiene 32 años y se describe como un ser en constante aprendizaje, redescubriendo su interior a través de un salto hacia su propia alma y hacia el servicio a los demás. Su intención es sostener un espacio seguro y libre de juicios, donde cada persona pueda conectar con su propia sabiduría interna.',
 			'credentials' => array(),
 		),
@@ -151,7 +151,7 @@ Hoy comparte estas experiencias y aprendizajes con el propósito de acompañar a
 			'name'        => 'Alberto Solís',
 			'role'        => 'Terapeuta',
 			'order'       => 6,
-			'image'       => get_template_directory() . '/assets/img/people/alberto-solis.png',
+			'image'       => get_template_directory() . '/assets/img/people/alberto-solis.jpg',
 			'bio'         => 'Terapeuta en Constelaciones Familiares Alberto se define como un buscador: alguien convencido de que existe mucho más allá de lo que percibimos en el mundo material. En ese camino ha encontrado terapias, filosofías y teorías que le han permitido tomar lo mejor de cada una para su propio crecimiento y el de quienes acompaña. Su formación incluye el Taller de Sanación Energética con Sol Ahimsa (2018), el curso "Sana tu Alma, Descubre tus Poderes Psíquicos" con Abril Méndez (2022–2023), y el Diplomado en Constelaciones Familiares del Instituto de Constelaciones Familiares de Monterrey (2019–2021). Recientemente completó los cursos de Sesiones e Implementación Álmica y Kriutunmi con Alma Solís (2026). Desde hace varios años ejerce como terapeuta en constelaciones familiares e imparte cursos, con el propósito de ayudar a los demás y contribuir a construir un mejor lugar para vivir.',
 			'credentials' => array(),
 		),

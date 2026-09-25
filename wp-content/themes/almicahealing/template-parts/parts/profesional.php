@@ -21,7 +21,7 @@ if ( ! $almicahealing_pro_id || 'profesional' !== get_post_type( $almicahealing_
 
 $almicahealing_pro_compact = ! empty( $args['compact'] );
 $almicahealing_pro_role    = almicahealing_field( 'role', $almicahealing_pro_id );
-$almicahealing_pro_photo   = get_the_post_thumbnail_url( $almicahealing_pro_id, 'almicahealing-card' );
+$almicahealing_pro_photo   = get_the_post_thumbnail_url( $almicahealing_pro_id, 'almicahealing-portrait' );
 $almicahealing_pro_bio     = get_post_field( 'post_content', $almicahealing_pro_id );
 ?>
 <div class="profesional<?php echo $almicahealing_pro_compact ? ' profesional--compact' : ''; ?>">

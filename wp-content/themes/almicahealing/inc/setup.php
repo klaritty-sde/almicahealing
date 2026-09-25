@@ -29,5 +29,10 @@ function almicahealing_setup() {
 
 	add_image_size( 'almicahealing-card', 640, 480, true );
 	add_image_size( 'almicahealing-hero', 1600, 900, true );
+	// Therapist portraits are drawn in a circle, so they need a SQUARE
+	// crop. Asking for the 4:3 card size instead shaves the top and
+	// bottom off a square photo and then the circle clips the sides,
+	// which cuts faces. 400px covers the largest circle (128px) at 3x.
+	add_image_size( 'almicahealing-portrait', 400, 400, true );
 }
 add_action( 'after_setup_theme', 'almicahealing_setup' );
