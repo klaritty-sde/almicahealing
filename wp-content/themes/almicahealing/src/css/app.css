@@ -248,6 +248,12 @@
 	.testimonial-slide {
 		@apply mt-8;
 	}
+	/* Figma sets the quotation mark as its own gold element above the
+	   quote, not as characters around it (node-id 146-293): Athelas 5rem
+	   with the line box squashed to 3.5rem so it sits tight to the text. */
+	.testimonial-slide__mark {
+		@apply block font-heading text-[5rem] leading-[3.5rem] text-gold;
+	}
 	.testimonial-slide__quote {
 		@apply font-heading text-xl italic text-dark-green md:text-2xl;
 	}

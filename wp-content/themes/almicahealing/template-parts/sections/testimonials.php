@@ -41,7 +41,18 @@ if ( ! $almicahealing_testimonials->have_posts() ) {
 				$almicahealing_testimonials->the_post();
 				?>
 				<blockquote class="testimonial-slide" <?php echo 0 === $almicahealing_testimonial_index ? '' : 'hidden'; ?>>
-					<p class="testimonial-slide__quote">&ldquo;<?php the_content(); ?>&rdquo;</p>
+					<span class="testimonial-slide__mark" aria-hidden="true">&ldquo;</span>
+					<?php
+					/*
+					 * Not the_content(): it runs wpautop, which wraps the
+					 * quote in its own <p>. Nested inside this <p> the
+					 * browser closed the outer one early, stranding the
+					 * quotation marks and dropping the class off the text
+					 * altogether. A testimonial is a single plain sentence,
+					 * so print it as text.
+					 */
+					?>
+					<p class="testimonial-slide__quote"><?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?></p>
 					<footer class="testimonial-slide__meta">
 						<cite class="testimonial-slide__name"><?php the_title(); ?></cite>
 						<?php
