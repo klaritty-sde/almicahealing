@@ -21,7 +21,7 @@
 
 !/wp-content/mu-plugins/
 /wp-content/mu-plugins/*
-!/wp-content/mu-plugins/almicahealing-analytics.php
+!/wp-content/mu-plugins/sde-analytics.php
 !/wp-content/mu-plugins/almicahealing-environment.php
 
 **/node_modules/

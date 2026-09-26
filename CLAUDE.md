@@ -23,7 +23,7 @@ The parent `CLAUDE.md` at `/Users/ianmeza/vvv-local/CLAUDE.md` also loads in thi
 ```
 !/wp-content/themes/almicahealing/
 !/wp-content/plugins/almicahealing-core/
-!/wp-content/mu-plugins/almicahealing-analytics.php
+!/wp-content/mu-plugins/sde-analytics.php
 !/wp-content/mu-plugins/almicahealing-environment.php
 ```
 
@@ -97,6 +97,19 @@ Logs — `WP_DEBUG` and `SCRIPT_DEBUG` are both on:
 tail -f /Users/ianmeza/vvv-local/www/almicahealing/log/nginx-error.log
 tail -f /Users/ianmeza/vvv-local/www/almicahealing/log/nginx-access.log
 ```
+
+## Analytics
+
+`wp-content/mu-plugins/sde-analytics.php` loads Google Tag Manager. It is **site-neutral and byte-identical** in Klaritty (`www/klaritty/public_html`) and Álmica (`www/almicahealing/public_html`): change it in one repo, copy it to the other, and confirm with `shasum` on both paths. Per-site configuration lives in each environment's `wp-config.php`, never in git:
+
+```php
+define( 'SDE_GTM_CONTAINER_ID', 'GTM-XXXXXXX' );       // required; placeholder IDs are rejected
+define( 'SDE_GTM_ENVIRONMENTS', 'production,local' );  // optional; defaults to production only
+```
+
+GTM never loads in wp-admin, WP-CLI, or for logged-in users, so test the front end in a private window. On production without a valid ID, administrators get an error notice instead of tracking stopping silently. Forms record a conversion by pushing `{ event: 'generate_lead', form_name: '<form>' }` to `window.dataLayer` and waiting for `eventCallback` before redirecting (reference implementation: `wp-content/themes/Klaritty/assets/js/contacto.js`).
+
+Álmica: no GTM container exists yet, so nothing loads in any environment until `SDE_GTM_CONTAINER_ID` is defined. Reuse Klaritty's container setup (Google tag plus a `generate_lead` event tag) with Álmica's own GA4 measurement ID.
 
 ## Deployment
 
