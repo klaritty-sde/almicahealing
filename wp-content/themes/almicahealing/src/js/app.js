@@ -1,10 +1,11 @@
 const AUTOPLAY_DELAY = 7000;
 
 document.querySelectorAll( '[data-almicahealing-slider]' ).forEach( ( slider ) => {
+	const rail = slider.querySelector( '.testimonials__rail' );
 	const slides = slider.querySelectorAll( '.testimonial-slide' );
 	const dots = slider.querySelectorAll( '.testimonials__dot' );
 
-	if ( slides.length < 2 ) {
+	if ( ! rail || slides.length < 2 ) {
 		return;
 	}
 
@@ -13,8 +14,17 @@ document.querySelectorAll( '[data-almicahealing-slider]' ).forEach( ( slider ) =
 
 	const showSlide = ( index ) => {
 		current = index;
+		// Each quote is one track width, so the rail's offset is just the
+		// index. The CSS transition on the rail is what makes this a slide
+		// rather than a jump.
+		rail.style.transform = `translateX(-${ index * 100 }%)`;
 		slides.forEach( ( slide, slideIndex ) => {
-			slide.hidden = slideIndex !== index;
+			const active = slideIndex === index;
+			// `inert` keeps the offscreen quotes out of the tab order and
+			// out of a find-in-page; `aria-hidden` is the belt to its
+			// braces for screen readers that don't map inert yet.
+			slide.inert = ! active;
+			slide.setAttribute( 'aria-hidden', active ? 'false' : 'true' );
 		} );
 		dots.forEach( ( dot, dotIndex ) => {
 			dot.setAttribute( 'aria-current', dotIndex === index ? 'true' : 'false' );

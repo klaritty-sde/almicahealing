@@ -35,39 +35,52 @@ if ( ! $almicahealing_testimonials->have_posts() ) {
 		<h2 class="testimonials__title"><?php echo esc_html( almicahealing_field( 'testimonials_title', get_the_ID(), __( 'Experiencias que dejan huella.', 'almicahealing' ) ) ); ?></h2>
 
 		<div class="testimonials__track">
-			<?php
-			$almicahealing_testimonial_index = 0;
-			while ( $almicahealing_testimonials->have_posts() ) :
-				$almicahealing_testimonials->the_post();
-				?>
-				<blockquote class="testimonial-slide" <?php echo 0 === $almicahealing_testimonial_index ? '' : 'hidden'; ?>>
-					<span class="testimonial-slide__mark" aria-hidden="true">&ldquo;</span>
+			<div class="testimonials__rail">
+				<?php
+				$almicahealing_testimonial_index = 0;
+				while ( $almicahealing_testimonials->have_posts() ) :
+					$almicahealing_testimonials->the_post();
+					?>
 					<?php
 					/*
-					 * Not the_content(): it runs wpautop, which wraps the
-					 * quote in its own <p>. Nested inside this <p> the
-					 * browser closed the outer one early, stranding the
-					 * quotation marks and dropping the class off the text
-					 * altogether. A testimonial is a single plain sentence,
-					 * so print it as text.
+					 * Not `hidden`: the rail slides the quotes past a window,
+					 * so they all have to stay in the layout to have somewhere
+					 * to slide from. `inert` + `aria-hidden` take the offscreen
+					 * ones out of the tab order and the accessibility tree
+					 * instead, and the track clips them out of sight. Without
+					 * JS the rail never moves, so this degrades to the first
+					 * quote alone.
 					 */
 					?>
-					<p class="testimonial-slide__quote"><?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?></p>
-					<footer class="testimonial-slide__meta">
-						<cite class="testimonial-slide__name"><?php the_title(); ?></cite>
+					<blockquote class="testimonial-slide" <?php echo 0 === $almicahealing_testimonial_index ? '' : 'inert aria-hidden="true"'; ?>>
+						<span class="testimonial-slide__mark" aria-hidden="true">&ldquo;</span>
 						<?php
-						$almicahealing_about = almicahealing_field( 'about', get_the_ID() );
-						$almicahealing_label = $almicahealing_about ? get_the_title( (int) $almicahealing_about ) : '';
+						/*
+						 * Not the_content(): it runs wpautop, which wraps the
+						 * quote in its own <p>. Nested inside this <p> the
+						 * browser closed the outer one early, stranding the
+						 * quotation marks and dropping the class off the text
+						 * altogether. A testimonial is a single plain sentence,
+						 * so print it as text.
+						 */
 						?>
-						<?php if ( $almicahealing_label ) : ?>
-							<span class="testimonial-slide__label"><?php echo esc_html( $almicahealing_label ); ?></span>
-						<?php endif; ?>
-					</footer>
-				</blockquote>
-				<?php
-				++$almicahealing_testimonial_index;
-			endwhile;
-			?>
+						<p class="testimonial-slide__quote"><?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?></p>
+						<footer class="testimonial-slide__meta">
+							<cite class="testimonial-slide__name"><?php the_title(); ?></cite>
+							<?php
+							$almicahealing_about = almicahealing_field( 'about', get_the_ID() );
+							$almicahealing_label = $almicahealing_about ? get_the_title( (int) $almicahealing_about ) : '';
+							?>
+							<?php if ( $almicahealing_label ) : ?>
+								<span class="testimonial-slide__label"><?php echo esc_html( $almicahealing_label ); ?></span>
+							<?php endif; ?>
+						</footer>
+					</blockquote>
+					<?php
+					++$almicahealing_testimonial_index;
+				endwhile;
+				?>
+			</div>
 		</div>
 
 		<?php if ( $almicahealing_testimonials->post_count > 1 ) : ?>

@@ -325,8 +325,20 @@
 	.testimonials__title {
 		@apply text-3xl md:text-4xl;
 	}
+	/* The track is the window; the rail inside it is the full-width row of
+	   quotes that slides past. Clipping here is what keeps the outgoing and
+	   incoming quote from showing either side of the window. */
+	.testimonials__track {
+		@apply mt-8 overflow-hidden;
+	}
+	.testimonials__rail {
+		@apply flex transition-transform duration-500 ease-out motion-reduce:transition-none;
+	}
+	/* Every quote is exactly one window wide, so the rail's offset is a
+	   whole number of steps. `items-stretch` (the flex default) sizes all
+	   three to the tallest, so the section never changes height mid-slide. */
 	.testimonial-slide {
-		@apply mt-8;
+		@apply w-full shrink-0;
 	}
 	/* Figma sets the quotation mark as its own gold element above the
 	   quote, not as characters around it (node-id 146-293): Athelas 5rem
