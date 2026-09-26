@@ -28,8 +28,12 @@
 		@apply bg-dark-green text-cream hover:bg-gold hover:text-dark-green;
 	}
 
+	/* Every eyebrow in the design is Kumbh Sans regular at ~0.7–0.75rem
+	   with the tracking opened well past 0.2em — never semibold, and
+	   never 0.875rem. 0.3em is the shared middle; the sections whose
+	   measured value differs override it below. */
 	.section-eyebrow {
-		@apply font-body text-sm font-semibold uppercase tracking-[0.2em] text-gold;
+		@apply font-body text-xs font-normal uppercase leading-4 tracking-[0.3em] text-gold;
 	}
 	.section-subtitle {
 		@apply mt-4 max-w-xl text-dark-green/70;
@@ -173,9 +177,6 @@
 	.how-it-works__inner {
 		@apply mx-auto max-w-6xl px-8 py-20 text-left;
 	}
-	.how-it-works .section-eyebrow {
-		@apply text-xs font-normal tracking-[0.3em];
-	}
 	.how-it-works__title {
 		@apply mt-6 text-3xl leading-tight md:text-[2.5rem];
 	}
@@ -213,6 +214,11 @@
 	}
 
 	/* Courses — Figma "Courses" frame, node-id 146-200. */
+	/* The courses eyebrow tracks a shade wider than the shared value:
+	   0.2625rem on 0.75rem (node 146-211). */
+	.courses .section-eyebrow {
+		@apply tracking-[0.35em];
+	}
 	.courses__header {
 		@apply grid gap-8 text-left md:grid-cols-2 md:items-end;
 	}
