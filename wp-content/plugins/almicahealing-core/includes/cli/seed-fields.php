@@ -251,40 +251,72 @@ function almicahealing_seed_servicio_fields( array $pros ) {
 
 	WP_CLI::log( 'Seeded Arteterapia (reference service instance).' );
 
-	almicahealing_seed_servicio_professional(
-		'servicio-limpieza-conexion-emocional-personas',
+	almicahealing_seed_servicio_professionals(
+		'limpieza-y-conexion-emocional-con-personas',
 		$pros,
-		'perla-barrones'
+		array( 'perla-barrones' )
+	);
+
+	// Both Conexión services are given two practitioners in the design
+	// (Figma node 268-5488), in this order.
+	almicahealing_seed_servicio_professionals(
+		'conexion-con-seres-trascendidos',
+		$pros,
+		array( 'tonatiuh-munoz', 'gabriela-dominguez' )
+	);
+	almicahealing_seed_servicio_professionals(
+		'conexion-con-registros',
+		$pros,
+		array( 'tonatiuh-munoz', 'gabriela-dominguez' )
 	);
 }
 
 /**
- * Assigns a single professional to a service, leaving the rest of the
- * service's fields alone.
+ * Makes sure a service lists the professionals the design gives it,
+ * leaving the rest of the service's fields alone.
  *
- * Only writes when the service has no professional yet, so an editor's
- * choice in wp-admin is never overwritten on a re-run.
+ * Unions rather than replaces, so a name an editor added in wp-admin
+ * survives and a service that is only missing one of the designed
+ * practitioners gains it without the others being reordered.
  *
- * @param string            $seed_key Service seed key.
- * @param array<string,int> $pros     Professional IDs by slug.
- * @param string            $pro_slug Which professional to assign.
+ * Services are found by slug, not by seed key: `seed` and `import`
+ * write different seed keys for the same post, but both derive the
+ * same `post_name` from the title.
+ *
+ * @param string            $slug      Service post slug.
+ * @param array<string,int> $pros      Professional IDs by slug.
+ * @param string[]          $pro_slugs Professionals the design lists, in order.
  */
-function almicahealing_seed_servicio_professional( $seed_key, array $pros, $pro_slug ) {
-	$servicio_id = almicahealing_seeded_id( $seed_key, 'servicio' );
+function almicahealing_seed_servicio_professionals( $slug, array $pros, array $pro_slugs ) {
+	$servicio = get_page_by_path( $slug, OBJECT, 'servicio' );
 
-	if ( ! $servicio_id || empty( $pros[ $pro_slug ] ) ) {
+	if ( ! $servicio ) {
 		return;
 	}
 
-	$current = get_post_meta( $servicio_id, 'professionals', true );
+	$current = get_post_meta( $servicio->ID, 'professionals', true );
+	$current = is_array( $current ) ? array_map( 'intval', $current ) : array();
+	$wanted  = $current;
 
-	if ( ! empty( $current ) ) {
+	foreach ( $pro_slugs as $pro_slug ) {
+		if ( empty( $pros[ $pro_slug ] ) ) {
+			continue;
+		}
+
+		$pro_id = (int) $pros[ $pro_slug ];
+
+		if ( ! in_array( $pro_id, $wanted, true ) ) {
+			$wanted[] = $pro_id;
+		}
+	}
+
+	if ( $wanted === $current ) {
 		return;
 	}
 
-	almicahealing_seed_field( 'professionals', array( $pros[ $pro_slug ] ), $servicio_id );
+	almicahealing_seed_field( 'professionals', $wanted, $servicio->ID );
 
-	WP_CLI::log( "Assigned {$pro_slug} to {$seed_key}." );
+	WP_CLI::log( sprintf( 'Set %s on %s.', implode( ', ', $pro_slugs ), $slug ) );
 }
 
 /**
