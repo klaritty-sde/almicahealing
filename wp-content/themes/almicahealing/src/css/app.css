@@ -282,6 +282,39 @@
 		@apply font-heading text-xl leading-[1.625rem] text-cream;
 	}
 
+	/* A very slight zoom while the pointer is on a service or course
+	   card. Only the photograph scales: the service card's scrim and the
+	   level and title sitting on the compact course card are siblings of
+	   the <img>, so they stay put rather than drifting with it. Both
+	   containers already clip, so nothing escapes the rounded box.
+
+	   The trigger is the whole card, not the image, so the course card's
+	   title link answers too; focus-within gives keyboard users the same
+	   feedback. */
+	.service-card__media img,
+	.course-card__media img {
+		@apply transition-transform duration-500 ease-out;
+	}
+	.service-card__link:hover .service-card__media img,
+	.service-card__link:focus-visible .service-card__media img,
+	.course-card:hover .course-card__media img,
+	.course-card:focus-within .course-card__media img {
+		@apply scale-[1.04];
+	}
+	/* "Muy ligero" or not, a scale is motion. */
+	@media (prefers-reduced-motion: reduce) {
+		.service-card__media img,
+		.course-card__media img {
+			@apply transition-none;
+		}
+		.service-card__link:hover .service-card__media img,
+		.service-card__link:focus-visible .service-card__media img,
+		.course-card:hover .course-card__media img,
+		.course-card:focus-within .course-card__media img {
+			@apply scale-100;
+		}
+	}
+
 	/* Testimonials — Figma "Testimonials" frame, node-id 146-279. */
 	.testimonials {
 		@apply bg-gold/20;
