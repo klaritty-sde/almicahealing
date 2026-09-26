@@ -19,10 +19,18 @@ $almicahealing_cta_label = almicahealing_hero_field( 'hero_cta_label', __( 'Cono
 $almicahealing_cta_url   = almicahealing_hero_field( 'hero_cta_url', home_url( '/acerca-de/' ) );
 ?>
 <section class="hero">
+	<?php
+	/*
+	 * The scrim runs left to right and all but clears the photo on the
+	 * right, so the sunset keeps its gold — Figma node 146-380. A flat
+	 * wash across the whole frame read as a green filter over the
+	 * picture.
+	 */
+	?>
 	<div
 		class="hero__media"
 		aria-hidden="true"
-		style="background-image: linear-gradient(to bottom right, rgba(38,59,51,.88), rgba(38,59,51,.7)), url(<?php echo esc_url( $almicahealing_image ); ?>);"
+		style="background-image: linear-gradient(90deg, rgba(38,59,51,.84) 0%, rgba(38,59,51,.52) 55%, rgba(38,59,51,.12) 100%), url(<?php echo esc_url( $almicahealing_image ); ?>);"
 	></div>
 	<div class="hero__inner hero__inner--half">
 		<div class="hero__content">

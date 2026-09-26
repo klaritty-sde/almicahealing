@@ -18,10 +18,17 @@ $almicahealing_image    = $almicahealing_image_id
 	: get_theme_file_uri( 'assets/img/home-quote-interlude.jpg' );
 ?>
 <section class="quote-interlude">
+	<?php
+	/*
+	 * One flat 50% wash, not a gradient reaching 90% at the foot — Figma
+	 * node 146-198. The heavier end was darkening the sunset out of the
+	 * photo and reading as a green filter.
+	 */
+	?>
 	<div
 		class="quote-interlude__media"
 		aria-hidden="true"
-		style="background-image: linear-gradient(to top, rgba(38,59,51,.9), rgba(38,59,51,.5)), url(<?php echo esc_url( $almicahealing_image ); ?>);"
+		style="background-image: linear-gradient(rgba(38,59,51,.5), rgba(38,59,51,.5)), url(<?php echo esc_url( $almicahealing_image ); ?>);"
 	></div>
 	<blockquote class="quote-interlude__quote">
 		<p><?php echo esc_html( $almicahealing_quote['line_1'] ?? __( 'La claridad no llega de golpe:', 'almicahealing' ) ); ?></p>
