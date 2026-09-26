@@ -16,7 +16,7 @@ $almicahealing_image    = $almicahealing_image_id
 	: get_theme_file_uri( 'assets/img/home-hero.jpg' );
 
 $almicahealing_cta_label = almicahealing_hero_field( 'hero_cta_label', __( 'Conoce Álmica Healing', 'almicahealing' ) );
-$almicahealing_cta_url   = almicahealing_hero_field( 'hero_cta_url', '#servicios' );
+$almicahealing_cta_url   = almicahealing_hero_field( 'hero_cta_url', home_url( '/acerca-de/' ) );
 ?>
 <section class="hero">
 	<div

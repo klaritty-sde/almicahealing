@@ -12,8 +12,11 @@
 }
 
 @layer components {
+	/* Measured off the Figma button (node 146-390 and its label 146-391):
+	   2rem/0.8125rem padding, and a label that is medium at 0.85rem with
+	   the tracking opened up — not the semibold 1rem it was set in. */
 	.button {
-		@apply inline-flex items-center justify-center rounded-full px-7 py-3 font-body font-semibold transition-colors;
+		@apply inline-flex items-center justify-center rounded-full px-8 py-[0.8125rem] font-body text-[0.85rem] font-medium leading-[1.275rem] tracking-[0.068rem] transition-colors;
 	}
 	.button--gold {
 		@apply bg-gold text-dark-green hover:bg-dark-green hover:text-cream;
