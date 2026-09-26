@@ -62,14 +62,20 @@
 	.hero__eyebrow {
 		@apply font-body text-sm font-semibold uppercase tracking-[0.2em] text-gold;
 	}
+	/* The home hero's type is measured off the design rather than stepped
+	   off Tailwind's scale, which ran a third small: the title is node
+	   146-386 (Athelas 4.2825rem, 108% leading) and the copy node 146-388
+	   (Kumbh Sans 1.05rem, 162.5%). The gaps are the Figma wrappers' own
+	   padding-top — 1.5rem above the title, 2rem above the copy, 3rem
+	   above the button. */
 	.hero__title {
-		@apply mt-4 text-4xl md:text-5xl;
+		@apply mt-6 text-[2.75rem] leading-[1.08] md:text-[4.2825rem];
 	}
 	.hero__subtitle {
-		@apply mt-6 max-w-xl text-cream/80;
+		@apply mt-8 max-w-xl text-[1.05rem] leading-[1.625] text-cream/[.72];
 	}
 	.hero__inner .button {
-		@apply mt-8;
+		@apply mt-12;
 	}
 	.hero--short .hero__inner {
 		@apply py-32;
@@ -77,11 +83,17 @@
 	.hero__inner--center {
 		@apply mx-auto max-w-2xl text-center;
 	}
+	/* Figma gives the hero a fixed 44.125rem frame with the copy centred
+	   in it (node 146-377), not padding that grows with the text — which
+	   is what left so much air around the title. */
 	.hero__inner--half {
-		@apply py-60;
+		@apply flex min-h-[44.125rem] items-center;
 	}
+	/* 36rem is the measured width of the Figma text stack (node 146-382),
+	   and it is what breaks the title over two lines as designed; half
+	   the container came out narrower and pushed it onto three. */
 	.hero__inner--half .hero__content {
-		@apply md:w-1/2;
+		@apply w-full md:max-w-[36rem];
 	}
 
 	/* Intro — Figma "Intro" frame, node-id 146-32. */
