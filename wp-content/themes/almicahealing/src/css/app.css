@@ -431,8 +431,11 @@
 		content: "";
 		@apply h-1 w-1 rounded-full bg-gold;
 	}
+	/* The course pill's label is gold, not cream (node 177-758) — the
+	   lifted gold, since it sits on the dark hero. Only the course one:
+	   the service chip beside it stays cream (node 146-946). */
 	.detail-hero__chips--above .detail-hero__chip {
-		@apply uppercase tracking-[0.18em];
+		@apply uppercase tracking-[0.18em] text-gold-dark;
 	}
 
 	.section-rule {
