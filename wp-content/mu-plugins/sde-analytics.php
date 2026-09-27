@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SDE Analytics (Google Tag Manager)
  * Description: Injects the official Google Tag Manager snippets via wp_head/wp_body_open. Site-neutral: the same file ships unchanged in every Klaritty SDE site, configured from wp-config.php.
- * Version:     2.0.0
+ * Version:     2.1.0
  * Author:      Klaritty SDE
  *
  * Configure per environment in wp-config.php (never committed):
@@ -20,6 +20,11 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * Cookie that carries queued dataLayer events to the visitor's next page.
+ */
+const SDE_ANALYTICS_QUEUE_COOKIE = 'sde_analytics_queue';
 
 /**
  * Returns the configured container ID, or '' when it is missing, not shaped
@@ -93,9 +98,57 @@ function sde_analytics_head_snippet() {
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','<?php echo $gtm_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped via esc_js() above. ?>');</script>
 	<!-- End Google Tag Manager -->
+	<script>(function(){var n='<?php echo esc_js( SDE_ANALYTICS_QUEUE_COOKIE ); ?>',m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));
+	if(!m){return;}document.cookie=n+'=; Max-Age=0; path=/; SameSite=Lax';
+	try{JSON.parse(decodeURIComponent(m[1])).forEach(function(e){if(e&&e.event){window.dataLayer.push(e);}});}catch(e){}})();</script>
 	<?php
 }
 add_action( 'wp_head', 'sde_analytics_head_snippet', 1 );
+
+/**
+ * Queues a dataLayer event for the visitor's next page view.
+ *
+ * For flows that end in a server-side redirect, such as a form posted
+ * without JavaScript, where no page is left to push the event from. The
+ * event rides in a short-lived cookie that the next page reads and clears
+ * client-side, so it also works behind full-page caching. Call it before
+ * any output, typically right before wp_safe_redirect().
+ *
+ * @param string                     $event  GA4-style event name, e.g. 'generate_lead'.
+ * @param array<string, scalar|null> $params Flat event parameters, e.g. array( 'form_name' => 'contacto' ).
+ * @return bool Whether the event was queued.
+ */
+function sde_analytics_queue_event( $event, array $params = array() ) {
+	if ( headers_sent() || ! preg_match( '/^[a-z][a-z0-9_]{0,39}$/', $event ) ) {
+		return false;
+	}
+
+	// Keep events already queued this page view (at most the last four),
+	// dropping anything in the cookie that is not a well-formed event.
+	$queue = array();
+	if ( isset( $_COOKIE[ SDE_ANALYTICS_QUEUE_COOKIE ] ) ) {
+		$queued = json_decode( wp_unslash( $_COOKIE[ SDE_ANALYTICS_QUEUE_COOKIE ] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON; every entry is validated below.
+		foreach ( is_array( $queued ) ? array_slice( $queued, -4 ) : array() as $entry ) {
+			if ( is_array( $entry ) && isset( $entry['event'] ) && is_string( $entry['event'] ) && preg_match( '/^[a-z][a-z0-9_]{0,39}$/', $entry['event'] ) ) {
+				$queue[] = array_filter( $entry, 'is_scalar' );
+			}
+		}
+	}
+
+	$queue[] = array_merge( array_filter( $params, 'is_scalar' ), array( 'event' => $event ) );
+
+	return setrawcookie(
+		SDE_ANALYTICS_QUEUE_COOKIE,
+		rawurlencode( wp_json_encode( $queue ) ),
+		array(
+			'expires'  => time() + 5 * MINUTE_IN_SECONDS,
+			'path'     => '/',
+			'secure'   => is_ssl(),
+			'httponly' => false, // Read by the snippet in sde_analytics_head_snippet().
+			'samesite' => 'Lax',
+		)
+	);
+}
 
 /**
  * Prints the GTM <noscript> snippet immediately after <body>.

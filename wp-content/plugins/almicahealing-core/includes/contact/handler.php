@@ -173,6 +173,12 @@ function almicahealing_contact_handle() {
 		);
 	}
 
+	// Only real submissions reach this point; the honeypot and time-trap
+	// branches above return the same redirect without the analytics event.
+	if ( function_exists( 'sde_analytics_queue_event' ) ) {
+		sde_analytics_queue_event( 'generate_lead', array( 'form_name' => 'contacto' ) );
+	}
+
 	if ( $wants_json ) {
 		wp_send_json_success( array( 'redirect' => $redirect ) );
 	}
