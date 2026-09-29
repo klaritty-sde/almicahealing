@@ -39,8 +39,11 @@
 		@apply mt-4 max-w-xl text-dark-green/70;
 	}
 
+	/* The hairline under the nav is the gold at a very low opacity — the
+	   same register as the footer's top rule — measured off the design
+	   at the Nav's 5rem bottom edge (node 193-6980). */
 	.site-header {
-		@apply bg-dark-green text-cream;
+		@apply border-b border-gold/[0.07] bg-dark-green text-cream;
 	}
 	.site-header__inner {
 		@apply mx-auto flex max-w-6xl items-center justify-between px-8 py-6;
@@ -87,8 +90,21 @@
 	.hero--short .hero__inner {
 		@apply py-32;
 	}
+	/* Servicios, Cursos and Acerca de share this centred hero, and Figma
+	   sizes it a step below the home hero above: the title is node
+	   146-648, Athelas 3.91531rem on the same 108% leading, set to its
+	   own 48.75rem measure. Inheriting the home's 4.2825rem broke the
+	   title over four lines instead of two. The measures sit on the text
+	   rather than on the wrapper because the wrapper's px-8 would eat
+	   4rem of them. */
 	.hero__inner--center {
-		@apply mx-auto max-w-2xl text-center;
+		@apply text-center;
+	}
+	.hero__inner--center .hero__title {
+		@apply mx-auto max-w-[48.75rem] md:text-[3.91531rem];
+	}
+	.hero__inner--center .hero__subtitle {
+		@apply mx-auto;
 	}
 	/* Figma gives the hero a fixed 44.125rem frame with the copy centred
 	   in it (node 146-377), not padding that grows with the text — which
