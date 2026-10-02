@@ -204,11 +204,12 @@ function almicahealing_seed_servicio_fields( array $pros ) {
 	wp_update_post(
 		array(
 			'ID'           => $arteterapia,
-			'post_excerpt' => 'Un puente hacia lo que no siempre encuentra palabras, a través de la creación artística.',
+			'post_excerpt' => 'A través de la creación artística, exploramos emociones y patrones que las palabras difícilmente alcanzan.',
 			'post_content' => "Es una forma distinta de acceder a lo que no siempre encuentra palabras. A través de técnicas como el dibujo, la pintura, el collage y el modelado, este proceso permite explorar emociones, pensamientos y experiencias personales desde la expresión simbólica. El arte se convierte en un puente hacia aspectos internos que, en ocasiones, resultan difíciles de nombrar directamente.\n\nA través de diversas técnicas creativas como dibujo, pintura, collage, modelado y expresión simbólica, la persona puede acceder a aspectos profundos de sí misma que a veces son difíciles de expresar con palabras.",
 		)
 	);
 
+	almicahealing_seed_field( 'tagline', 'Un puente hacia lo que no siempre encuentra palabras, a través de la creación artística.', $arteterapia );
 	almicahealing_seed_field( 'price', 850, $arteterapia );
 	almicahealing_seed_field( 'duration_minutes', 60, $arteterapia );
 	almicahealing_seed_field( 'modality', 'presencial', $arteterapia );
@@ -336,7 +337,7 @@ function almicahealing_seed_curso_fields( array $pros ) {
 	wp_update_post(
 		array(
 			'ID'           => $clantanra,
-			'post_excerpt' => 'Un programa enfocado en el desarrollo del autoconocimiento profundo y la conexión con el propósito personal.',
+			'post_excerpt' => 'Un viaje de profundización en la percepción energética y el lenguaje sutil del cuerpo.',
 			'post_content' => "Un programa enfocado en el desarrollo del autoconocimiento profundo y la conexión con el propósito personal, que integra herramientas de crecimiento interior y técnicas de sanación.\n\nSe exploran herramientas de crecimiento interior que permiten integrar aprendizajes profundos y aplicarlos en la vida cotidiana, así como técnicas de limpieza y sanación dirigidas a personas, lugares, objetos, animales y plantas. Un programa de alta conexión interior, pensado para quienes buscan ampliar su percepción e intuición.",
 		)
 	);
@@ -364,7 +365,7 @@ function almicahealing_seed_curso_fields( array $pros ) {
 	// The other two courses: their headings and pricing differ, which is
 	// exactly the variation the shared template has to absorb.
 	$others = array(
-		'curso-riutunmi'                => array(
+		'curso-kriutunmi'               => array(
 			'tagline'          => 'Un espacio de formación para el desarrollo de la conciencia y la conexión con dimensiones más profundas del ser.',
 			'program_label'    => 'Curso básico de canalización',
 			'level'            => 'basico',
@@ -374,7 +375,7 @@ function almicahealing_seed_curso_fields( array $pros ) {
 		),
 		'curso-lo-que-nadie-nos-enseno' => array(
 			'tagline'          => 'Herramientas prácticas para afrontar los desafíos cotidianos con mayor conciencia y equilibrio.',
-			'program_label'    => 'Curso básico de canalización',
+			'program_label'    => 'Curso de canalización abierto a todo público',
 			'level'            => 'abierto',
 			'price'            => 4700,
 			'duration'         => '3 meses',
@@ -382,8 +383,23 @@ function almicahealing_seed_curso_fields( array $pros ) {
 		),
 	);
 
+	// Lo Que Nadie Nos Enseñó is taught by Alberto Solís, not Alma (Mariana,
+	// 2026-09-23; the workbook's `facilitators` column).
+	$facilitators = array(
+		'curso-kriutunmi'               => 'alma-solis',
+		'curso-lo-que-nadie-nos-enseno' => 'alberto-solis',
+	);
+
+	// Kriutunmi was keyed `curso-riutunmi` before the KW-177 rename, and
+	// `seed` still stamps that key, so accept either.
+	$legacy_keys = array( 'curso-kriutunmi' => 'curso-riutunmi' );
+
 	foreach ( $others as $seed_key => $fields ) {
 		$curso_id = almicahealing_seeded_id( $seed_key, 'curso' );
+
+		if ( ! $curso_id && isset( $legacy_keys[ $seed_key ] ) ) {
+			$curso_id = almicahealing_seeded_id( $legacy_keys[ $seed_key ], 'curso' );
+		}
 
 		if ( ! $curso_id ) {
 			continue;
@@ -393,8 +409,8 @@ function almicahealing_seed_curso_fields( array $pros ) {
 			almicahealing_seed_field( $name, $value, $curso_id );
 		}
 
-		if ( ! empty( $pros['alma-solis'] ) ) {
-			almicahealing_seed_field( 'facilitators', array( $pros['alma-solis'] ), $curso_id );
+		if ( ! empty( $pros[ $facilitators[ $seed_key ] ] ) ) {
+			almicahealing_seed_field( 'facilitators', array( $pros[ $facilitators[ $seed_key ] ] ), $curso_id );
 		}
 	}
 
