@@ -241,17 +241,19 @@ function almicahealing_seed_run() {
 		array( '_wp_page_template' => 'page-templates/legal.php' )
 	);
 
-	// Servicios — full catalog order (Figma "Servicios" frame, node-id
-	// 146-634); the featured six also appear in the Home teaser.
+	// Servicios — full catalog order. The featured six lead, in the order
+	// the client set on 2026-09-29 (KW-177); they also appear in the Home
+	// teaser. The rest keep the Figma "Servicios" frame order (node-id
+	// 146-634). Seed keys stay as they were so existing posts still match.
 	$servicios = array(
-		array( 'arteterapia', 'Arteterapia', true ),
+		array( 'escaneo-balance-energetico', 'Terapia y Armonización Energética', true ),
 		array( 'biodescodificacion', 'Biodescodificación', true ),
-		array( 'constelacion-familiar', 'Constelación Familiar para el Trabajo', true ),
 		array( 'armonizacion-energetica', 'Armonización Energética Laboral y Bloqueos Relacionados', true ),
-		array( 'limpieza-energetica-lugares', 'Limpieza Energética de Lugares', false ),
-		array( 'escaneo-balance-energetico', 'Escaneo y Balance Energético en Personas', true ),
-		array( 'conexion-seres-trascendidos', 'Conexión con Seres Trascendidos', false ),
+		array( 'constelacion-familiar', 'Constelación Familiar para el Trabajo', true ),
 		array( 'conexion-registros', 'Conexión con Registros', true ),
+		array( 'arteterapia', 'Arteterapia', true ),
+		array( 'limpieza-energetica-lugares', 'Limpieza Energética de Lugares', false ),
+		array( 'conexion-seres-trascendidos', 'Conexión con Seres Trascendidos', false ),
 		array( 'futuros-posibles', 'Futuros Posibles', false ),
 		array( 'limpieza-conexion-personas', 'Limpieza y Conexión con Personas', false ),
 		array( 'limpieza-conexion-emocional-personas', 'Limpieza y Conexión Emocional con Personas', false ),
@@ -274,10 +276,11 @@ function almicahealing_seed_run() {
 		);
 	}
 
-	// Cursos (Figma "Courses" frame, node-id 146-200).
+	// Cursos (Figma "Courses" frame, node-id 146-200), Kriutunmi first per
+	// the client (KW-177). The `riutunmi` key predates the rename.
 	$cursos = array(
+		array( 'riutunmi', 'Kriutunmi', 'Un espacio de formación para el desarrollo de la conciencia y la conexión con dimensiones más profundas del ser.' ),
 		array( 'clantanra', 'Clantanra', 'Un programa de alta conexión interior para quienes buscan ampliar su percepción e intuición.' ),
-		array( 'riutunmi', 'Riutunmi', 'Un espacio de formación para el desarrollo de la conciencia y la conexión con dimensiones más profundas del ser.' ),
 		array( 'lo-que-nadie-nos-enseno', 'Lo Que Nadie Nos Enseñó', 'Herramientas prácticas para afrontar los desafíos cotidianos con mayor conciencia y equilibrio.' ),
 	);
 	foreach ( $cursos as $order => list( $key, $title, $excerpt ) ) {

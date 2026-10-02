@@ -1,6 +1,6 @@
 <?php
 /**
- * "Curso" content type — Clantarra, Riutunmi, Lo Que Nadie Nos Enseñó.
+ * "Curso" content type — Kriutunmi, Clantanra, Lo Que Nadie Nos Enseñó.
  *
  * @package AlmicaHealingCore
  */
