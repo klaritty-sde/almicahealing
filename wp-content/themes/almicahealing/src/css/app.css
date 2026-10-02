@@ -505,6 +505,45 @@
 		@apply uppercase tracking-[0.18em] text-gold-dark;
 	}
 
+	/* Service hero, measured from Figma frame 10 (node 146-932): a
+	   34.02rem frame with the copy centred in it, the back link pinned
+	   to the top, and the title in Athelas 3.91531rem on 108% leading.
+	   The heading frame claims an 820px max, but the text overflows it —
+	   "Constelación Familiar para el Trabajo" sits on one 975px line — so
+	   the real measure is the frame's 1075px content box. Balanced
+	   wrapping then breaks the long titles where Figma does ("…Laboral /
+	   y Bloqueos Relacionados"), in Athelas and in the Georgia fallback
+	   Windows gets. The old 42rem measure broke them over three lines
+	   (KW-178). The content's pb-4 offsets the back link so the copy
+	   centres on the frame, not on the space under the link. */
+	.detail-hero--service {
+		@apply md:min-h-[34.02rem];
+	}
+	.detail-hero--service .detail-hero__inner {
+		@apply flex flex-col self-stretch py-8;
+	}
+	.detail-hero--service .detail-hero__content {
+		@apply my-auto max-w-none pb-4 pt-12 md:pt-0;
+	}
+	/* The wash is a gradient, not a flat tint: #263B33 from 72% to 88%,
+	   under a 3% black layer (nodes 146-935 and 146-936). The Figma
+	   photos are untreated, so the wash has to come from here. */
+	.detail-hero--service .detail-hero__scrim {
+		@apply bg-transparent;
+		background-image:
+			linear-gradient(rgb(0 0 0 / 0.03), rgb(0 0 0 / 0.03)),
+			linear-gradient(170.13deg, rgb(38 59 51 / 0.72) 8.49%, rgb(38 59 51 / 0.88) 91.51%);
+	}
+	.detail-hero--service .detail-hero__title {
+		@apply mx-auto mt-5 max-w-[67.1875rem] text-balance leading-[1.08] md:text-[3.91531rem];
+	}
+	.detail-hero--service .detail-hero__tagline {
+		@apply mt-7 text-[0.9375rem] leading-[1.5625rem] text-cream/65;
+	}
+	.detail-hero--service .detail-hero__chips {
+		@apply mt-8;
+	}
+
 	.section-rule {
 		@apply mb-8 block h-px w-8 bg-gold;
 	}

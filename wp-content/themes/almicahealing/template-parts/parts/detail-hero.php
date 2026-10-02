@@ -13,6 +13,9 @@
  *   below the tagline. Courses lead with the programme pill (frames
  *   5–7); services close with the duration chip (frames 10–20).
  * - image (string) — background image URL.
+ * - modifier (string) — extra class on the section. Services pass
+ *   `detail-hero--service`: their Figma hero (frames 10–20) is taller,
+ *   with a bigger title, than the course one (frames 5–7).
  *
  * @package AlmicaHealing
  */
@@ -30,10 +33,11 @@ $almicahealing_hero = wp_parse_args(
 		'chips'       => array(),
 		'chips_first' => false,
 		'image'       => '',
+		'modifier'    => '',
 	)
 );
 ?>
-<section class="detail-hero">
+<section class="detail-hero<?php echo $almicahealing_hero['modifier'] ? ' ' . esc_attr( $almicahealing_hero['modifier'] ) : ''; ?>">
 	<?php if ( $almicahealing_hero['image'] ) : ?>
 		<div class="detail-hero__media" aria-hidden="true" style="background-image: url(<?php echo esc_url( $almicahealing_hero['image'] ); ?>);"></div>
 	<?php endif; ?>

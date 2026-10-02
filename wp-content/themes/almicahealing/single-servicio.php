@@ -45,6 +45,7 @@ while ( have_posts() ) :
 			'tagline'    => $almicahealing_tagline,
 			'chips'      => array( $almicahealing_duration ),
 			'image'      => almicahealing_hero_image_url( $almicahealing_id ),
+			'modifier'   => 'detail-hero--service',
 		)
 	);
 	?>
