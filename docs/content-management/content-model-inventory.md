@@ -39,6 +39,7 @@ Categories/Tags exist only on blog posts, which are not part of the content mode
 | Posts | 1 — **"Hello world!"** (published) — WordPress default |
 | Menus | "Menú principal" → `primary`: Inicio, Acerca de, Servicios, Cursos. "Menú de pie de página" → `footer`: Acerca de, Servicios, Cursos |
 | Users | 1 administrator (Klaritty), 1 editor |
+| Site language | `es_MX` (changed from the default `en_US` on 2026-10-06; see G5) |
 
 ## Capability notes that shape the client guide
 
@@ -167,9 +168,9 @@ Production: 3 courses — Kriutunmi (1), Clantanra (2), Lo Que Nadie Nos Enseñ�
 Production: 6 — Alma Solís, Elizabeth de las Casas, Gabriela Domínguez, Tonatiuh Muñoz, Perla Barrones,
 Alberto Solís.
 
-Note: `parts/profesional.php` checks `get_post_type()` but not post status. Whether a trashed
-professional still renders where referenced depends on SCF's relationship formatting — **not
-verified**. The client guide therefore tells editors to unlink a person before trashing them.
+Note: a **trashed or draft** professional still renders wherever they're referenced. SCF returns raw
+IDs with no status filter, and `parts/profesional.php` checks only `get_post_type()`; see G8. The
+client guide tells editors to unlink a person before trashing them.
 
 ---
 
@@ -376,12 +377,13 @@ dimensions on upload.
 |---|---|---|
 | G1 | Acerca de "Nosotros" text: the importer writes `paginas` → `Acerca de / nosotros` into `post_content`, but `page-acerca-de.php` renders the hard-coded `sections/historia.php` and never calls `the_content()`. Editing the page body has no effect | Gap — dev decision |
 | G2 | Ajustes → WhatsApp: field instructions say "Vacío oculta las menciones a WhatsApp", but no template reads it | Gap |
-| G3 | Contact form is only reachable from blog post singles; leads = 0 on production | Needs product decision |
+| G3 | Contact form is only reachable from blog post singles; leads = 0 on production | **Decided 2026-10-06:** the form stays as is for now, and Contactos is **left out of the client guide** until the form is placed somewhere visitors can reach it (KW-138 Contáctanos, deferred). When it ships, restore a Contactos section: read/export/trash only, 18-month auto-trash, notifications go to a fixed address independent of Ajustes → Correo de contacto |
 | G4 | Default "Hello world!" post and "Sample Page" are published on production | Cleanup decision for Ian |
-| G5 | wp-admin display language for each user (custom labels are Spanish in code; core WP labels follow the site/user locale). A WP-CLI dump on production returned English core labels | Needs verification |
-| G6 | Exact text of the core "add new" button in the editors' locale | Needs verification |
-| G7 | Breeze: whether the Editor role sees the purge-cache control, and whether saving a post purges the affected pages automatically | Needs verification |
-| G8 | Behaviour of a trashed `profesional` still referenced by a relationship | Needs verification |
-| G9 | Klaritty user roles: content editors are Editors (no Ajustes/Menús access) unless given Administrator | Needs verification |
+| G5 | wp-admin display language | **Resolved 2026-10-06.** Production was on the default `en_US`. Ian chose Spanish: ran `wp language core install es_MX --activate` plus plugin/theme packs. Site locale is now `es_MX`, matching local VVV. Neither user has a per-user `locale` override. SCF, Akismet and the bundled themes have es_MX packs; the custom theme needs none (its source strings are Spanish); Breeze and Object Cache Pro have no es_MX pack and stay English. Side effect: front end now outputs `lang="es-MX"` |
+| G6 | Core button labels | **Resolved 2026-10-06** from the official WP 7.1 es_MX pack and `wp-includes/js/dist/editor.js`. In 7.1 a published post's main button reads **Save → Guardar** (not Update). New posts: **Publicar**. Draft: **Guardar como borrador**. CPT add-new: **Añadir** (core default `add_new` is `Add`). Preview lives in the **Ver** device menu → **Previsualizar en nueva pestaña** |
+| G7 | Breeze page cache | **Resolved 2026-10-06** (read-only check of production options and plugin code). File cache on, TTL 1440 min (24 h); Varnish auto-purge on (a Varnish PURGE is domain-wide on Cloudways). Logged-in users are not served cached pages (`breeze-disable-admin` all 0). On **update** of an existing post Breeze purges only URLs tied to that post (permalink, feeds, author/term archives) and **explicitly drops the home page**; full flush happens only on new posts and menu saves. SCF options-page saves trigger **no** purge. So Home teasers, the Servicios/Cursos lists, "Otros servicios" cards and every footer can stay stale for visitors up to 24 h. The admin-bar **Breeze → Purge All Cache** is shown to `manage_options` **or** `editor`, so Editors have it. Guide tells editors to purge after every change and check in a private window. Dev follow-up to consider: flush Breeze on `acf/save_post` for the options page and on servicio/curso/profesional/testimonio saves |
+| G8 | Trashed/draft posts still referenced by a field | **Resolved 2026-10-06** from SCF 6.9.5 source (same version as production). With `return_format => id`, relationship and post_object `format_value()` return raw IDs with **no status filter**, and `parts/profesional.php` checks only `get_post_type()` (and `cards/servicio.php` checks nothing). So a **trashed or draft** professional still renders in Quién imparte, Facilitador/a and Fundadora/Formación, and a trashed service hand-picked in `related_services` still renders as a card (with a non-public permalink). A testimonial `about` pointing at it still shows its title. Only permanent deletion hides them. Guide tells editors to unlink first. Dev follow-up to consider: filter non-`publish` IDs in the theme helpers |
+| G9 | Klaritty user roles | **Resolved 2026-10-06.** Content editors stay **Editors**. Ajustes de Álmica, Menús and Ajustes → Generales are changed by Klaritty's administrator on request. No capability change planned |
 | G10 | `phone` is printed as plain text — no click-to-call | By design or gap — dev decision |
 | G11 | No CPT declares `revisions` in `supports`, so Servicios/Cursos/Profesionales/Testimonios have **no revision history**; only Pages do. The options page never has revisions | Known limitation — consider adding `revisions` support (dev decision) |
+| G12 | Page revisions on production | **Resolved 2026-10-06** (read-only). `WP_POST_REVISIONS` isn't defined, so it's the WP default (unlimited). SCF (`includes/revisions.php`, WP ≥ 6.4 path) stores field values on each revision and copies them back on `wp_restore_post_revision`. Existing revisions predate editor use: Inicio has 1 and Aviso de privacidad 2, and the Inicio revision carries **no** field meta, because the importer wrote fields with `update_field()` and no revision. Restoring one of those changes only title/content and leaves fields untouched. Revisions saved from the editor from now on include fields |

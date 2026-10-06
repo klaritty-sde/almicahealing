@@ -18,9 +18,9 @@ The website was first filled from a content spreadsheet. **That spreadsheet is n
 
 ### A note on admin language
 
-The site's own menus and fields (Servicios, Cursos, Ajustes de Álmica, and so on) are always in Spanish. WordPress's built-in buttons follow the language set for your user account. This guide gives them in Spanish, with the English in parentheses the first time each one appears. See the table in [WordPress basics](#4-wordpress-basics).
+The WordPress admin is set to **Spanish (Mexico)**, and this guide uses the Spanish labels you'll see on screen.
 
-> **Needs verification:** which admin language the Klaritty accounts use. Confirm before screenshots are taken, so the screenshots and text match.
+If your screen shows English, your profile has its own language setting. Go to **Usuarios → Perfil**, set **Idioma** to **Predeterminado del sitio** (*Site Default*), and save. A few third-party screens, such as the caching plugin's, may stay in English because they have no Spanish translation.
 
 ## 2. What you can safely edit
 
@@ -32,14 +32,13 @@ You can create, edit and remove these yourself:
 - **Testimonials** (Testimonios): quotes, client names, which service or course each one is about, and their order.
 - **Page text and images** on Inicio, Acerca de, Servicios and Cursos, in the fields provided.
 - **The legal documents**: the text of Aviso de privacidad and Términos y condiciones.
-- **Contact form messages** (Contactos): read, export and delete.
 
-With an **Administrator** account you can also edit:
+Content editors use **Editor** accounts, which cover everything above. Two areas are handled by Klaritty's site administrator instead:
 
 - **Global website content** (Ajustes de Álmica): contact email, phone, location, social links, footer text, price wording and the course contact card.
 - **Navigation menus**: the header and footer link lists.
 
-> **Needs verification:** which role each Klaritty user has. Editor accounts don't see **Ajustes de Álmica** or the menu screens.
+These screens don't appear for Editor accounts. They're still content changes, not development: send the new text to Klaritty's site administrator, who makes the change.
 
 ## 3. What requires development
 
@@ -70,16 +69,19 @@ Contact development for any of these:
 
 Log in at the website's `/wp-admin` address with your own user account. The left-hand sidebar lists everything you can manage.
 
-> 📷 **Screenshot needed:** The full wp-admin left sidebar for an Administrator, showing **Servicios**, **Cursos**, **Testimonios**, **Profesionales**, **Ajustes de Álmica**, **Contactos** and **Páginas**. Take a second capture from an Editor account to show what's missing there.
+> 📷 **Screenshot needed:** The wp-admin left sidebar as an **Editor** sees it, showing **Servicios**, **Cursos**, **Testimonios**, **Profesionales** and **Páginas**. Editors are the main audience, so capture it from an Editor account.
 
 ### The everyday workflow
 
 1. **Open the section** in the left sidebar, for example **Servicios**.
 2. **Find the item.** Click its title in the list, or use the search box at the top right of the list.
 3. **Edit the fields.** The main text area is at the top of the editing screen. The site-specific fields are in a panel **below** it, titled after the content type (for example **Servicio**). Scroll down to find them.
-4. **Preview** with **Vista previa** (*Preview*) if you're making a larger change.
-5. **Save.** Click **Actualizar** (*Update*) for something already published, or **Publicar** (*Publish*) for something new. Use **Guardar borrador** (*Save draft*) to keep working later without showing it on the website.
-6. **Check the public page.** Open it in a new tab and confirm the change looks right.
+4. **Preview** if you're making a larger change: open the **Ver** menu (the screen icon at the top right) and choose **Previsualizar en nueva pestaña**.
+5. **Save.** Click **Publicar** for something new, or **Guardar** for something already published. Use **Guardar como borrador** to keep working later without showing it on the website.
+6. **Clear the cache.** In the black bar at the top of the screen, open **Breeze** and click **Purge All Cache**. Do this after every change that shows on more than one page, and when in doubt, always. See [Troubleshooting](#14-troubleshooting) for why.
+7. **Check the public page in a private or incognito window.** While you're logged in you always see the latest version, so a private window is the only way to see what visitors see.
+
+> 📷 **Screenshot needed:** The black admin bar at the top of any wp-admin screen, with the **Breeze** menu open and **Purge All Cache** highlighted. Capture it from an Editor account.
 
 > 📷 **Screenshot needed:** A Service edit screen, scrolled so the main text area and the top of the **Servicio** field panel are both visible. Annotate "Main text" and "Service fields", and point out the right-hand settings sidebar.
 
@@ -91,17 +93,19 @@ Fields marked with **\*** are required. Fill them in before publishing. A missin
 
 The panel on the right of the editing screen holds a few standard WordPress settings this site uses:
 
-- **Imagen destacada** (*Featured image*): the main photo for services, courses and professionals.
-- **Extracto** (*Excerpt*): a short summary. Services and courses use it. See each section for where it appears.
-- **Orden** (*Order*): a number that controls the order of services, courses and testimonials. Lower numbers come first.
-- **Plantilla** (*Template*): only matters on the legal pages.
+- **Imagen destacada**: the main photo for services, courses and professionals.
+- **Extracto**: a short summary. Services and courses use it. See each section for where it appears.
+- **Orden**: a number that controls the order of services, courses and testimonials. Lower numbers come first.
+- **Plantilla**: only matters on the legal pages.
 
 ### Drafts and trash
 
-- Items saved as drafts don't appear anywhere on the website, including lists, the home page and the contact form.
-- **Mover a la papelera** (*Move to trash*) removes an item from the website. Items stay in **Papelera** (*Trash*) and can be restored from there.
+- Drafts and trashed items disappear from the website's lists: the Servicios and Cursos pages, the home page and the testimonial slider. Trashed items stay in **Papelera** and can be restored from there.
+- **One exception: items you picked by hand somewhere else.** A professional selected on a service, course or Acerca de, or a service selected under another service's **Otros servicios**, **still appears** after you trash it or turn it back into a draft. Always remove it from those places first. See [Removing a Professional](#removing-a-professional) and [Removing a Service](#removing-a-service).
 
-### Core WordPress labels: Spanish and English
+### If your screen is in English
+
+The admin is set to Spanish. If you've switched your own profile to English, these are the equivalents of the labels used in this guide:
 
 | Spanish | English |
 |---|---|
@@ -113,19 +117,18 @@ The panel on the right of the editing screen holds a few standard WordPress sett
 | Extracto | Excerpt |
 | Orden | Order |
 | Plantilla | Template |
-| Vista previa | Preview |
-| Publicar / Actualizar | Publish / Update |
-| Guardar borrador | Save draft |
+| Ver → Previsualizar en nueva pestaña | View → Preview in new tab |
+| Publicar / Guardar | Publish / Save |
+| Guardar como borrador | Save draft |
+| Añadir | Add |
 | Mover a la papelera | Move to trash |
 | Texto alternativo | Alternative text |
-
-> **Needs verification:** depending on the WordPress version, the **Actualizar** button may read **Guardar** (*Save*), and the add-new button may read **Añadir** or **Añadir nuevo**. Match these to the live admin when screenshots are taken.
 
 ## 5. Managing Services
 
 ### What a Service is
 
-A **Service** is one individual session that clients can book, such as Arteterapia or Biodescodificación. Each service has its own page. It also appears as a card in the services catalogue, possibly on the home page, and as an option in the contact form.
+A **Service** is one individual session that clients can book, such as Arteterapia or Biodescodificación. Each service has its own page. It also appears as a card in the services catalogue, and possibly on the home page.
 
 ### Where to find Services
 
@@ -133,21 +136,28 @@ Click **Servicios** in the left sidebar. The list shows every service, published
 
 ### Creating a Service
 
-1. Go to **Servicios** and click the add-new button at the top of the list. The screen that opens is titled **Añadir servicio**.
+1. Go to **Servicios** and click **Añadir** at the top of the list. The screen that opens is titled **Añadir servicio**.
 2. Type the service name as the title.
 3. Write the description in the main text area.
-4. In the right-hand sidebar, set the **Imagen destacada** (*Featured image*), the **Extracto** (*Excerpt*) and the **Orden** (*Order*).
+4. In the right-hand sidebar, set the **Imagen destacada**, the **Extracto** and the **Orden**.
 5. Scroll down to the **Servicio** panel and fill in the fields. All required fields are marked **\***.
-6. Click **Guardar borrador** (*Save draft*), then **Vista previa** (*Preview*) to check it.
-7. Click **Publicar** (*Publish*).
+6. Click **Guardar como borrador**, then preview it with **Ver → Previsualizar en nueva pestaña**.
+7. Click **Publicar**.
 
-The new service then appears automatically in the **Servicios** catalogue and in the contact form's **Servicio de interés** dropdown. It appears on the home page only if you turn on **Destacado en Inicio**.
+The new service then appears automatically in the **Servicios** catalogue. It appears on the home page only if you turn on **Destacado en Inicio**.
 
 ### Editing an existing Service
 
 1. Go to **Servicios** and click the service's title.
 2. Change the fields you need.
-3. Click **Actualizar** (*Update*), then check the public page.
+3. Click **Guardar**, then check the public page.
+
+### Removing a Service
+
+1. Check whether any other service has picked this one under **Otros servicios**, and remove it there. Hand-picked services keep showing even after they're trashed.
+2. If a testimonial is about this service (**Sobre**), point it at another service or course, or clear the field.
+3. Open the service and click **Mover a la papelera**, or switch it back to draft if you'll bring it back later.
+4. Clear the cache and check the Servicios page and the home page.
 
 ### Fields
 
@@ -155,7 +165,7 @@ The new service then appears automatically in the **Servicios** catalogue and in
 
 #### Title
 
-The service name. It appears on the service card, as the large heading on the service page, in "Otros servicios" cards, in the contact form dropdown, and under any testimonial linked to this service. Renaming a service updates all of these at once.
+The service name. It appears on the service card, as the large heading on the service page, in "Otros servicios" cards, and under any testimonial linked to this service. Renaming a service updates all of these at once.
 
 Long names are fine. They wrap onto two lines in the page header.
 
@@ -169,11 +179,11 @@ A one-sentence summary. It appears under the title in the page header **only whe
 
 #### Imagen destacada (Featured image)
 
-The photo on the service card. It's also used as the page header background when **Imagen del encabezado** is empty. The card shows a tall, narrow slice from the **centre** of the photo. See [Images and media](#12-images-and-media).
+The photo on the service card. It's also used as the page header background when **Imagen del encabezado** is empty. The card shows a tall, narrow slice from the **centre** of the photo. See [Images and media](#11-images-and-media).
 
 #### Orden (Order)
 
-Controls the service's position in the catalogue, in the contact form dropdown and among the home page's featured services. It also decides which three services appear by default under "Otros servicios". Lower numbers come first.
+Controls the service's position in the catalogue and among the home page's featured services. It also decides which three services appear by default under "Otros servicios". Lower numbers come first.
 
 #### Frase del encabezado
 
@@ -255,16 +265,16 @@ Click **Cursos** in the left sidebar.
 
 ### Creating a Course
 
-1. Go to **Cursos** and click the add-new button. The screen is titled **Añadir curso**.
+1. Go to **Cursos** and click **Añadir** at the top of the list. The screen is titled **Añadir curso**.
 2. Enter the title and description, and set the **Imagen destacada**, **Extracto** and **Orden** in the sidebar.
 3. Fill in the **Curso** panel below the main text area.
-4. Save a draft, preview, then **Publicar** (*Publish*).
+4. Save a draft, preview, then **Publicar**.
 
 Note that the home page shows only the **first 3 courses** by **Orden**. All courses appear on the **Cursos** page.
 
 ### Editing an existing Course
 
-Go to **Cursos**, click the title, make your changes, click **Actualizar** (*Update*) and check the page.
+Go to **Cursos**, click the title, make your changes, click **Guardar** and check the page.
 
 ### Fields
 
@@ -358,21 +368,25 @@ Click **Profesionales** in the left sidebar.
 
 ### Creating a Professional
 
-1. Go to **Profesionales** and click the add-new button. The screen is titled **Añadir profesional**.
+1. Go to **Profesionales** and click **Añadir** at the top of the list. The screen is titled **Añadir profesional**.
 2. Type the person's full name as the title.
 3. Write their bio in the main text area.
-4. Set their portrait as the **Imagen destacada** (*Featured image*).
+4. Set their portrait as the **Imagen destacada**.
 5. Fill in **Rol** in the **Profesional** panel.
-6. **Publicar** (*Publish*).
+6. **Publicar**.
 7. Open each service or course they deliver and add them under **Quién imparte** or **Facilitador/a**. Creating the person doesn't place them anywhere on its own.
 
 ### Editing a Professional
 
-Go to **Profesionales**, click the name, edit and **Actualizar** (*Update*). The change appears everywhere that person is selected.
+Go to **Profesionales**, click the name, edit and click **Guardar**. The change appears everywhere that person is selected.
 
 ### Removing a Professional
 
-First, remove them from every service (**Quién imparte**), every course (**Facilitador/a**) and, if they're the founder, from Acerca de. **Then** move them to the trash.
+**Trashing a professional, or turning them back into a draft, doesn't take them off the website.** They keep appearing, with photo, role and bio, everywhere they're still selected. So:
+
+1. Remove them from every service (**Quién imparte**) and every course (**Facilitador/a**). If they're the founder, choose someone else under **Fundadora** on Acerca de.
+2. **Then** move them to the trash.
+3. Clear the cache and check the services and courses they were on.
 
 ### Fields
 
@@ -421,12 +435,12 @@ Click **Testimonios** in the left sidebar.
 
 ### Creating or editing a Testimonial
 
-1. Go to **Testimonios** and click the add-new button (**Añadir testimonio**), or click an existing testimonial.
+1. Go to **Testimonios** and click **Añadir** (the screen is titled **Añadir testimonio**), or click an existing testimonial.
 2. **Title:** the client's display name. The convention is first name and initial, for example "Valentina R."
 3. **Main text area:** the quote itself.
 4. In the **Testimonio** panel, choose the service or course the quote is about in **Sobre**.
-5. Set **Orden** (*Order*) in the sidebar to place it in the slider.
-6. **Publicar** (*Publish*) or **Actualizar** (*Update*).
+5. Set **Orden** in the sidebar to place it in the slider.
+6. Click **Publicar** for a new testimonial, or **Guardar** for an existing one.
 
 > 📷 **Screenshot needed:** A Testimonio edit screen showing the title, the quote and the **Sobre** dropdown with a service selected.
 
@@ -448,7 +462,7 @@ The service or course the client is talking about. Its current name appears unde
 
 Position in the slider. Lower numbers come first.
 
-If you see an **Extracto** (*Excerpt*) box on this screen, leave it alone. The website doesn't display it.
+If you see an **Extracto** box on this screen, leave it alone. The website doesn't display it.
 
 ### Publishing checklist — Testimonials
 
@@ -463,7 +477,7 @@ If you see an **Extracto** (*Excerpt*) box on this screen, leave it alone. The w
 
 The site has six pages you edit. Their main content (service cards, course cards, testimonials) comes from the sections above. On the pages themselves, you edit the header and a few blocks of text.
 
-Go to **Páginas** (*Pages*) in the left sidebar.
+Go to **Páginas** in the left sidebar.
 
 > **Important:** Don't change the **web address (slug)** of any of these pages, and don't delete them. The site's links and templates depend on them.
 
@@ -485,7 +499,7 @@ Every page has an **Encabezado de página** panel with these fields:
 - **Antetítulo**: the small line above the title, up to 60 characters.
 - **Título**: the large heading, up to 120 characters.
 - **Subtítulo**: the text under the heading.
-- **Imagen de fondo**: the background photo. See [Images and media](#12-images-and-media).
+- **Imagen de fondo**: the background photo. See [Images and media](#11-images-and-media).
 - **Texto del botón** and **Enlace del botón**: a button. **Only the home page shows it.**
 
 Which fields each page uses:
@@ -529,10 +543,10 @@ Only the header is edited on these pages. The cards update automatically when yo
 
 1. Go to **Páginas** and open the page.
 2. Edit the document in the main text area.
-3. Make each numbered section a **Heading** (*Encabezado*) block at **H2** level. The website numbers H2 headings automatically ("1.", "2.", …), so **don't type the numbers**.
+3. Make each numbered section an **Encabezado** block at **H2** level. The website numbers H2 headings automatically ("1.", "2.", …), so **don't type the numbers**.
 4. Write the section text as normal paragraphs under each heading.
-5. Leave the **Plantilla** (*Template*) setting on **Legal**.
-6. **Actualizar** (*Update*) and check both pages.
+5. Leave the **Plantilla** setting on **Legal**.
+6. Click **Guardar** and check both pages.
 
 The header ("Información legal y de privacidad."), the tabs linking the two documents and the footer links are fixed. The contact note at the bottom of both pages comes from **Ajustes de Álmica → Legales**.
 
@@ -550,7 +564,9 @@ The header ("Información legal y de privacidad."), the tabs linking the two doc
 
 ### Ajustes de Álmica
 
-**Ajustes de Álmica** in the left sidebar holds information that appears on **many pages at once**. **A change here affects the whole website**, so double-check before saving. This screen needs an **Administrator** account.
+**Ajustes de Álmica** in the left sidebar holds information that appears on **many pages at once**. **A change here affects the whole website**, so double-check before saving. Only Klaritty's site administrator sees this screen. Editors send their changes to the administrator.
+
+Saving this screen doesn't refresh the website's cached pages. After **Guardar ajustes**, always use **Breeze → Purge All Cache** in the top bar, or visitors may see the old footer and contact details for up to 24 hours.
 
 Fields are grouped into tabs. Click **Guardar ajustes** to save.
 
@@ -562,8 +578,6 @@ Fields are grouped into tabs. Click **Guardar ajustes** to save.
 - **Teléfono**: shown in the footer as text.
 - **WhatsApp**: **not currently shown anywhere on the website.** Filling it in won't change the site. Ask development if you want WhatsApp links.
 - **Ubicación**: the location line in the footer, for example "México · sesiones virtuales".
-
-Changing **Correo de contacto** does **not** change where contact-form messages are emailed. That's a development change.
 
 #### Redes sociales tab
 
@@ -593,37 +607,24 @@ Changing **Correo de contacto** does **not** change where contact-form messages 
 
 ### Navigation menus
 
-The header and footer link lists are managed in **Apariencia → Menús** (*Appearance → Menus*). This needs an **Administrator** account.
+The header and footer link lists are managed in **Apariencia → Menús**. Only Klaritty's site administrator sees this screen.
 
 - **Menú principal**: the header links (Inicio, Acerca de, Servicios, Cursos).
 - **Menú de pie de página**: the footer's "Navegación" column (Acerca de, Servicios, Cursos).
 
 Menus are one level only, with no dropdowns. The footer's **Legal** and **Contacto** columns aren't menus. They're built automatically from the legal pages and from Ajustes de Álmica.
 
-> 📷 **Screenshot needed:** **Apariencia → Menús** with **Menú principal** selected, showing its four items and the "Menu locations" checkboxes.
+> 📷 **Screenshot needed:** **Apariencia → Menús** with **Menú principal** selected, showing its four items and the **Ajustes del menú** section where the menu is assigned to its location.
 
 ### Site title and tagline
 
-The site name in the footer's copyright line comes from **Ajustes → Generales** (*Settings → General*), which needs Administrator access. Only change it as part of an agreed rebrand.
+The site name in the footer's copyright line comes from **Ajustes → Generales**, which only the site administrator can change. Only change it as part of an agreed rebrand.
 
-## 11. Contact form messages
-
-**Contactos** in the left sidebar lists messages sent through the website's contact form.
-
-- Click an entry to read the details: name, email, phone, country, service of interest and message.
-- **Exportar CSV**, at the top of the list, downloads every message as a spreadsheet.
-- You can't create entries by hand.
-- For privacy, messages older than **18 months** are moved to the trash automatically.
-
-These entries contain personal data. Don't share exports outside the people who need them.
-
-> **Needs verification:** the contact form isn't currently placed on any of the main pages (Inicio, Acerca de, Servicios, Cursos). Confirm with development where it should live before relying on this list.
-
-## 12. Images and media
+## 11. Images and media
 
 ### Uploading
 
-Upload images straight from the field: click the image field's add button, or the featured-image box in the sidebar. You can also upload in **Medios** (*Media*) first and pick the image later.
+Upload images straight from the field: click the image field's add button, or the featured-image box in the sidebar. You can also upload in **Medios** first and pick the image later.
 
 ### Recommended sizes
 
@@ -646,12 +647,12 @@ WordPress doesn't check image sizes when you upload. Smaller images are accepted
 - **Compress large photos** before uploading. Photos straight from a camera or phone are often much bigger than needed.
 - **Keep the same shape when replacing an image.** Swapping a landscape photo for a portrait one (or the reverse) changes what gets cropped.
 - **Use descriptive file names**, such as `arteterapia-sesion.jpg` instead of `IMG_4821.jpg`.
-- **Fill in Texto alternativo** (*Alternative text*) in the media details. Briefly describe the photo for visitors who use screen readers.
+- **Fill in Texto alternativo** in the media details. Briefly describe the photo for visitors who use screen readers.
 - **Check the result** on the website, on desktop and on a phone, after every image change.
 
-> 📷 **Screenshot needed:** The **Medios** (*Media*) attachment-details panel for one service photo, showing the dimensions and the **Texto alternativo** field.
+> 📷 **Screenshot needed:** The **Medios** attachment-details panel for one service photo, showing the dimensions and the **Texto alternativo** field.
 
-## 13. Links and buttons
+## 12. Links and buttons
 
 Most links on this site are created automatically from content. Service cards link to their service, the "Volver a servicios" link goes back to the catalogue, and the menus link to the pages. Only a few fields take a web address you type yourself:
 
@@ -671,7 +672,7 @@ Tips:
 - **WhatsApp links** aren't supported yet. See [section 3](#3-what-requires-development).
 - Inside a text editor, select the words and use the link button in the toolbar. Don't paste raw addresses into the text.
 
-## 14. FAQ
+## 13. FAQ
 
 ### Can I change text myself?
 
@@ -683,7 +684,7 @@ Yes. Select a new image in the same field and save. Keep the same shape (landsca
 
 ### Can I create another service, course, professional or testimonial?
 
-Yes. Use the add-new button in **Servicios**, **Cursos**, **Profesionales** or **Testimonios**. New services and courses automatically appear on the Servicios and Cursos pages. New services also appear in the contact form. Remember:
+Yes. Click **Añadir** in **Servicios**, **Cursos**, **Profesionales** or **Testimonios**. New services and courses automatically appear on the Servicios and Cursos pages. Remember:
 
 - The home page shows at most **6 featured services** and the **first 3 courses**.
 - A new professional only appears where you select them on a service or course.
@@ -711,29 +712,31 @@ Normal editing can't break the design, because the templates control the layout.
 - changing a page's or service's web address (slug)
 - deleting or unpublishing the main pages
 - removing the **Legal** template from a legal page
-- trashing a professional who is still selected on services or courses
+- trashing a professional, or a hand-picked "Otros servicios" service, while it's still selected somewhere. It keeps showing on the website.
 - turning off every **Destacado en Inicio**, which hides the home page services section
 
-If something looks wrong after a change, undo it (see [Troubleshooting](#15-troubleshooting)) and contact development.
+If something looks wrong after a change, undo it (see [Troubleshooting](#14-troubleshooting)) and contact development.
 
 ### When should I contact the developer?
 
-Contact development whenever you need something [section 3](#3-what-requires-development) lists, when a fix in [Troubleshooting](#15-troubleshooting) doesn't work, or whenever you're unsure whether a change is content or structure. Asking first is always fine.
+Contact development whenever you need something [section 3](#3-what-requires-development) lists, when a fix in [Troubleshooting](#14-troubleshooting) doesn't work, or whenever you're unsure whether a change is content or structure. Asking first is always fine.
 
-## 15. Troubleshooting
+## 14. Troubleshooting
 
 ### I updated something but can't see the change
 
-1. Make sure you clicked **Actualizar** / **Publicar** and the item isn't still a draft.
-2. Reload the public page. If you're logged in, also try a private or incognito window.
-3. Make sure you're looking in the right place. For example, a service's **Extracto** isn't shown on its card, and a course's **Duración** only shows when it has a price.
-4. The website keeps a cached copy of its pages for speed, so a change can take a short while to appear.
+1. Make sure you clicked **Guardar** or **Publicar** and the item isn't still a draft.
+2. Make sure you're looking in the right place. For example, a service's **Extracto** isn't shown on its card, and a course's **Duración** only shows when it has a price.
+3. **Clear the cache.** In the black bar at the top of the screen, open **Breeze** and click **Purge All Cache**.
+4. Check again in a **private or incognito window**.
 
-> **Needs verification:** whether your account shows a "purge cache" option in the top admin bar, and whether saving clears the cache automatically.
+Why this happens: the website keeps a saved copy of each page so it loads quickly for visitors. Saving an item refreshes that item's own page, but **not** the other pages that show it: the home page, the Servicios and Cursos lists, or the "Otros servicios" cards. Changes in **Ajustes de Álmica** don't refresh any page. Without a purge, visitors can see the old version for **up to 24 hours**.
+
+While you're logged in, you always see the latest version. That's why the private window matters: it shows what visitors see.
 
 ### The image looks wrong
 
-- **Cropped badly:** move the subject to the centre of the photo, or use a photo closer to the shape in [Images and media](#12-images-and-media), then re-upload.
+- **Cropped badly:** move the subject to the centre of the photo, or use a photo closer to the shape in [Images and media](#11-images-and-media), then re-upload.
 - **Blurry:** the upload was too small. Upload a larger version.
 - **The page header shows a different photo from the card:** the service or course has its own **Imagen del encabezado**. Change or clear that field.
 - **A portrait shows an empty circle:** the professional has no featured image.
@@ -749,7 +752,7 @@ Contact development whenever you need something [section 3](#3-what-requires-dev
 
 - Scroll down. The site's fields are in a panel **below** the main text area.
 - On the home page, look in the **Inicio** panel. On other pages, look in **Encabezado de página**.
-- Contact details, prices wording and footer text are in **Ajustes de Álmica** (Administrator accounts only).
+- Contact details, prices wording and footer text are in **Ajustes de Álmica**. Editors don't see it; ask Klaritty's site administrator.
 - If none of these have it, the field doesn't exist yet. Ask development.
 
 ### I'm not sure where a piece of content is managed
@@ -770,11 +773,9 @@ Contact development whenever you need something [section 3](#3-what-requires-dev
 
 ### I made a mistake and want to go back
 
-- **Pages** (Inicio, Acerca de, legal pages, …) keep a history of saved versions. In the settings sidebar, open **Revisiones** (*Revisions*), pick an earlier version and restore it.
+- **Pages** (Inicio, Acerca de, legal pages, …) keep a history of saved versions. In the settings sidebar, open **Revisiones**, pick an earlier version and restore it. Restoring brings back both the main text and the page's fields (the header and the Inicio panel) as they were at that save. The oldest version of each page comes from the initial content load and only holds the main text, so restoring that one leaves the fields as they are.
 - **Services, courses, professionals, testimonials and Ajustes de Álmica don't keep a version history.** Before a big edit, copy the current text somewhere safe so you can paste it back if needed.
-- A trashed item can be restored from **Papelera** (*Trash*) at the top of its list.
-
-> **Needs verification:** that revisions are enabled on production for Pages, and whether restoring a page revision also restores its header and Inicio fields.
+- A trashed item can be restored from **Papelera** at the top of its list.
 
 # Recommended YouTrack Knowledge Base Structure
 
@@ -786,18 +787,17 @@ Contents: the title and intro line, plus **1. About this guide**, including "A n
 | # | Child article | Sections from this file |
 |---|---|---|
 | 1 | **Start Here: What You Can and Can't Change** | 2. What you can safely edit · 3. What requires development |
-| 2 | **WordPress Basics** | 4. WordPress basics, including the Spanish/English label table |
+| 2 | **WordPress Basics** | 4. WordPress basics, including the English label table |
 | 3 | **Managing Services** | 5. Managing Services |
 | 4 | **Managing Courses** | 6. Managing Courses |
 | 5 | **Managing Professionals** | 7. Managing Professionals |
 | 6 | **Managing Testimonials** | 8. Managing Testimonials |
 | 7 | **Managing Pages (Home, About, Listings, Legal)** | 9. Managing Pages |
-| 8 | **Global Website Content, Menus and Contact Messages** | 10. Global website content · 11. Contact form messages |
-| 9 | **Images & Links** | 12. Images and media · 13. Links and buttons |
-| 10 | **FAQ & Troubleshooting** | 14. FAQ · 15. Troubleshooting |
+| 8 | **Global Website Content & Menus** | 10. Global website content |
+| 9 | **Images & Links** | 11. Images and media · 12. Links and buttons |
+| 10 | **FAQ & Troubleshooting** | 13. FAQ · 14. Troubleshooting |
 
 Notes for publishing:
 
 - Internal links in this file point to `#section` anchors. In YouTrack, replace them with links to the matching child article.
-- Keep the **Needs verification** notes out of the published articles. Resolve them first, or move them to an internal comment.
 - Replace each **📷 Screenshot needed** placeholder with the captured image when the screenshots are ready.
