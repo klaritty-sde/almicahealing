@@ -1,113 +1,113 @@
-# Álmica Healing Website — Content Management Guide
+# Sitio web de Álmica Healing — Guía de administración de contenido
 
-For the Klaritty team members who keep the Álmica Healing website up to date.
+Para el equipo de Klaritty que mantiene actualizado el sitio web de Álmica Healing.
 
-## 1. About this guide
+## 1. Acerca de esta guía
 
-The Álmica Healing website is built from **structured content**. Services, courses, professionals and testimonials aren't free-form pages. Each one is a set of labelled boxes, such as a title, a price, a list of benefits or a photo. The website's templates turn those boxes into finished, consistently designed pages.
+El sitio web de Álmica Healing está construido con **contenido estructurado**. Los servicios, cursos, profesionales y testimonios no son páginas libres. Cada uno es un conjunto de campos con nombre, como un título, un precio, una lista de beneficios o una foto. Las plantillas del sitio convierten esos campos en páginas terminadas y con un diseño uniforme.
 
-In short: **you manage the information, and the website manages how it looks.**
+En resumen: **tú administras la información y el sitio se encarga de cómo se ve.**
 
-This means:
+Esto significa que:
 
-- You never need to arrange layouts, choose fonts or set colours. Fill in the fields and the page is laid out for you.
-- One change can appear in several places. For example, editing a professional's photo updates it on every service and course where they appear.
-- If you need something the fields don't offer, that's a request for development (see [section 3](#3-what-requires-development)).
+- Nunca tienes que acomodar diseños, elegir tipografías ni definir colores. Llena los campos y la página se arma sola.
+- Un cambio puede aparecer en varios lugares. Por ejemplo, si cambias la foto de un profesional, se actualiza en todos los servicios y cursos donde aparece.
+- Si necesitas algo que los campos no ofrecen, es una solicitud para desarrollo (consulta [Qué requiere desarrollo](#3-que-requiere-desarrollo)).
 
-The website was first filled from a content spreadsheet. **That spreadsheet is no longer used.** From now on, the content in WordPress is the official version. Make all changes in WordPress, and don't edit the old spreadsheet expecting the website to follow.
+El contenido del sitio se cargó por primera vez desde una hoja de cálculo. **Esa hoja de cálculo ya no se usa.** A partir de ahora, la versión oficial del contenido es la que está en WordPress. Haz todos los cambios en WordPress y no edites la hoja de cálculo esperando que el sitio se actualice.
 
-### A note on admin language
+### Sobre el idioma del panel
 
-The WordPress admin is set to **Spanish (Mexico)**, and this guide uses the Spanish labels you'll see on screen.
+El panel de WordPress está configurado en **español (México)**, y esta guía usa las etiquetas en español que verás en pantalla.
 
-If your screen shows English, your profile has its own language setting. Go to **Usuarios → Perfil**, set **Idioma** to **Predeterminado del sitio** (*Site Default*), and save. A few third-party screens, such as the caching plugin's, may stay in English because they have no Spanish translation.
+Si tu pantalla aparece en inglés, tu perfil tiene su propio ajuste de idioma. Ve a **Usuarios → Perfil**, elige **Predeterminado del sitio** en **Idioma** y guarda. Algunas pantallas de terceros, como la del plugin de caché, pueden seguir en inglés porque no tienen traducción al español.
 
-## 2. What you can safely edit
+## 2. Qué puedes editar
 
-You can create, edit and remove these yourself:
+Puedes crear, editar y eliminar por tu cuenta lo siguiente:
 
-- **Services** (Servicios): titles, descriptions, prices, durations, modality, benefits, photos, who delivers each service, which services appear on the home page, and the order of the catalogue.
-- **Courses** (Cursos): titles, descriptions, prices, durations, level, programme label, the numbered list, photos, facilitators and order.
-- **Professionals** (Profesionales): names, roles, bios, portraits and the founder's training ("Formación").
-- **Testimonials** (Testimonios): quotes, client names, which service or course each one is about, and their order.
-- **Page text and images** on Inicio, Acerca de, Servicios and Cursos, in the fields provided.
-- **The legal documents**: the text of Aviso de privacidad and Términos y condiciones.
+- **Servicios**: títulos, descripciones, precios, duraciones, modalidad, beneficios, fotos, quién imparte cada servicio, qué servicios aparecen en la página de inicio y el orden del catálogo.
+- **Cursos**: títulos, descripciones, precios, duraciones, nivel, etiqueta del programa, la lista numerada, fotos, facilitadores y orden.
+- **Profesionales**: nombres, roles, biografías, retratos y la formación de la fundadora («Formación»).
+- **Testimonios**: citas, nombres de clientes, el servicio o curso del que habla cada uno y su orden.
+- **Textos e imágenes de las páginas** Inicio, Acerca de, Servicios y Cursos, en los campos disponibles.
+- **Los documentos legales**: el texto del Aviso de privacidad y de los Términos y condiciones.
 
-Content editors use **Editor** accounts, which cover everything above. Two areas are handled by Klaritty's site administrator instead:
+Quienes editan contenido usan cuentas de **Editor**, que cubren todo lo anterior. Hay dos áreas que maneja el administrador del sitio de Klaritty:
 
-- **Global website content** (Ajustes de Álmica): contact email, phone, location, social links, footer text, price wording and the course contact card.
-- **Navigation menus**: the header and footer link lists.
+- **Contenido global del sitio** (Ajustes de Álmica): correo de contacto, teléfono, ubicación, redes sociales, textos del pie de página, textos de precios y la tarjeta de contacto de los cursos.
+- **Menús de navegación**: las listas de enlaces del encabezado y del pie de página.
 
-These screens don't appear for Editor accounts. They're still content changes, not development: send the new text to Klaritty's site administrator, who makes the change.
+Estas pantallas no aparecen en las cuentas de Editor. Aun así son cambios de contenido, no de desarrollo: envía el texto nuevo al administrador del sitio de Klaritty, que se encarga de hacer el cambio.
 
-## 3. What requires development
+## 3. Qué requiere desarrollo
 
-A simple rule:
+Una regla sencilla:
 
-> If you're changing **what something says**, it's probably a content change, and you can do it.
+> Si estás cambiando **lo que dice algo**, probablemente es un cambio de contenido y lo puedes hacer tú.
 >
-> If you're changing **what information exists**, **how something is structured** or **how something is displayed**, it's probably a development change.
+> Si estás cambiando **qué información existe**, **cómo está estructurado algo** o **cómo se muestra**, probablemente es un cambio de desarrollo.
 
-Contact development for any of these:
+Contacta a desarrollo para cualquiera de estos casos:
 
-- **A new field for every item.** For example, a "session schedule" or "booking link" on every service, or a start date on every course.
-- **A new type of content.** For example, a shop, products, events or a blog section. (The online shop and service booking were deliberately left out of this version of the site.)
-- **Changing a layout.** For example, moving the benefits above the description, showing more than 6 featured services on the home page, or changing card shapes.
-- **Text that's built into the design.** Section labels such as "Sobre este servicio", "Inversión", "Quién imparte", "Otros servicios", "Sobre el curso", "Otros programas", "Tu proceso comienza aquí", "Ver más" and "Contáctanos" have no field.
-- **The "Nosotros" history text on Acerca de.** It's built into the page and has no editable field yet.
-- **The legal pages' header.** That covers the "Información legal y de privacidad." heading and the tab names.
-- **New benefit icons.** You can choose only from the existing list.
-- **New pages.** The site has no general-purpose page design. A new page would get a very plain layout.
-- **The contact form**: its questions, its confirmation email, which address receives the notifications, or putting the form on another page.
-- **WhatsApp or TikTok links.** The settings have fields for them, but the website doesn't display them yet.
-- **Anything about plugins, analytics, the domain or email delivery.**
-- **Changing the web address (URL) of a page, service or course.**
+- **Un campo nuevo para todos los elementos.** Por ejemplo, un «horario de sesiones» o un «enlace de reserva» en cada servicio, o una fecha de inicio en cada curso.
+- **Un tipo de contenido nuevo.** Por ejemplo, una tienda, productos, eventos o un blog. (La tienda en línea y las reservas de servicios se dejaron fuera de esta versión del sitio a propósito.)
+- **Cambiar un diseño.** Por ejemplo, mover los beneficios arriba de la descripción, mostrar más de 6 servicios destacados en la página de inicio o cambiar la forma de las tarjetas.
+- **Textos que forman parte del diseño.** Las etiquetas de sección como «Sobre este servicio», «Inversión», «Quién imparte», «Otros servicios», «Sobre el curso», «Otros programas», «Tu proceso comienza aquí», «Ver más» y «Contáctanos» no tienen campo.
+- **El texto de historia «Nosotros» en Acerca de.** Es parte de la página y todavía no tiene un campo editable.
+- **El encabezado de las páginas legales.** Incluye el título «Información legal y de privacidad.» y los nombres de las pestañas.
+- **Íconos de beneficios nuevos.** Solo puedes elegir de la lista existente.
+- **Páginas nuevas.** El sitio no tiene un diseño de página de uso general. Una página nueva tendría un diseño muy básico.
+- **El formulario de contacto**: sus preguntas, su correo de confirmación, la dirección que recibe las notificaciones o colocar el formulario en otra página.
+- **Enlaces de WhatsApp o TikTok.** Los ajustes tienen campos para ellos, pero el sitio todavía no los muestra.
+- **Cualquier cosa relacionada con plugins, analítica, el dominio o el envío de correos.**
+- **Cambiar la dirección web (URL) de una página, servicio o curso.**
 
-## 4. WordPress basics
+## 4. Conceptos básicos de WordPress
 
-### Logging in
+### Iniciar sesión
 
-Log in at the website's `/wp-admin` address with your own user account. The left-hand sidebar lists everything you can manage.
+Inicia sesión en la dirección `/wp-admin` del sitio con tu propia cuenta. La barra lateral izquierda muestra todo lo que puedes administrar.
 
-> 📷 **Screenshot needed:** The wp-admin left sidebar as an **Editor** sees it, showing **Servicios**, **Cursos**, **Testimonios**, **Profesionales** and **Páginas**. Editors are the main audience, so capture it from an Editor account.
+> 📷 **Captura necesaria:** La barra lateral izquierda de wp-admin como la ve un **Editor**, mostrando **Servicios**, **Cursos**, **Testimonios**, **Profesionales** y **Páginas**. Los editores son el público principal, así que tómala desde una cuenta de Editor.
 
-### The everyday workflow
+### El flujo de trabajo diario
 
-1. **Open the section** in the left sidebar, for example **Servicios**.
-2. **Find the item.** Click its title in the list, or use the search box at the top right of the list.
-3. **Edit the fields.** The main text area is at the top of the editing screen. The site-specific fields are in a panel **below** it, titled after the content type (for example **Servicio**). Scroll down to find them.
-4. **Preview** if you're making a larger change: open the **Ver** menu (the screen icon at the top right) and choose **Previsualizar en nueva pestaña**.
-5. **Save.** Click **Publicar** for something new, or **Guardar** for something already published. Use **Guardar como borrador** to keep working later without showing it on the website.
-6. **Clear the cache.** In the black bar at the top of the screen, open **Breeze** and click **Purge All Cache**. Do this after every change that shows on more than one page, and when in doubt, always. See [Troubleshooting](#14-troubleshooting) for why.
-7. **Check the public page in a private or incognito window.** While you're logged in you always see the latest version, so a private window is the only way to see what visitors see.
+1. **Abre la sección** en la barra lateral izquierda, por ejemplo **Servicios**.
+2. **Busca el elemento.** Haz clic en su título en la lista o usa el buscador en la parte superior derecha de la lista.
+3. **Edita los campos.** El área de texto principal está en la parte superior de la pantalla de edición. Los campos propios del sitio están en un panel **debajo** de ella, con el nombre del tipo de contenido (por ejemplo **Servicio**). Desplázate hacia abajo para encontrarlos.
+4. **Previsualiza** si vas a hacer un cambio grande: abre el menú **Ver** (el ícono de pantalla arriba a la derecha) y elige **Previsualizar en nueva pestaña**.
+5. **Guarda.** Haz clic en **Publicar** si es algo nuevo, o en **Guardar** si ya estaba publicado. Usa **Guardar como borrador** para seguir trabajando después sin que se muestre en el sitio.
+6. **Vacía la caché.** En la barra negra de la parte superior de la pantalla, abre **Breeze** y haz clic en **Purge All Cache**. Hazlo después de cualquier cambio que se vea en más de una página y, si tienes duda, siempre. Consulta [Solución de problemas](#14-solucion-de-problemas) para saber por qué.
+7. **Revisa la página pública en una ventana privada o de incógnito.** Mientras tienes la sesión iniciada siempre ves la versión más reciente, así que una ventana privada es la única forma de ver lo que ven los visitantes.
 
-> 📷 **Screenshot needed:** The black admin bar at the top of any wp-admin screen, with the **Breeze** menu open and **Purge All Cache** highlighted. Capture it from an Editor account.
+> 📷 **Captura necesaria:** La barra negra superior de cualquier pantalla de wp-admin, con el menú **Breeze** abierto y **Purge All Cache** resaltado. Tómala desde una cuenta de Editor.
 
-> 📷 **Screenshot needed:** A Service edit screen, scrolled so the main text area and the top of the **Servicio** field panel are both visible. Annotate "Main text" and "Service fields", and point out the right-hand settings sidebar.
+> 📷 **Captura necesaria:** La pantalla de edición de un servicio, desplazada de forma que se vean el área de texto principal y la parte superior del panel de campos **Servicio**. Señala «Texto principal» y «Campos del servicio», e indica la barra lateral de ajustes a la derecha.
 
-### Fields marked with an asterisk
+### Campos marcados con asterisco
 
-Fields marked with **\*** are required. Fill them in before publishing. A missing required field can stop the item from saving or leave a gap on the page.
+Los campos marcados con **\*** son obligatorios. Llénalos antes de publicar. Si falta un campo obligatorio, puede que el elemento no se guarde o que quede un hueco en la página.
 
-### The settings sidebar
+### La barra lateral de ajustes
 
-The panel on the right of the editing screen holds a few standard WordPress settings this site uses:
+El panel a la derecha de la pantalla de edición tiene algunos ajustes estándar de WordPress que usa este sitio:
 
-- **Imagen destacada**: the main photo for services, courses and professionals.
-- **Extracto**: a short summary. Services and courses use it. See each section for where it appears.
-- **Orden**: a number that controls the order of services, courses and testimonials. Lower numbers come first.
-- **Plantilla**: only matters on the legal pages.
+- **Imagen destacada**: la foto principal de servicios, cursos y profesionales.
+- **Extracto**: un resumen corto. Lo usan los servicios y los cursos. Consulta cada sección para saber dónde aparece.
+- **Orden**: un número que controla el orden de servicios, cursos y testimonios. Los números más bajos aparecen primero.
+- **Plantilla**: solo importa en las páginas legales.
 
-### Drafts and trash
+### Borradores y papelera
 
-- Drafts and trashed items disappear from the website's lists: the Servicios and Cursos pages, the home page and the testimonial slider. Trashed items stay in **Papelera** and can be restored from there.
-- **One exception: items you picked by hand somewhere else.** A professional selected on a service, course or Acerca de, or a service selected under another service's **Otros servicios**, **still appears** after you trash it or turn it back into a draft. Always remove it from those places first. See [Removing a Professional](#removing-a-professional) and [Removing a Service](#removing-a-service).
+- Los borradores y los elementos en la papelera desaparecen de los listados del sitio: las páginas Servicios y Cursos, la página de inicio y el carrusel de testimonios. Los elementos en la papelera se quedan en **Papelera** y se pueden restaurar desde ahí.
+- **Una excepción: los elementos que elegiste a mano en otro lugar.** Un profesional seleccionado en un servicio, un curso o Acerca de, o un servicio seleccionado en **Otros servicios** de otro servicio, **sigue apareciendo** aunque lo mandes a la papelera o lo regreses a borrador. Quítalo primero de esos lugares. Consulta [Retirar a un profesional](#retirar-a-un-profesional) y [Retirar un servicio](#retirar-un-servicio).
 
-### If your screen is in English
+### Si tu pantalla está en inglés
 
-The admin is set to Spanish. If you've switched your own profile to English, these are the equivalents of the labels used in this guide:
+El panel está configurado en español. Si cambiaste tu perfil a inglés, estas son las equivalencias de las etiquetas que usa esta guía:
 
-| Spanish | English |
+| Español | Inglés |
 |---|---|
 | Páginas | Pages |
 | Medios | Media |
@@ -124,680 +124,677 @@ The admin is set to Spanish. If you've switched your own profile to English, the
 | Mover a la papelera | Move to trash |
 | Texto alternativo | Alternative text |
 
-## 5. Managing Services
+## 5. Administrar servicios
 
-### What a Service is
+### Qué es un servicio
 
-A **Service** is one individual session that clients can book, such as Arteterapia or Biodescodificación. Each service has its own page. It also appears as a card in the services catalogue, and possibly on the home page.
+Un **servicio** es una sesión individual que los clientes pueden reservar, como Arteterapia o Biodescodificación. Cada servicio tiene su propia página. También aparece como tarjeta en el catálogo de servicios y, si se destaca, en la página de inicio.
 
-### Where to find Services
+### Dónde encontrar los servicios
 
-Click **Servicios** in the left sidebar. The list shows every service, published or not.
+Haz clic en **Servicios** en la barra lateral izquierda. La lista muestra todos los servicios, publicados o no.
 
-### Creating a Service
+### Crear un servicio
 
-1. Go to **Servicios** and click **Añadir** at the top of the list. The screen that opens is titled **Añadir servicio**.
-2. Type the service name as the title.
-3. Write the description in the main text area.
-4. In the right-hand sidebar, set the **Imagen destacada**, the **Extracto** and the **Orden**.
-5. Scroll down to the **Servicio** panel and fill in the fields. All required fields are marked **\***.
-6. Click **Guardar como borrador**, then preview it with **Ver → Previsualizar en nueva pestaña**.
-7. Click **Publicar**.
+1. Ve a **Servicios** y haz clic en **Añadir** en la parte superior de la lista. La pantalla que se abre se llama **Añadir servicio**.
+2. Escribe el nombre del servicio como título.
+3. Escribe la descripción en el área de texto principal.
+4. En la barra lateral derecha, define la **Imagen destacada**, el **Extracto** y el **Orden**.
+5. Desplázate hasta el panel **Servicio** y llena los campos. Todos los obligatorios están marcados con **\***.
+6. Haz clic en **Guardar como borrador** y luego previsualízalo con **Ver → Previsualizar en nueva pestaña**.
+7. Haz clic en **Publicar**.
 
-The new service then appears automatically in the **Servicios** catalogue. It appears on the home page only if you turn on **Destacado en Inicio**.
+El servicio nuevo aparece automáticamente en el catálogo de **Servicios**. Solo aparece en la página de inicio si activas **Destacado en Inicio**.
 
-### Editing an existing Service
+### Editar un servicio existente
 
-1. Go to **Servicios** and click the service's title.
-2. Change the fields you need.
-3. Click **Guardar**, then check the public page.
+1. Ve a **Servicios** y haz clic en el título del servicio.
+2. Cambia los campos que necesites.
+3. Haz clic en **Guardar** y revisa la página pública.
 
-### Removing a Service
+### Retirar un servicio
 
-1. Check whether any other service has picked this one under **Otros servicios**, and remove it there. Hand-picked services keep showing even after they're trashed.
-2. If a testimonial is about this service (**Sobre**), point it at another service or course, or clear the field.
-3. Open the service and click **Mover a la papelera**, or switch it back to draft if you'll bring it back later.
-4. Clear the cache and check the Servicios page and the home page.
+1. Revisa si algún otro servicio eligió este en **Otros servicios** y quítalo de ahí. Los servicios elegidos a mano siguen apareciendo aunque estén en la papelera.
+2. Si algún testimonio habla de este servicio (**Sobre**), cámbialo a otro servicio o curso, o deja el campo vacío.
+3. Abre el servicio y haz clic en **Mover a la papelera**, o regrésalo a borrador si lo vas a volver a usar.
+4. Vacía la caché y revisa la página Servicios y la página de inicio.
 
-### Fields
+### Campos
 
-> 📷 **Screenshot needed:** The **Servicio** field panel for Arteterapia, from **Frase del encabezado** down to **Beneficios**, with at least two benefits visible.
+> 📷 **Captura necesaria:** El panel de campos **Servicio** de Arteterapia, desde **Frase del encabezado** hasta **Beneficios**, con al menos dos beneficios visibles.
 
-#### Title
+#### Título
 
-The service name. It appears on the service card, as the large heading on the service page, in "Otros servicios" cards, and under any testimonial linked to this service. Renaming a service updates all of these at once.
+El nombre del servicio. Aparece en la tarjeta del servicio, como título grande en su página, en las tarjetas de «Otros servicios» y debajo de cualquier testimonio vinculado a este servicio. Si cambias el nombre, se actualiza en todos esos lugares a la vez.
 
-Long names are fine. They wrap onto two lines in the page header.
+Los nombres largos no son problema. Se acomodan en dos líneas en el encabezado de la página.
 
-#### Main text area (description)
+#### Área de texto principal (descripción)
 
-The **"Sobre este servicio"** section of the service page. Write one to three plain paragraphs. Avoid headings, images and other blocks.
+La sección **«Sobre este servicio»** de la página del servicio. Escribe de uno a tres párrafos sencillos. Evita títulos, imágenes y otros bloques.
 
-#### Extracto (Excerpt)
+#### Extracto
 
-A one-sentence summary. It appears under the title in the page header **only when "Frase del encabezado" is empty**. Search engines may also show it as the page description. Aim for about 160 characters or fewer.
+Un resumen de una oración. Aparece debajo del título en el encabezado de la página **solo cuando «Frase del encabezado» está vacía**. Los buscadores también pueden mostrarlo como descripción de la página. Procura no pasar de unos 160 caracteres.
 
-#### Imagen destacada (Featured image)
+#### Imagen destacada
 
-The photo on the service card. It's also used as the page header background when **Imagen del encabezado** is empty. The card shows a tall, narrow slice from the **centre** of the photo. See [Images and media](#11-images-and-media).
+La foto de la tarjeta del servicio. También se usa como fondo del encabezado de la página cuando **Imagen del encabezado** está vacía. La tarjeta muestra una franja alta y angosta del **centro** de la foto. Consulta [Imágenes y medios](#11-imagenes-y-medios).
 
-#### Orden (Order)
+#### Orden
 
-Controls the service's position in the catalogue and among the home page's featured services. It also decides which three services appear by default under "Otros servicios". Lower numbers come first.
+Controla la posición del servicio en el catálogo y entre los servicios destacados de la página de inicio. También decide qué tres servicios aparecen de forma predeterminada en «Otros servicios». Los números más bajos aparecen primero.
 
 #### Frase del encabezado
 
-The sentence under the title in the page header. If empty, the **Extracto** is used instead. Up to 200 characters.
+La oración debajo del título en el encabezado de la página. Si está vacía, se usa el **Extracto**. Hasta 200 caracteres.
 
 #### Imagen del encabezado
 
-An optional, different photo for the page header. If empty, the featured image is used. The header lays a dark green tint over the photo so the text stays readable, so the photo works as a soft background.
+Una foto distinta y opcional para el encabezado de la página. Si está vacía, se usa la imagen destacada. El encabezado pone un tono verde oscuro sobre la foto para que el texto se lea bien, así que la foto funciona como un fondo suave.
 
 #### Precio \*
 
-The session price, as a **number only**: no "$", no "MXN", no commas. For example, `1150` is displayed as **$1,150.00 MXN**. The currency label comes from **Ajustes de Álmica**.
+El precio de la sesión, **solo el número**: sin «$», sin «MXN» y sin comas. Por ejemplo, `1150` se muestra como **$1,150.00 MXN**. La etiqueta de moneda viene de **Ajustes de Álmica**.
 
 #### Base del precio
 
-The small line under the price. **Leave it empty** for the standard wording ("por sesión individual", set in Ajustes de Álmica). Fill it in only if this service is priced differently, for example "por paquete de 3 sesiones". Up to 80 characters.
+La línea pequeña debajo del precio. **Déjala vacía** para usar el texto estándar («por sesión individual», definido en Ajustes de Álmica). Llénala solo si este servicio se cobra de otra forma, por ejemplo «por paquete de 3 sesiones». Hasta 80 caracteres.
 
 #### Duración (minutos) \*
 
-The session length in minutes, in steps of 15, from 15 to 480. It appears in **two places**: the chip in the page header ("60 min") and the "Inversión" price box.
+La duración de la sesión en minutos, en intervalos de 15, de 15 a 480. Aparece en **dos lugares**: la etiqueta del encabezado de la página («60 min») y el recuadro de precio «Inversión».
 
 #### Modalidad \*
 
-Choose **Presencial**, **Virtual** or **Presencial y virtual**. It's shown in the "Inversión" box.
+Elige **Presencial**, **Virtual** o **Presencial y virtual**. Se muestra en el recuadro «Inversión».
 
 #### Beneficios \*
 
-The tiles under **"Lo que esta sesión puede ofrecerte"**. Add **between 1 and 6** with **Añadir beneficio**. Drag rows to reorder them. Each benefit has three parts:
+Las tarjetas debajo de **«Lo que esta sesión puede ofrecerte»**. Agrega **entre 1 y 6** con **Añadir beneficio**. Arrastra las filas para reordenarlas. Cada beneficio tiene tres partes:
 
-- **Icono \***: choose from the list (Corazón, Ondas, Brote, Ojo, Círculos, Equilibrio, Espiral, Manos, Luna, Chispa). For a consistent look, prefer **Corazón, Ondas, Brote, Ojo, Círculos and Manos**. The other four are drawn in an older style.
-- **Título \***: the benefit itself, up to 90 characters. For example, "Favorece la expresión emocional".
-- **Descripción**: optional, up to 180 characters. How you start it changes how it's displayed:
-  - Starting with a **capital letter** shows it as a separate supporting sentence under the title. For example, title "Reduce el estrés" and description "El proceso creativo ofrece un espacio de calma."
-  - Starting with a **lowercase letter** shows it as the *continuation* of the title's sentence, in the same style. For example, title "Te ayuda a" and description "soltar lo que ya no te pertenece."
+- **Icono \***: elige de la lista (Corazón, Ondas, Brote, Ojo, Círculos, Equilibrio, Espiral, Manos, Luna, Chispa). Para un aspecto uniforme, prefiere **Corazón, Ondas, Brote, Ojo, Círculos y Manos**. Los otros cuatro tienen un estilo de dibujo anterior.
+- **Título \***: el beneficio en sí, hasta 90 caracteres. Por ejemplo, «Favorece la expresión emocional».
+- **Descripción**: opcional, hasta 180 caracteres. La forma en que empieza cambia cómo se muestra:
+  - Si empieza con **mayúscula**, se muestra como una oración de apoyo aparte, debajo del título. Por ejemplo, título «Reduce el estrés» y descripción «El proceso creativo ofrece un espacio de calma.»
+  - Si empieza con **minúscula**, se muestra como la *continuación* de la oración del título, con el mismo estilo. Por ejemplo, título «Te ayuda a» y descripción «soltar lo que ya no te pertenece.»
 
-> 📷 **Screenshot needed:** A service page on the website, showing the benefit tiles. Include one tile with a capitalised description and, if one exists, one with a lowercase continuation, side by side.
+> 📷 **Captura necesaria:** La página de un servicio en el sitio, mostrando las tarjetas de beneficios. Incluye una tarjeta con descripción en mayúscula y, si existe, una con continuación en minúscula, una junto a la otra.
 
 #### Quién imparte
 
-The professional(s) who deliver this service, up to 3. Search on the left and click a name to add it. Drag to reorder. Each person is shown with their portrait, name, role and bio, all taken from their **Profesionales** entry.
+El o los profesionales que imparten este servicio, hasta 3. Busca a la izquierda y haz clic en un nombre para agregarlo. Arrastra para reordenar. Cada persona se muestra con su retrato, nombre, rol y biografía, tomados de su ficha en **Profesionales**.
 
-**If you leave this empty, the whole "Quién imparte" section is hidden.** Use that while the therapist isn't confirmed.
+**Si lo dejas vacío, se oculta toda la sección «Quién imparte».** Úsalo así mientras el terapeuta no esté confirmado.
 
 #### Otros servicios
 
-Optional. Picks the (up to) 3 services shown at the bottom of the page. **Leave it empty** to show the next three services in catalogue order automatically, which gives every service a different set. If you pick fewer than 3, only the ones you picked are shown.
+Opcional. Elige los servicios (hasta 3) que se muestran al final de la página. **Déjalo vacío** para mostrar automáticamente los tres servicios siguientes en el orden del catálogo, lo que le da a cada servicio un grupo distinto. Si eliges menos de 3, solo se muestran los que elegiste.
 
 #### Destacado en Inicio
 
-Turn this on to feature the service on the home page. The home page shows **up to 6** featured services, in catalogue order. If more than 6 are turned on, only the first 6 by **Orden** appear.
+Actívalo para destacar el servicio en la página de inicio. La página de inicio muestra **hasta 6** servicios destacados, en el orden del catálogo. Si hay más de 6 activados, solo aparecen los primeros 6 según el **Orden**.
 
-If **none** are turned on, the whole services section disappears from the home page.
+Si **ninguno** está activado, desaparece por completo la sección de servicios de la página de inicio.
 
 #### Incluye cuadernillo
 
-Turn this on to add the line "Incluye cuadernillo descargable." under the description. It's only a line of text. The website doesn't deliver a file.
+Actívalo para agregar la línea «Incluye cuadernillo descargable.» debajo de la descripción. Es solo una línea de texto. El sitio no entrega ningún archivo.
 
-### Publishing checklist — Services
+### Lista de verificación antes de publicar — Servicios
 
-- [ ] Title is spelled correctly.
-- [ ] Description reads well and has no stray headings or images.
-- [ ] Featured image is set, and the subject is in the centre.
-- [ ] Price is a plain number; duration and modality are correct.
-- [ ] 1–6 benefits, each with an icon and a title.
-- [ ] "Quién imparte" lists the right person, or is empty on purpose.
-- [ ] "Destacado en Inicio" is set as intended, and no more than 6 services are featured.
-- [ ] **Orden** puts the service where you want it in the catalogue.
-- [ ] Previewed, published, and checked on the website: the service page, the Servicios page and the home page.
+- [ ] El título está bien escrito.
+- [ ] La descripción se lee bien y no tiene títulos ni imágenes sueltas.
+- [ ] La imagen destacada está definida y el motivo está al centro.
+- [ ] El precio es solo un número; la duración y la modalidad son correctas.
+- [ ] Hay de 1 a 6 beneficios, cada uno con ícono y título.
+- [ ] «Quién imparte» muestra a la persona correcta, o está vacío a propósito.
+- [ ] «Destacado en Inicio» está como debe y no hay más de 6 servicios destacados.
+- [ ] El **Orden** coloca el servicio donde quieres en el catálogo.
+- [ ] Previsualizado, publicado y revisado en el sitio: la página del servicio, la página Servicios y la página de inicio.
 
-## 6. Managing Courses
+## 6. Administrar cursos
 
-### What a Course is
+### Qué es un curso
 
-A **Course** is a multi-week training programme, such as Kriutunmi or Clantanra. Each course has its own page. It also appears as a card on the **Cursos** page and on the home page, and in "Otros programas" at the bottom of the other course pages.
+Un **curso** es un programa de formación de varias semanas, como Kriutunmi o Clantanra. Cada curso tiene su propia página. También aparece como tarjeta en la página **Cursos** y en la página de inicio, y en «Otros programas» al final de las páginas de los demás cursos.
 
-### Where to find Courses
+### Dónde encontrar los cursos
 
-Click **Cursos** in the left sidebar.
+Haz clic en **Cursos** en la barra lateral izquierda.
 
-### Creating a Course
+### Crear un curso
 
-1. Go to **Cursos** and click **Añadir** at the top of the list. The screen is titled **Añadir curso**.
-2. Enter the title and description, and set the **Imagen destacada**, **Extracto** and **Orden** in the sidebar.
-3. Fill in the **Curso** panel below the main text area.
-4. Save a draft, preview, then **Publicar**.
+1. Ve a **Cursos** y haz clic en **Añadir** en la parte superior de la lista. La pantalla se llama **Añadir curso**.
+2. Escribe el título y la descripción, y define la **Imagen destacada**, el **Extracto** y el **Orden** en la barra lateral.
+3. Llena el panel **Curso** debajo del área de texto principal.
+4. Guarda un borrador, previsualiza y luego haz clic en **Publicar**.
 
-Note that the home page shows only the **first 3 courses** by **Orden**. All courses appear on the **Cursos** page.
+Ten en cuenta que la página de inicio solo muestra los **primeros 3 cursos** según el **Orden**. Todos los cursos aparecen en la página **Cursos**.
 
-### Editing an existing Course
+### Editar un curso existente
 
-Go to **Cursos**, click the title, make your changes, click **Guardar** and check the page.
+Ve a **Cursos**, haz clic en el título, haz tus cambios, haz clic en **Guardar** y revisa la página.
 
-### Fields
+### Campos
 
-> 📷 **Screenshot needed:** The **Curso** field panel for Kriutunmi, showing **Etiqueta del programa**, **Nivel**, **Precio**, **Duración**, **Encabezado de la lista** and a few **Puntos de la lista**.
+> 📷 **Captura necesaria:** El panel de campos **Curso** de Kriutunmi, mostrando **Etiqueta del programa**, **Nivel**, **Precio**, **Duración**, **Encabezado de la lista** y algunos **Puntos de la lista**.
 
-#### Title
+#### Título
 
-The course name. It appears on all course cards, as the page heading, and under linked testimonials.
+El nombre del curso. Aparece en todas las tarjetas del curso, como título de su página y debajo de los testimonios vinculados.
 
-#### Main text area (description)
+#### Área de texto principal (descripción)
 
-The **"Sobre el curso"** section. One to three plain paragraphs.
+La sección **«Sobre el curso»**. De uno a tres párrafos sencillos.
 
-#### Extracto (Excerpt)
+#### Extracto
 
-**The summary shown on the course card**, on both the home page and the Cursos page. It also appears under the page title when **Frase del encabezado** is empty. Keep it to one or two sentences, about 160 characters.
+**El resumen que se muestra en la tarjeta del curso**, tanto en la página de inicio como en la página Cursos. También aparece debajo del título de la página cuando **Frase del encabezado** está vacía. Mantenlo en una o dos oraciones, unos 160 caracteres.
 
-#### Imagen destacada (Featured image)
+#### Imagen destacada
 
-The photo on every course card, and the page header background. Cards crop it to different shapes in different places, so keep the subject in the centre.
+La foto de todas las tarjetas del curso y el fondo del encabezado de su página. Las tarjetas la recortan con formas distintas en distintos lugares, así que mantén el motivo al centro.
 
-#### Orden (Order)
+#### Orden
 
-The course's position on the Cursos page (with its "01", "02", "03" number), on the home page and in "Otros programas".
+La posición del curso en la página Cursos (con su número «01», «02», «03»), en la página de inicio y en «Otros programas».
 
 #### Frase del encabezado
 
-The sentence under the title in the page header. If empty, the **Extracto** is used. Up to 250 characters.
+La oración debajo del título en el encabezado de la página. Si está vacía, se usa el **Extracto**. Hasta 250 caracteres.
 
 #### Etiqueta del programa \*
 
-The small pill above the title in the page header. For example, "Curso intermedio de canalización y sanación". Up to 80 characters.
+La etiqueta pequeña arriba del título en el encabezado de la página. Por ejemplo, «Curso intermedio de canalización y sanación». Hasta 80 caracteres.
 
 #### Nivel \*
 
-**Básico**, **Intermedio** or **Abierto a todos**. It's shown on the small course cards in "Otros programas".
+**Básico**, **Intermedio** o **Abierto a todos**. Se muestra en las tarjetas pequeñas de «Otros programas».
 
 #### Precio
 
-The course price as a **whole number only**. For example, `5900` is displayed as **$5,900 MXN**.
+El precio del curso, **solo como número entero**. Por ejemplo, `5900` se muestra como **$5,900 MXN**.
 
-**Leave it empty if the price is on request.** The price box then disappears, and the card and contact box show "Escríbenos para conocer el precio" instead. That wording is set in Ajustes de Álmica.
+**Déjalo vacío si el precio es a consultar.** Entonces desaparece el recuadro de precio, y la tarjeta y el recuadro de contacto muestran «Escríbenos para conocer el precio». Ese texto se define en Ajustes de Álmica.
 
 #### Duración
 
-Free text such as "2 meses", up to 40 characters. It's shown inside the price box, so **it only appears when Precio is filled in**.
+Texto libre como «2 meses», hasta 40 caracteres. Se muestra dentro del recuadro de precio, así que **solo aparece cuando Precio está lleno**.
 
 #### Encabezado de la lista \*
 
-The heading of the numbered list box: **Objetivos**, **Beneficios** or **Temas**.
+El título del recuadro con la lista numerada: **Objetivos**, **Beneficios** o **Temas**.
 
 #### Puntos de la lista \*
 
-The numbered points, from 1 to 10. Add them with **Añadir punto**. **Don't type the numbers.** The website numbers the points automatically. Each point is up to 200 characters.
+Los puntos numerados, de 1 a 10. Agrégalos con **Añadir punto**. **No escribas los números.** El sitio numera los puntos automáticamente. Cada punto puede tener hasta 200 caracteres.
 
 #### Facilitador/a
 
-The person (1 or 2) leading the course, chosen from **Profesionales**. On the course page they're shown in the sidebar with a small portrait, name and role. The bio isn't shown here.
+La persona (1 o 2) que imparte el curso, elegida de **Profesionales**. En la página del curso se muestra en la barra lateral con un retrato pequeño, su nombre y su rol. Aquí no se muestra la biografía.
 
-### Text that comes from Ajustes de Álmica
+### Textos que vienen de Ajustes de Álmica
 
-The box titled "¿Te interesa este programa?", its text and the contact email appear on **every** course page. They're edited once, in **Ajustes de Álmica**. See [Global website content](#10-global-website-content).
+El recuadro «¿Te interesa este programa?», su texto y el correo de contacto aparecen en **todas** las páginas de cursos. Se editan una sola vez, en **Ajustes de Álmica**. Consulta [Contenido global del sitio](#10-contenido-global-del-sitio).
 
-### Publishing checklist — Courses
+### Lista de verificación antes de publicar — Cursos
 
-- [ ] Title, programme label and level are correct.
-- [ ] The Extracto reads well as a card summary.
-- [ ] Price is a whole number, or empty on purpose for "price on request".
-- [ ] Duration is filled in if there's a price.
-- [ ] The list heading matches the points; no numbers are typed in the points.
-- [ ] Facilitator is selected.
-- [ ] Featured image is set.
-- [ ] **Orden** is correct, remembering that only the first 3 show on the home page.
-- [ ] Previewed, published, and checked on the course page, the Cursos page and the home page.
+- [ ] El título, la etiqueta del programa y el nivel son correctos.
+- [ ] El extracto se lee bien como resumen de tarjeta.
+- [ ] El precio es un número entero, o está vacío a propósito para «precio a consultar».
+- [ ] La duración está llena si hay precio.
+- [ ] El encabezado de la lista corresponde a los puntos; no hay números escritos en los puntos.
+- [ ] El facilitador está seleccionado.
+- [ ] La imagen destacada está definida.
+- [ ] El **Orden** es correcto, recordando que solo los primeros 3 aparecen en la página de inicio.
+- [ ] Previsualizado, publicado y revisado en la página del curso, la página Cursos y la página de inicio.
 
-## 7. Managing Professionals
+## 7. Administrar profesionales
 
-### What a Professional is
+### Qué es un profesional
 
-A **Professional** is a therapist, facilitator or the founder. Each person is written **once** and then selected wherever they appear:
+Un **profesional** es un terapeuta, un facilitador o la fundadora. Cada persona se registra **una sola vez** y luego se selecciona en cada lugar donde aparece:
 
-- on services, under "Quién imparte"
-- on courses, under "Facilitador/a"
-- on Acerca de, as the founder
+- en servicios, en «Quién imparte»
+- en cursos, en «Facilitador/a»
+- en Acerca de, como fundadora
 
-Professionals don't have their own page on the website.
+Los profesionales no tienen su propia página en el sitio.
 
-### Where to find Professionals
+### Dónde encontrar a los profesionales
 
-Click **Profesionales** in the left sidebar.
+Haz clic en **Profesionales** en la barra lateral izquierda.
 
-### Creating a Professional
+### Crear un profesional
 
-1. Go to **Profesionales** and click **Añadir** at the top of the list. The screen is titled **Añadir profesional**.
-2. Type the person's full name as the title.
-3. Write their bio in the main text area.
-4. Set their portrait as the **Imagen destacada**.
-5. Fill in **Rol** in the **Profesional** panel.
-6. **Publicar**.
-7. Open each service or course they deliver and add them under **Quién imparte** or **Facilitador/a**. Creating the person doesn't place them anywhere on its own.
+1. Ve a **Profesionales** y haz clic en **Añadir** en la parte superior de la lista. La pantalla se llama **Añadir profesional**.
+2. Escribe el nombre completo de la persona como título.
+3. Escribe su biografía en el área de texto principal.
+4. Define su retrato como **Imagen destacada**.
+5. Llena **Rol** en el panel **Profesional**.
+6. Haz clic en **Publicar**.
+7. Abre cada servicio o curso que imparte y agrégalo en **Quién imparte** o **Facilitador/a**. Crear a la persona no la coloca en ningún lugar por sí solo.
 
-### Editing a Professional
+### Editar un profesional
 
-Go to **Profesionales**, click the name, edit and click **Guardar**. The change appears everywhere that person is selected.
+Ve a **Profesionales**, haz clic en el nombre, edita y haz clic en **Guardar**. El cambio aparece en todos los lugares donde esa persona está seleccionada.
 
-### Removing a Professional
+### Retirar a un profesional
 
-**Trashing a professional, or turning them back into a draft, doesn't take them off the website.** They keep appearing, with photo, role and bio, everywhere they're still selected. So:
+**Mandar a un profesional a la papelera, o regresarlo a borrador, no lo quita del sitio.** Sigue apareciendo, con foto, rol y biografía, en todos los lugares donde siga seleccionado. Por eso:
 
-1. Remove them from every service (**Quién imparte**) and every course (**Facilitador/a**). If they're the founder, choose someone else under **Fundadora** on Acerca de.
-2. **Then** move them to the trash.
-3. Clear the cache and check the services and courses they were on.
+1. Quítalo de todos los servicios (**Quién imparte**) y de todos los cursos (**Facilitador/a**). Si es la fundadora, elige a otra persona en **Fundadora** en Acerca de.
+2. **Después** mándalo a la papelera.
+3. Vacía la caché y revisa los servicios y cursos donde aparecía.
 
-### Fields
+### Campos
 
-> 📷 **Screenshot needed:** Alma Solís's edit screen, showing the portrait in the featured-image sidebar, the bio, **Rol**, and two or three **Formación** rows.
+> 📷 **Captura necesaria:** La pantalla de edición de Alma Solís, mostrando el retrato en la barra lateral de imagen destacada, la biografía, **Rol** y dos o tres filas de **Formación**.
 
-#### Title (name)
+#### Título (nombre)
 
-The person's full name, as it should appear on the website.
+El nombre completo de la persona, tal como debe aparecer en el sitio.
 
-#### Main text area (bio)
+#### Área de texto principal (biografía)
 
-One to three short paragraphs. It's shown on service pages and on Acerca de, but not in the course sidebar.
+De uno a tres párrafos cortos. Se muestra en las páginas de servicios y en Acerca de, pero no en la barra lateral de los cursos.
 
-#### Imagen destacada (Featured image) — portrait
+#### Imagen destacada — retrato
 
-Displayed as a **circle**. Use a square photo with the face centred and some space around it. Without a portrait, an empty circle is shown.
+Se muestra como un **círculo**. Usa una foto cuadrada con la cara al centro y algo de espacio alrededor. Sin retrato, se muestra un círculo vacío.
 
 #### Rol \*
 
-The gold line under the name. For example, "Terapeuta Holística. Especialista en Terapia Centrada en Soluciones". Up to 140 characters.
+La línea dorada debajo del nombre. Por ejemplo, «Terapeuta Holística. Especialista en Terapia Centrada en Soluciones». Hasta 140 caracteres.
 
 #### Formación
 
-A list of training and credentials, added with **Añadir formación**. Each row has a **Título** (required), and optionally an **Año**, an **Institución** and a **Descripción**.
+Una lista de estudios y certificaciones, que se agregan con **Añadir formación**. Cada fila tiene un **Título** (obligatorio) y, de forma opcional, **Año**, **Institución** y **Descripción**.
 
-**This list is shown only for the person selected as founder on Acerca de.** For anyone else, it's stored but not displayed.
+**Esta lista solo se muestra para la persona seleccionada como fundadora en Acerca de.** Para cualquier otra persona, se guarda pero no se muestra.
 
-### Publishing checklist — Professionals
+### Lista de verificación antes de publicar — Profesionales
 
-- [ ] Name spelled correctly.
-- [ ] Role is filled in.
-- [ ] Square portrait with the face centred.
-- [ ] Bio proofread.
-- [ ] The person is selected on the right services and courses.
-- [ ] Checked on at least one service or course page where they appear.
+- [ ] El nombre está bien escrito.
+- [ ] El rol está lleno.
+- [ ] El retrato es cuadrado y tiene la cara al centro.
+- [ ] La biografía está revisada.
+- [ ] La persona está seleccionada en los servicios y cursos correctos.
+- [ ] Revisado en al menos una página de servicio o curso donde aparece.
 
-## 8. Managing Testimonials
+## 8. Administrar testimonios
 
-### What a Testimonial is
+### Qué es un testimonio
 
-A short client quote shown in the **"Experiencias que dejan huella"** slider on the home page.
+Una cita corta de un cliente que se muestra en el carrusel **«Experiencias que dejan huella»** de la página de inicio.
 
-### Where to find Testimonials
+### Dónde encontrar los testimonios
 
-Click **Testimonios** in the left sidebar.
+Haz clic en **Testimonios** en la barra lateral izquierda.
 
-### Creating or editing a Testimonial
+### Crear o editar un testimonio
 
-1. Go to **Testimonios** and click **Añadir** (the screen is titled **Añadir testimonio**), or click an existing testimonial.
-2. **Title:** the client's display name. The convention is first name and initial, for example "Valentina R."
-3. **Main text area:** the quote itself.
-4. In the **Testimonio** panel, choose the service or course the quote is about in **Sobre**.
-5. Set **Orden** in the sidebar to place it in the slider.
-6. Click **Publicar** for a new testimonial, or **Guardar** for an existing one.
+1. Ve a **Testimonios** y haz clic en **Añadir** (la pantalla se llama **Añadir testimonio**), o haz clic en un testimonio existente.
+2. **Título:** el nombre del cliente tal como se mostrará. La convención es nombre e inicial, por ejemplo «Valentina R.»
+3. **Área de texto principal:** la cita.
+4. En el panel **Testimonio**, elige en **Sobre** el servicio o curso del que habla la cita.
+5. Define el **Orden** en la barra lateral para ubicarlo en el carrusel.
+6. Haz clic en **Publicar** si es un testimonio nuevo, o en **Guardar** si ya existe.
 
-> 📷 **Screenshot needed:** A Testimonio edit screen showing the title, the quote and the **Sobre** dropdown with a service selected.
+> 📷 **Captura necesaria:** La pantalla de edición de un testimonio, mostrando el título, la cita y el menú desplegable **Sobre** con un servicio seleccionado.
 
-### Fields
+### Campos
 
-#### Title
+#### Título
 
-The client's name as displayed under the quote.
+El nombre del cliente tal como aparece debajo de la cita.
 
-#### Main text area (quote)
+#### Área de texto principal (cita)
 
-Shown as **plain text**: bold, italics, links and paragraph breaks are dropped. Keep it to one paragraph, about 300 characters or fewer.
+Se muestra como **texto simple**: se eliminan las negritas, cursivas, enlaces y saltos de párrafo. Mantenla en un solo párrafo, de unos 300 caracteres o menos.
 
 #### Sobre
 
-The service or course the client is talking about. Its current name appears under the client's name, so if that service is renamed, the label updates automatically. Leave it empty for no label.
+El servicio o curso del que habla el cliente. Su nombre actual aparece debajo del nombre del cliente, así que si se cambia el nombre de ese servicio, la etiqueta se actualiza sola. Déjalo vacío si no quieres etiqueta.
 
-#### Orden (Order)
+#### Orden
 
-Position in the slider. Lower numbers come first.
+La posición en el carrusel. Los números más bajos aparecen primero.
 
-If you see an **Extracto** box on this screen, leave it alone. The website doesn't display it.
+Si ves un recuadro **Extracto** en esta pantalla, no lo toques. El sitio no lo muestra.
 
-### Publishing checklist — Testimonials
+### Lista de verificación antes de publicar — Testimonios
 
-- [ ] The client has agreed to be quoted, and the name is shown the agreed way.
-- [ ] The quote is a single, proofread paragraph.
-- [ ] **Sobre** points to the right service or course.
-- [ ] Checked in the home page slider.
+- [ ] El cliente aceptó que se publique su testimonio, y el nombre aparece como se acordó.
+- [ ] La cita es un solo párrafo revisado.
+- [ ] **Sobre** apunta al servicio o curso correcto.
+- [ ] Revisado en el carrusel de la página de inicio.
 
-## 9. Managing Pages
+## 9. Administrar páginas
 
-### What the Pages are
+### Qué son las páginas
 
-The site has six pages you edit. Their main content (service cards, course cards, testimonials) comes from the sections above. On the pages themselves, you edit the header and a few blocks of text.
+El sitio tiene seis páginas que puedes editar. Su contenido principal (tarjetas de servicios, tarjetas de cursos, testimonios) viene de **Servicios**, **Cursos** y **Testimonios**. En las páginas en sí, editas el encabezado y algunos bloques de texto.
 
-Go to **Páginas** in the left sidebar.
+Ve a **Páginas** en la barra lateral izquierda.
 
-> **Important:** Don't change the **web address (slug)** of any of these pages, and don't delete them. The site's links and templates depend on them.
+> **Importante:** No cambies la **dirección web (slug)** de ninguna de estas páginas y no las elimines. Los enlaces y las plantillas del sitio dependen de ellas.
 
-| Page | What you can edit there |
+| Página | Qué puedes editar ahí |
 |---|---|
-| **Inicio** (home page) | Header, plus every section in the **Inicio** panel |
-| **Acerca de** | Header, plus which professional is the founder |
-| **Servicios** | Header only. The catalogue comes from **Servicios** |
-| **Cursos** | Header only. The list comes from **Cursos** |
-| **Aviso de privacidad** | The legal text |
-| **Términos y condiciones** | The legal text |
+| **Inicio** (página de inicio) | El encabezado y todas las secciones del panel **Inicio** |
+| **Acerca de** | El encabezado y qué profesional es la fundadora |
+| **Servicios** | Solo el encabezado. El catálogo viene de **Servicios** |
+| **Cursos** | Solo el encabezado. La lista viene de **Cursos** |
+| **Aviso de privacidad** | El texto legal |
+| **Términos y condiciones** | El texto legal |
 
-On **Inicio, Acerca de, Servicios and Cursos**, the main text area at the top of the edit screen **isn't shown on the website**. Type nothing there and use the panels below it.
+En **Inicio, Acerca de, Servicios y Cursos**, el área de texto principal en la parte superior de la pantalla de edición **no se muestra en el sitio**. No escribas nada ahí y usa los paneles de abajo.
 
-### The page header ("Encabezado de página")
+### El encabezado de la página («Encabezado de página»)
 
-Every page has an **Encabezado de página** panel with these fields:
+Todas las páginas tienen un panel **Encabezado de página** con estos campos:
 
-- **Antetítulo**: the small line above the title, up to 60 characters.
-- **Título**: the large heading, up to 120 characters.
-- **Subtítulo**: the text under the heading.
-- **Imagen de fondo**: the background photo. See [Images and media](#11-images-and-media).
-- **Texto del botón** and **Enlace del botón**: a button. **Only the home page shows it.**
+- **Antetítulo**: la línea pequeña arriba del título, hasta 60 caracteres.
+- **Título**: el título grande, hasta 120 caracteres.
+- **Subtítulo**: el texto debajo del título.
+- **Imagen de fondo**: la foto de fondo. Consulta [Imágenes y medios](#11-imagenes-y-medios).
+- **Texto del botón** y **Enlace del botón**: un botón. **Solo la página de inicio lo muestra.**
 
-Which fields each page uses:
+Qué campos usa cada página:
 
-| Page | Fields used |
+| Página | Campos que usa |
 |---|---|
-| Inicio | All six |
-| Acerca de, Servicios, Cursos | Antetítulo, Título, Subtítulo, Imagen de fondo (the button fields are ignored) |
-| Aviso de privacidad, Términos y condiciones | None. These pages have a fixed header |
+| Inicio | Los seis |
+| Acerca de, Servicios, Cursos | Antetítulo, Título, Subtítulo, Imagen de fondo (los campos del botón se ignoran) |
+| Aviso de privacidad, Términos y condiciones | Ninguno. Estas páginas tienen un encabezado fijo |
 
-**If you empty a header field, the website shows the original design text instead.** Emptying a field doesn't hide it. Servicios and Cursos show a plain green header when they have no background image.
+**Si vacías un campo del encabezado, el sitio muestra el texto original del diseño.** Vaciar un campo no lo oculta. Servicios y Cursos muestran un encabezado verde liso cuando no tienen imagen de fondo.
 
-> 📷 **Screenshot needed:** The **Encabezado de página** panel on the Servicios page, next to the live Servicios page header, with arrows matching each field to what it controls.
+> 📷 **Captura necesaria:** El panel **Encabezado de página** de la página Servicios, junto al encabezado de la página Servicios en el sitio, con flechas que relacionen cada campo con lo que controla.
 
-### Inicio (home page)
+### Inicio (página de inicio)
 
-Below the page header, the **Inicio** panel holds the copy for each home page section, in page order:
+Debajo del encabezado de página, el panel **Inicio** contiene los textos de cada sección de la página de inicio, en el orden en que aparecen:
 
-1. **Introducción**: the "Todo comienza cuando volvemos a conectar" block. It has **Título**, **Texto** (a small text editor with basic formatting), **Imagen**, and **Texto del botón** / **Enlace del botón**. The image is shown in a tall, arched frame, so only its centre is visible.
-2. **Servicios (encabezado)**: **Antetítulo**, **Título** and **Subtítulo** above the featured services. The services themselves come from **Destacado en Inicio** on each service.
-3. **Cómo funciona**: **exactly 3 steps**, each with a **Título** and **Texto**. The icons, the 01/02/03 numbers and the heading "Tu proceso comienza aquí" are part of the design.
-4. **Cita**: the quote over a photo. It has **Línea 1**, **Línea 2** (shown in italics) and **Imagen de fondo**.
-5. **Cursos (encabezado)**: **Antetítulo**, **Título** and **Texto** above the course cards.
-6. **Testimonios (título)**: the heading above the testimonial slider.
+1. **Introducción**: el bloque «Todo comienza cuando volvemos a conectar». Tiene **Título**, **Texto** (un pequeño editor con formato básico), **Imagen**, y **Texto del botón** / **Enlace del botón**. La imagen se muestra en un marco alto con forma de arco, así que solo se ve el centro.
+2. **Servicios (encabezado)**: **Antetítulo**, **Título** y **Subtítulo** arriba de los servicios destacados. Los servicios en sí vienen de **Destacado en Inicio** en cada servicio.
+3. **Cómo funciona**: **exactamente 3 pasos**, cada uno con **Título** y **Texto**. Los íconos, los números 01/02/03 y el título «Tu proceso comienza aquí» son parte del diseño.
+4. **Cita**: la frase sobre una foto. Tiene **Línea 1**, **Línea 2** (en cursivas) e **Imagen de fondo**.
+5. **Cursos (encabezado)**: **Antetítulo**, **Título** y **Texto** arriba de las tarjetas de cursos.
+6. **Testimonios (título)**: el título arriba del carrusel de testimonios.
 
-**Don't empty these fields to hide something.** Depending on the field, an empty value either brings back the original text or leaves a gap (an empty **Texto del botón** hides that button). To remove a whole section, ask development.
+**No vacíes estos campos para ocultar algo.** Según el campo, un valor vacío regresa el texto original o deja un hueco (un **Texto del botón** vacío oculta ese botón). Para quitar una sección completa, pídelo a desarrollo.
 
-> 📷 **Screenshot needed:** The **Inicio** panel on the Inicio edit screen, with the **Introducción** and **Cómo funciona** groups expanded.
+> 📷 **Captura necesaria:** El panel **Inicio** en la pantalla de edición de Inicio, con los grupos **Introducción** y **Cómo funciona** desplegados.
 
 ### Acerca de
 
-- **Header:** see above.
-- **Fundadora \*** (in the **Acerca de** panel): choose the founder from **Profesionales**. Her portrait, name, role and bio come from that entry, and so does the **"Formación"** list. To change the founder's text or photo, edit her entry under **Profesionales**, not this page.
-- The **"Historia / Nosotros"** text is part of the page design and has no field. Changes go to development.
+- **Encabezado:** consulta lo anterior.
+- **Fundadora \*** (en el panel **Acerca de**): elige a la fundadora de **Profesionales**. Su retrato, nombre, rol y biografía vienen de esa ficha, igual que la lista **«Formación»**. Para cambiar el texto o la foto de la fundadora, edita su ficha en **Profesionales**, no esta página.
+- El texto **«Historia / Nosotros»** es parte del diseño de la página y no tiene campo. Los cambios van a desarrollo.
 
-### Servicios and Cursos
+### Servicios y Cursos
 
-Only the header is edited on these pages. The cards update automatically when you add, edit, reorder or unpublish services and courses.
+En estas páginas solo se edita el encabezado. Las tarjetas se actualizan solas cuando agregas, editas, reordenas o despublicas servicios y cursos.
 
-### Legal pages: Aviso de privacidad and Términos y condiciones
+### Páginas legales: Aviso de privacidad y Términos y condiciones
 
-1. Go to **Páginas** and open the page.
-2. Edit the document in the main text area.
-3. Make each numbered section an **Encabezado** block at **H2** level. The website numbers H2 headings automatically ("1.", "2.", …), so **don't type the numbers**.
-4. Write the section text as normal paragraphs under each heading.
-5. Leave the **Plantilla** setting on **Legal**.
-6. Click **Guardar** and check both pages.
+1. Ve a **Páginas** y abre la página.
+2. Edita el documento en el área de texto principal.
+3. Haz que cada sección numerada sea un bloque **Encabezado** de nivel **H2**. El sitio numera los encabezados H2 automáticamente («1.», «2.», …), así que **no escribas los números**.
+4. Escribe el texto de cada sección como párrafos normales debajo de su encabezado.
+5. Deja el ajuste **Plantilla** en **Legal**.
+6. Haz clic en **Guardar** y revisa las dos páginas.
 
-The header ("Información legal y de privacidad."), the tabs linking the two documents and the footer links are fixed. The contact note at the bottom of both pages comes from **Ajustes de Álmica → Legales**.
+El encabezado («Información legal y de privacidad.»), las pestañas que enlazan los dos documentos y los enlaces del pie de página son fijos. La nota de contacto al final de las dos páginas viene de **Ajustes de Álmica → Legales**.
 
-> 📷 **Screenshot needed:** The Aviso de privacidad edit screen, showing an H2 heading block selected with the block toolbar visible, and the **Plantilla: Legal** setting in the sidebar.
+> 📷 **Captura necesaria:** La pantalla de edición del Aviso de privacidad, mostrando un bloque de encabezado H2 seleccionado con su barra de herramientas visible, y el ajuste **Plantilla: Legal** en la barra lateral.
 
-### Publishing checklist — Pages
+### Lista de verificación antes de publicar — Páginas
 
-- [ ] The web address (slug) hasn't changed.
-- [ ] Header fields are filled in, not emptied to hide them.
-- [ ] Home page: still exactly 3 "Cómo funciona" steps.
-- [ ] Legal pages: sections are H2 headings, with no typed numbers; the template is still **Legal**.
-- [ ] Checked on desktop and on a phone.
+- [ ] La dirección web (slug) no cambió.
+- [ ] Los campos del encabezado están llenos, no vaciados para ocultarlos.
+- [ ] Página de inicio: siguen siendo exactamente 3 pasos en «Cómo funciona».
+- [ ] Páginas legales: las secciones son encabezados H2, sin números escritos; la plantilla sigue siendo **Legal**.
+- [ ] Revisado en computadora y en celular.
 
-## 10. Global website content
+## 10. Contenido global del sitio
 
 ### Ajustes de Álmica
 
-**Ajustes de Álmica** in the left sidebar holds information that appears on **many pages at once**. **A change here affects the whole website**, so double-check before saving. Only Klaritty's site administrator sees this screen. Editors send their changes to the administrator.
+**Ajustes de Álmica**, en la barra lateral izquierda, contiene información que aparece en **muchas páginas a la vez**. **Un cambio aquí afecta todo el sitio**, así que revisa dos veces antes de guardar. Solo el administrador del sitio de Klaritty ve esta pantalla. Los editores le envían sus cambios al administrador.
 
-Saving this screen doesn't refresh the website's cached pages. After **Guardar ajustes**, always use **Breeze → Purge All Cache** in the top bar, or visitors may see the old footer and contact details for up to 24 hours.
+Guardar esta pantalla no actualiza las páginas en caché del sitio. Después de **Guardar ajustes**, usa siempre **Breeze → Purge All Cache** en la barra superior, o los visitantes podrían ver el pie de página y los datos de contacto anteriores hasta por 24 horas.
 
-Fields are grouped into tabs. Click **Guardar ajustes** to save.
+Los campos están agrupados en pestañas. Haz clic en **Guardar ajustes** para guardar.
 
-> 📷 **Screenshot needed:** The **Ajustes de Álmica** screen with the **Contacto** tab open and the tab list (Contacto, Redes sociales, Pie de página, Precios, Cursos, Legales) visible.
+> 📷 **Captura necesaria:** La pantalla **Ajustes de Álmica** con la pestaña **Contacto** abierta y la lista de pestañas visible (Contacto, Redes sociales, Pie de página, Precios, Cursos, Legales).
 
-#### Contacto tab
+#### Pestaña Contacto
 
-- **Correo de contacto**: shown in the footer, on every course page and on both legal pages.
-- **Teléfono**: shown in the footer as text.
-- **WhatsApp**: **not currently shown anywhere on the website.** Filling it in won't change the site. Ask development if you want WhatsApp links.
-- **Ubicación**: the location line in the footer, for example "México · sesiones virtuales".
+- **Correo de contacto**: se muestra en el pie de página, en todas las páginas de cursos y en las dos páginas legales.
+- **Teléfono**: se muestra en el pie de página como texto.
+- **WhatsApp**: **actualmente no se muestra en ninguna parte del sitio.** Llenarlo no cambia nada. Pide a desarrollo si quieres enlaces de WhatsApp.
+- **Ubicación**: la línea de ubicación del pie de página, por ejemplo «México · sesiones virtuales».
 
-#### Redes sociales tab
+#### Pestaña Redes sociales
 
-- **Instagram** and **Facebook**: the full profile address, starting with `https://`. These power the IG and FB buttons in the footer. If a field is empty, its button stays visible but goes nowhere.
-- **TikTok**: **not currently shown on the website.**
+- **Instagram** y **Facebook**: la dirección completa del perfil, empezando con `https://`. Alimentan los botones IG y FB del pie de página. Si un campo está vacío, su botón sigue visible pero no lleva a ningún lado.
+- **TikTok**: **actualmente no se muestra en el sitio.**
 
-#### Pie de página tab
+#### Pestaña Pie de página
 
-- **Descripción**: the sentence under the logo in the footer.
-- **Lema**: the tagline in the footer's bottom bar.
+- **Descripción**: la oración debajo del logo en el pie de página.
+- **Lema**: el lema en la franja inferior del pie de página.
 
-#### Precios tab
+#### Pestaña Precios
 
-- **Moneda**: the currency label after **every** price on the site, for example "MXN".
-- **Base del precio (servicios)**: the standard line under service prices ("por sesión individual"). An individual service can override it.
-- **Texto de precio a consultar**: shown on courses that have no price.
+- **Moneda**: la etiqueta de moneda después de **todos** los precios del sitio, por ejemplo «MXN».
+- **Base del precio (servicios)**: la línea estándar debajo de los precios de los servicios («por sesión individual»). Cada servicio puede cambiarla.
+- **Texto de precio a consultar**: se muestra en los cursos que no tienen precio.
 
-#### Cursos tab
+#### Pestaña Cursos
 
-- **Título de la tarjeta de contacto** and **Texto de la tarjeta de contacto**: the "¿Te interesa este programa?" box on every course page.
+- **Título de la tarjeta de contacto** y **Texto de la tarjeta de contacto**: el recuadro «¿Te interesa este programa?» en todas las páginas de cursos.
 
-#### Legales tab
+#### Pestaña Legales
 
-- **Nota de contacto**: the note at the bottom of both legal pages. The contact email is added after it automatically.
+- **Nota de contacto**: la nota al final de las dos páginas legales. El correo de contacto se agrega automáticamente después.
 
-**Emptying an Ajustes field brings back its original default text.** It doesn't remove the item from the website.
+**Si vacías un campo de Ajustes, regresa su texto original.** No quita el elemento del sitio.
 
-### Navigation menus
+### Menús de navegación
 
-The header and footer link lists are managed in **Apariencia → Menús**. Only Klaritty's site administrator sees this screen.
+Las listas de enlaces del encabezado y del pie de página se administran en **Apariencia → Menús**. Solo el administrador del sitio de Klaritty ve esta pantalla.
 
-- **Menú principal**: the header links (Inicio, Acerca de, Servicios, Cursos).
-- **Menú de pie de página**: the footer's "Navegación" column (Acerca de, Servicios, Cursos).
+- **Menú principal**: los enlaces del encabezado (Inicio, Acerca de, Servicios, Cursos).
+- **Menú de pie de página**: la columna «Navegación» del pie de página (Acerca de, Servicios, Cursos).
 
-Menus are one level only, with no dropdowns. The footer's **Legal** and **Contacto** columns aren't menus. They're built automatically from the legal pages and from Ajustes de Álmica.
+Los menús tienen un solo nivel, sin submenús desplegables. Las columnas **Legal** y **Contacto** del pie de página no son menús. Se generan automáticamente a partir de las páginas legales y de Ajustes de Álmica.
 
-> 📷 **Screenshot needed:** **Apariencia → Menús** with **Menú principal** selected, showing its four items and the **Ajustes del menú** section where the menu is assigned to its location.
+> 📷 **Captura necesaria:** **Apariencia → Menús** con **Menú principal** seleccionado, mostrando sus cuatro elementos y la sección **Ajustes del menú** donde se asigna el menú a su ubicación.
 
-### Site title and tagline
+### Título y descripción corta del sitio
 
-The site name in the footer's copyright line comes from **Ajustes → Generales**, which only the site administrator can change. Only change it as part of an agreed rebrand.
+El nombre del sitio en la línea de derechos de autor del pie de página viene de **Ajustes → Generales**, que solo puede cambiar el administrador del sitio. Cámbialo únicamente como parte de un cambio de marca acordado.
 
-## 11. Images and media
+## 11. Imágenes y medios
 
-### Uploading
+### Subir imágenes
 
-Upload images straight from the field: click the image field's add button, or the featured-image box in the sidebar. You can also upload in **Medios** first and pick the image later.
+Sube las imágenes directamente desde el campo: haz clic en el botón para agregar del campo de imagen, o en el recuadro de imagen destacada de la barra lateral. También puedes subirlas primero en **Medios** y elegirlas después.
 
-### Recommended sizes
+### Tamaños recomendados
 
-The website crops images automatically. Uploading at least these sizes gives the sharpest result.
+El sitio recorta las imágenes automáticamente. Subirlas al menos con estos tamaños da el resultado más nítido.
 
-| Where | Shape on the website | Upload at least | Keep the subject… |
+| Dónde | Forma en el sitio | Sube al menos | Mantén el motivo… |
 |---|---|---|---|
-| Service card (featured image) | Tall portrait card | 640 × 480 px, landscape | In the **centre**. The card shows only the middle slice |
-| Course card (featured image) | Portrait card / small landscape card | 640 × 480 px, landscape | In the centre |
-| Service and course page header | Wide banner under a green tint | 1600 × 900 px, landscape | In the centre |
-| Page headers (Inicio, Acerca de, Servicios, Cursos) | Wide banner | 1600 × 900 px, landscape | Home page: on the **right**. The left side is darkened behind the text |
-| Home "Introducción" image | Tall arched frame | 1600 × 900 px | In the centre. The edges are cut off |
-| Home "Cita" background | Wide banner under a green tint | 1600 × 900 px | Anywhere; the image is muted |
-| Professional portrait | Circle | 400 × 400 px, **square** | Face centred, with space around |
+| Tarjeta de servicio (imagen destacada) | Tarjeta vertical alta | 640 × 480 px, horizontal | Al **centro**. La tarjeta solo muestra la franja central |
+| Tarjeta de curso (imagen destacada) | Tarjeta vertical / tarjeta horizontal pequeña | 640 × 480 px, horizontal | Al centro |
+| Encabezado de servicio y de curso | Banda ancha con tono verde encima | 1600 × 900 px, horizontal | Al centro |
+| Encabezados de página (Inicio, Acerca de, Servicios, Cursos) | Banda ancha | 1600 × 900 px, horizontal | Página de inicio: a la **derecha**. El lado izquierdo se oscurece detrás del texto |
+| Imagen de «Introducción» en Inicio | Marco alto con forma de arco | 1600 × 900 px | Al centro. Los bordes se recortan |
+| Fondo de «Cita» en Inicio | Banda ancha con tono verde encima | 1600 × 900 px | En cualquier lugar; la imagen queda atenuada |
+| Retrato de profesional | Círculo | 400 × 400 px, **cuadrada** | La cara al centro, con espacio alrededor |
 
-WordPress doesn't check image sizes when you upload. Smaller images are accepted but may look soft or be cropped unexpectedly.
+WordPress no revisa el tamaño de las imágenes al subirlas. Las imágenes más pequeñas se aceptan, pero pueden verse borrosas o recortarse de forma inesperada.
 
-### Good practice
+### Buenas prácticas
 
-- **Compress large photos** before uploading. Photos straight from a camera or phone are often much bigger than needed.
-- **Keep the same shape when replacing an image.** Swapping a landscape photo for a portrait one (or the reverse) changes what gets cropped.
-- **Use descriptive file names**, such as `arteterapia-sesion.jpg` instead of `IMG_4821.jpg`.
-- **Fill in Texto alternativo** in the media details. Briefly describe the photo for visitors who use screen readers.
-- **Check the result** on the website, on desktop and on a phone, after every image change.
+- **Comprime las fotos grandes** antes de subirlas. Las fotos que salen directo de una cámara o un celular suelen ser mucho más pesadas de lo necesario.
+- **Conserva la misma forma al reemplazar una imagen.** Cambiar una foto horizontal por una vertical (o al revés) cambia lo que se recorta.
+- **Usa nombres de archivo descriptivos**, como `arteterapia-sesion.jpg` en lugar de `IMG_4821.jpg`.
+- **Llena el Texto alternativo** en los detalles del archivo. Describe brevemente la foto para los visitantes que usan lectores de pantalla.
+- **Revisa el resultado** en el sitio, en computadora y en celular, después de cada cambio de imagen.
 
-> 📷 **Screenshot needed:** The **Medios** attachment-details panel for one service photo, showing the dimensions and the **Texto alternativo** field.
+> 📷 **Captura necesaria:** El panel de detalles de un archivo en **Medios** para una foto de servicio, mostrando las dimensiones y el campo **Texto alternativo**.
 
-## 12. Links and buttons
+## 12. Enlaces y botones
 
-Most links on this site are created automatically from content. Service cards link to their service, the "Volver a servicios" link goes back to the catalogue, and the menus link to the pages. Only a few fields take a web address you type yourself:
+La mayoría de los enlaces del sitio se crean automáticamente a partir del contenido. Las tarjetas de servicio enlazan a su servicio, el enlace «Volver a servicios» regresa al catálogo y los menús enlazan a las páginas. Solo algunos campos reciben una dirección web que escribes tú:
 
-| Field | Where | What to enter |
+| Campo | Dónde | Qué escribir |
 |---|---|---|
-| **Enlace del botón** (Encabezado de página) | Home page header button | An internal page, for example `/acerca-de/`, or a full address |
-| **Enlace del botón** (Inicio → Introducción) | Home intro button | Same as above |
-| **Instagram**, **Facebook** (Ajustes de Álmica) | Footer buttons | The full profile address starting with `https://` |
-| **Correo de contacto** (Ajustes de Álmica) | Footer, course pages, legal pages | Just the email address, for example `nombre@dominio.com`. The website makes it clickable |
+| **Enlace del botón** (Encabezado de página) | Botón del encabezado de la página de inicio | Una página interna, por ejemplo `/acerca-de/`, o una dirección completa |
+| **Enlace del botón** (Inicio → Introducción) | Botón de la introducción de la página de inicio | Igual que el anterior |
+| **Instagram**, **Facebook** (Ajustes de Álmica) | Botones del pie de página | La dirección completa del perfil, empezando con `https://` |
+| **Correo de contacto** (Ajustes de Álmica) | Pie de página, páginas de cursos, páginas legales | Solo la dirección de correo, por ejemplo `nombre@dominio.com`. El sitio la convierte en enlace |
 
-Tips:
+Consejos:
 
-- **Internal links:** copy the address from the page on the website and keep only the part after the domain, for example `/servicios/arteterapia/`. That keeps the link working if the domain ever changes.
-- **External links:** paste the full address, including `https://`.
-- **Test every link** after saving by clicking it on the live website.
-- **Phone numbers** are shown as text. They aren't clickable call links.
-- **WhatsApp links** aren't supported yet. See [section 3](#3-what-requires-development).
-- Inside a text editor, select the words and use the link button in the toolbar. Don't paste raw addresses into the text.
+- **Enlaces internos:** copia la dirección de la página en el sitio y conserva solo la parte después del dominio, por ejemplo `/servicios/arteterapia/`. Así el enlace sigue funcionando si algún día cambia el dominio.
+- **Enlaces externos:** pega la dirección completa, incluyendo `https://`.
+- **Prueba cada enlace** después de guardar, haciendo clic en él en el sitio publicado.
+- **Los números de teléfono** se muestran como texto. No son enlaces para llamar.
+- **Los enlaces de WhatsApp** todavía no son compatibles. Consulta [Qué requiere desarrollo](#3-que-requiere-desarrollo).
+- Dentro de un editor de texto, selecciona las palabras y usa el botón de enlace de la barra de herramientas. No pegues direcciones sueltas en el texto.
 
-## 13. FAQ
+## 13. Preguntas frecuentes
 
-### Can I change text myself?
+### ¿Puedo cambiar los textos por mi cuenta?
 
-Yes. Anything that has a field can be changed in WordPress: titles, descriptions, prices, benefits, bios, quotes, page headers, home page copy, legal text and the global settings. Text that's part of the design, like section labels, needs development.
+Sí. Todo lo que tiene un campo se puede cambiar en WordPress: títulos, descripciones, precios, beneficios, biografías, citas, encabezados de página, textos de la página de inicio, textos legales y los ajustes globales. Los textos que forman parte del diseño, como las etiquetas de sección, requieren desarrollo.
 
-### Can I replace an image?
+### ¿Puedo reemplazar una imagen?
 
-Yes. Select a new image in the same field and save. Keep the same shape (landscape or square) as the original, and check the page afterwards.
+Sí. Elige una imagen nueva en el mismo campo y guarda. Conserva la misma forma (horizontal o cuadrada) que la original y revisa la página después.
 
-### Can I create another service, course, professional or testimonial?
+### ¿Puedo crear otro servicio, curso, profesional o testimonio?
 
-Yes. Click **Añadir** in **Servicios**, **Cursos**, **Profesionales** or **Testimonios**. New services and courses automatically appear on the Servicios and Cursos pages. Remember:
+Sí. Haz clic en **Añadir** en **Servicios**, **Cursos**, **Profesionales** o **Testimonios**. Los servicios y cursos nuevos aparecen automáticamente en las páginas Servicios y Cursos. Recuerda:
 
-- The home page shows at most **6 featured services** and the **first 3 courses**.
-- A new professional only appears where you select them on a service or course.
+- La página de inicio muestra como máximo **6 servicios destacados** y los **primeros 3 cursos**.
+- Un profesional nuevo solo aparece donde lo selecciones en un servicio o curso.
 
-### Can I create a new page?
+### ¿Puedo crear una página nueva?
 
-Not as a designed page. The site has no general-purpose page design, so a new page would look very plain. Ask development.
+No como página con diseño. El sitio no tiene un diseño de página de uso general, así que una página nueva se vería muy básica. Pídelo a desarrollo.
 
-### Can I change the layout?
+### ¿Puedo cambiar el diseño?
 
-No. Layout, section order, colours and fonts are part of the design. Send layout requests to development.
+No. El diseño, el orden de las secciones, los colores y las tipografías son parte del diseño del sitio. Envía las solicitudes de diseño a desarrollo.
 
-### What if I need information that doesn't have a field?
+### ¿Qué hago si necesito información que no tiene campo?
 
-Don't squeeze it into another field, such as putting a schedule into the description or a link into a benefit title. Ask development for a proper field, so it appears consistently on every item.
+No la metas en otro campo, como poner un horario en la descripción o un enlace en el título de un beneficio. Pide a desarrollo un campo adecuado, para que aparezca de forma uniforme en todos los elementos.
 
-### Should I update the original Excel file?
+### ¿Debo actualizar el archivo de Excel original?
 
-No. The spreadsheet was only used to load the first version of the content. **WordPress is now the official version.** Changes made in the spreadsheet won't reach the website. If the spreadsheet were imported again, it could overwrite your WordPress edits, so tell development if anyone plans to.
+No. La hoja de cálculo solo se usó para cargar la primera versión del contenido. **Ahora la versión oficial es WordPress.** Los cambios en la hoja de cálculo no llegan al sitio. Si la hoja se volviera a importar, podría sobrescribir tus cambios en WordPress, así que avisa a desarrollo si alguien planea hacerlo.
 
-### Can editing content break the website?
+### ¿Editar contenido puede descomponer el sitio?
 
-Normal editing can't break the design, because the templates control the layout. A few actions can cause problems, though:
+La edición normal no puede romper el diseño, porque las plantillas controlan cómo se ve. Aun así, algunas acciones pueden causar problemas:
 
-- changing a page's or service's web address (slug)
-- deleting or unpublishing the main pages
-- removing the **Legal** template from a legal page
-- trashing a professional, or a hand-picked "Otros servicios" service, while it's still selected somewhere. It keeps showing on the website.
-- turning off every **Destacado en Inicio**, which hides the home page services section
+- cambiar la dirección web (slug) de una página o de un servicio
+- eliminar o despublicar las páginas principales
+- quitar la plantilla **Legal** de una página legal
+- mandar a la papelera a un profesional, o un servicio elegido a mano en «Otros servicios», mientras sigue seleccionado en algún lugar. Sigue apareciendo en el sitio.
+- desactivar todos los **Destacado en Inicio**, lo que oculta la sección de servicios de la página de inicio
 
-If something looks wrong after a change, undo it (see [Troubleshooting](#14-troubleshooting)) and contact development.
+Si algo se ve mal después de un cambio, deshazlo (consulta [Solución de problemas](#14-solucion-de-problemas)) y contacta a desarrollo.
 
-### When should I contact the developer?
+### ¿Cuándo debo contactar a desarrollo?
 
-Contact development whenever you need something [section 3](#3-what-requires-development) lists, when a fix in [Troubleshooting](#14-troubleshooting) doesn't work, or whenever you're unsure whether a change is content or structure. Asking first is always fine.
+Contacta a desarrollo cuando necesites algo de la lista de [Qué requiere desarrollo](#3-que-requiere-desarrollo), cuando una solución de [Solución de problemas](#14-solucion-de-problemas) no funcione, o cuando tengas dudas sobre si un cambio es de contenido o de estructura. Preguntar primero siempre está bien.
 
-## 14. Troubleshooting
+## 14. Solución de problemas
 
-### I updated something but can't see the change
+### Hice un cambio pero no lo veo
 
-1. Make sure you clicked **Guardar** or **Publicar** and the item isn't still a draft.
-2. Make sure you're looking in the right place. For example, a service's **Extracto** isn't shown on its card, and a course's **Duración** only shows when it has a price.
-3. **Clear the cache.** In the black bar at the top of the screen, open **Breeze** and click **Purge All Cache**.
-4. Check again in a **private or incognito window**.
+1. Asegúrate de haber hecho clic en **Guardar** o **Publicar** y de que el elemento no siga como borrador.
+2. Asegúrate de estar buscando en el lugar correcto. Por ejemplo, el **Extracto** de un servicio no se muestra en su tarjeta, y la **Duración** de un curso solo aparece cuando tiene precio.
+3. **Vacía la caché.** En la barra negra de la parte superior de la pantalla, abre **Breeze** y haz clic en **Purge All Cache**.
+4. Vuelve a revisar en una **ventana privada o de incógnito**.
 
-Why this happens: the website keeps a saved copy of each page so it loads quickly for visitors. Saving an item refreshes that item's own page, but **not** the other pages that show it: the home page, the Servicios and Cursos lists, or the "Otros servicios" cards. Changes in **Ajustes de Álmica** don't refresh any page. Without a purge, visitors can see the old version for **up to 24 hours**.
+Por qué pasa: el sitio guarda una copia de cada página para que cargue rápido para los visitantes. Al guardar un elemento se actualiza su propia página, pero **no** las demás páginas donde aparece: la página de inicio, los listados de Servicios y Cursos o las tarjetas de «Otros servicios». Los cambios en **Ajustes de Álmica** no actualizan ninguna página. Si no vacías la caché, los visitantes pueden ver la versión anterior **hasta por 24 horas**.
 
-While you're logged in, you always see the latest version. That's why the private window matters: it shows what visitors see.
+Mientras tienes la sesión iniciada, siempre ves la versión más reciente. Por eso importa la ventana privada: muestra lo que ven los visitantes.
 
-### The image looks wrong
+### La imagen se ve mal
 
-- **Cropped badly:** move the subject to the centre of the photo, or use a photo closer to the shape in [Images and media](#11-images-and-media), then re-upload.
-- **Blurry:** the upload was too small. Upload a larger version.
-- **The page header shows a different photo from the card:** the service or course has its own **Imagen del encabezado**. Change or clear that field.
-- **A portrait shows an empty circle:** the professional has no featured image.
+- **Mal recortada:** mueve el motivo al centro de la foto, o usa una foto más parecida a la forma indicada en [Imágenes y medios](#11-imagenes-y-medios), y vuelve a subirla.
+- **Borrosa:** la imagen era demasiado pequeña. Sube una versión más grande.
+- **El encabezado de la página muestra una foto distinta a la de la tarjeta:** el servicio o curso tiene su propia **Imagen del encabezado**. Cambia o vacía ese campo.
+- **Un retrato muestra un círculo vacío:** el profesional no tiene imagen destacada.
 
-### My link doesn't work
+### Mi enlace no funciona
 
-- External links must start with `https://`.
-- Internal links should start with `/`, for example `/acerca-de/`.
-- Check for typos and spaces, then save and click the link on the live site.
-- Instagram or Facebook buttons that go nowhere mean the field in **Ajustes de Álmica** is empty.
+- Los enlaces externos deben empezar con `https://`.
+- Los enlaces internos deben empezar con `/`, por ejemplo `/acerca-de/`.
+- Revisa que no haya errores de escritura ni espacios, guarda y haz clic en el enlace en el sitio publicado.
+- Si los botones de Instagram o Facebook no llevan a ningún lado, el campo en **Ajustes de Álmica** está vacío.
 
-### I don't see a field for the information I need
+### No veo un campo para la información que necesito
 
-- Scroll down. The site's fields are in a panel **below** the main text area.
-- On the home page, look in the **Inicio** panel. On other pages, look in **Encabezado de página**.
-- Contact details, prices wording and footer text are in **Ajustes de Álmica**. Editors don't see it; ask Klaritty's site administrator.
-- If none of these have it, the field doesn't exist yet. Ask development.
+- Desplázate hacia abajo. Los campos del sitio están en un panel **debajo** del área de texto principal.
+- En la página de inicio, busca en el panel **Inicio**. En las demás páginas, busca en **Encabezado de página**.
+- Los datos de contacto, los textos de precios y los textos del pie de página están en **Ajustes de Álmica**. Los editores no lo ven; pídeselo al administrador del sitio de Klaritty.
+- Si no está en ninguno de esos lugares, el campo todavía no existe. Pídelo a desarrollo.
 
-### I'm not sure where a piece of content is managed
+### No sé dónde se administra un contenido
 
-| You see on the website… | Edit it in… |
+| Lo que ves en el sitio… | Se edita en… |
 |---|---|
-| A service's name, price, benefits, photo | **Servicios** → that service |
-| A therapist's photo, role or bio | **Profesionales** → that person |
-| A course card's summary | **Cursos** → that course → **Extracto** |
-| "Escríbenos para conocer el precio" | **Ajustes de Álmica → Precios** |
-| "¿Te interesa este programa?" box | **Ajustes de Álmica → Cursos** |
-| Footer email, phone, location, social buttons | **Ajustes de Álmica** |
-| Footer "Navegación" links, header links | **Apariencia → Menús** |
-| Home page section text | **Páginas → Inicio → Inicio** panel |
-| Founder on Acerca de and her "Formación" | **Profesionales** → the founder (chosen in **Páginas → Acerca de**) |
-| A testimonial's label under the name | **Testimonios** → that testimonial → **Sobre** |
-| "Nosotros" text, section labels, legal header | Not editable. Ask development |
+| Nombre, precio, beneficios o foto de un servicio | **Servicios** → ese servicio |
+| Foto, rol o biografía de un terapeuta | **Profesionales** → esa persona |
+| El resumen de la tarjeta de un curso | **Cursos** → ese curso → **Extracto** |
+| «Escríbenos para conocer el precio» | **Ajustes de Álmica → Precios** |
+| El recuadro «¿Te interesa este programa?» | **Ajustes de Álmica → Cursos** |
+| Correo, teléfono, ubicación y botones de redes del pie de página | **Ajustes de Álmica** |
+| Enlaces de «Navegación» del pie de página, enlaces del encabezado | **Apariencia → Menús** |
+| Textos de las secciones de la página de inicio | **Páginas → Inicio →** panel **Inicio** |
+| La fundadora en Acerca de y su «Formación» | **Profesionales** → la fundadora (elegida en **Páginas → Acerca de**) |
+| La etiqueta debajo del nombre en un testimonio | **Testimonios** → ese testimonio → **Sobre** |
+| El texto «Nosotros», las etiquetas de sección, el encabezado legal | No se puede editar. Pídelo a desarrollo |
 
-### I made a mistake and want to go back
+### Me equivoqué y quiero regresar a la versión anterior
 
-- **Pages** (Inicio, Acerca de, legal pages, …) keep a history of saved versions. In the settings sidebar, open **Revisiones**, pick an earlier version and restore it. Restoring brings back both the main text and the page's fields (the header and the Inicio panel) as they were at that save. The oldest version of each page comes from the initial content load and only holds the main text, so restoring that one leaves the fields as they are.
-- **Services, courses, professionals, testimonials and Ajustes de Álmica don't keep a version history.** Before a big edit, copy the current text somewhere safe so you can paste it back if needed.
-- A trashed item can be restored from **Papelera** at the top of its list.
+- Las **páginas** (Inicio, Acerca de, páginas legales, …) guardan un historial de versiones. En la barra lateral de ajustes, abre **Revisiones**, elige una versión anterior y restáurala. Al restaurar se recuperan tanto el texto principal como los campos de la página (el encabezado y el panel Inicio) tal como estaban al guardarse. La versión más antigua de cada página viene de la carga inicial de contenido y solo tiene el texto principal, así que restaurarla deja los campos como están.
+- **Los servicios, cursos, profesionales, testimonios y Ajustes de Álmica no guardan historial de versiones.** Antes de un cambio grande, copia el texto actual en un lugar seguro para poder pegarlo de nuevo si hace falta.
+- Un elemento en la papelera se puede restaurar desde **Papelera**, en la parte superior de su lista.
 
-# Recommended YouTrack Knowledge Base Structure
+# Base de conocimiento de YouTrack
 
-A parent article plus nine child articles. Each child is one or two H2 sections of this file, so it can be copied as-is. Promote the H2 to the article title, and its H3/H4 headings move up one level.
+Publicada el 2026-10-06 en la base de conocimiento de Klaritty Work (KW), visible para los miembros del proyecto KW. Cada artículo corresponde a una o dos secciones H2 de este archivo. En los artículos de una sola sección, el H2 se convierte en el título del artículo y los encabezados H3/H4 suben un nivel; los enlaces `#sección` se convierten en enlaces al artículo correspondiente.
 
-**Álmica Healing Website — Content Management** (parent)
-Contents: the title and intro line, plus **1. About this guide**, including "A note on admin language". End with a list of links to the child articles.
+**Este archivo es la fuente.** Cuando cambie, actualiza también el artículo correspondiente.
 
-| # | Child article | Sections from this file |
+| Artículo | Título | Secciones de este archivo |
 |---|---|---|
-| 1 | **Start Here: What You Can and Can't Change** | 2. What you can safely edit · 3. What requires development |
-| 2 | **WordPress Basics** | 4. WordPress basics, including the English label table |
-| 3 | **Managing Services** | 5. Managing Services |
-| 4 | **Managing Courses** | 6. Managing Courses |
-| 5 | **Managing Professionals** | 7. Managing Professionals |
-| 6 | **Managing Testimonials** | 8. Managing Testimonials |
-| 7 | **Managing Pages (Home, About, Listings, Legal)** | 9. Managing Pages |
-| 8 | **Global Website Content & Menus** | 10. Global website content |
-| 9 | **Images & Links** | 11. Images and media · 12. Links and buttons |
-| 10 | **FAQ & Troubleshooting** | 13. FAQ · 14. Troubleshooting |
+| KW-A-1 (principal) | **Sitio web de Álmica Healing — Administración de contenido** | Línea de introducción · 1. Acerca de esta guía · enlaces a los artículos hijos |
+| KW-A-2 | **Empieza aquí: qué puedes cambiar y qué no** | 2. Qué puedes editar · 3. Qué requiere desarrollo |
+| KW-A-3 | **Conceptos básicos de WordPress** | 4. Conceptos básicos de WordPress |
+| KW-A-4 | **Administrar servicios** | 5. Administrar servicios |
+| KW-A-5 | **Administrar cursos** | 6. Administrar cursos |
+| KW-A-6 | **Administrar profesionales** | 7. Administrar profesionales |
+| KW-A-7 | **Administrar testimonios** | 8. Administrar testimonios |
+| KW-A-8 | **Administrar páginas (Inicio, Acerca de, listados y legales)** | 9. Administrar páginas |
+| KW-A-9 | **Contenido global del sitio y menús** | 10. Contenido global del sitio |
+| KW-A-10 | **Imágenes y enlaces** | 11. Imágenes y medios · 12. Enlaces y botones |
+| KW-A-11 | **Preguntas frecuentes y solución de problemas** | 13. Preguntas frecuentes · 14. Solución de problemas |
 
-Notes for publishing:
-
-- Internal links in this file point to `#section` anchors. In YouTrack, replace them with links to the matching child article.
-- Replace each **📷 Screenshot needed** placeholder with the captured image when the screenshots are ready.
+Los marcadores **📷 Captura necesaria** se publicaron tal cual. Cuando tengas las capturas, reemplázalos por las imágenes en los dos lugares.
