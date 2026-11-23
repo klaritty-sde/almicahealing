@@ -68,6 +68,7 @@ function almicahealing_level_choices() {
 	return array(
 		'basico'     => __( 'Básico', 'almicahealing' ),
 		'intermedio' => __( 'Intermedio', 'almicahealing' ),
+		'avanzado'   => __( 'Avanzado', 'almicahealing' ),
 		'abierto'    => __( 'Abierto a todos', 'almicahealing' ),
 	);
 }

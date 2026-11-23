@@ -134,8 +134,8 @@ content_types:
       level:
         type: select
         required: true
-        options: { basico: Básico, intermedio: Intermedio, abierto: Abierto a todos }
-        note: Field, not taxonomy — 3 fixed values, no per-level listing.
+        options: { basico: Básico, intermedio: Intermedio, avanzado: Avanzado, abierto: Abierto a todos }
+        note: Field, not taxonomy — 4 fixed values, no per-level listing.
       price:
         type: number
         required: false

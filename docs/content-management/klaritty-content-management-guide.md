@@ -310,7 +310,7 @@ La etiqueta pequeña arriba del título en el encabezado de la página. Por ejem
 
 #### Nivel \*
 
-**Básico**, **Intermedio** o **Abierto a todos**. Se muestra en las tarjetas pequeñas de «Otros programas».
+**Básico**, **Intermedio**, **Avanzado** o **Abierto a todos**. Se muestra en las tarjetas pequeñas de «Otros programas».
 
 #### Precio
 

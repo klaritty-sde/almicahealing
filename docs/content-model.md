@@ -119,7 +119,7 @@ erDiagram
 | Beneficio | no, only meaningful inside one service | no (the texts differ per service) | no | repeater on Servicio |
 | Punto de programa | no | no | no | repeater on Curso |
 | Credencial | no | no | no | repeater on Profesional |
-| Nivel de curso | n/a | 3 fixed values, no listing per level | no | select field, **not** a taxonomy |
+| Nivel de curso | n/a | 4 fixed values, no listing per level | no | select field, **not** a taxonomy |
 | Modalidad | n/a | fixed values, no filtering | no | select field (enum) |
 
 Why these are fields rather than taxonomies: level and modality have a few fixed values, no archive
@@ -184,7 +184,7 @@ Editor-managed: yes. Reusable: yes.
 | description | `post_content` | rich text | ✔ | 1 | — | "Sobre el curso" |
 | image | featured image | image | ✔ | 1 | — | Card, hero and "Otros programas" all use the same photo in Figma |
 | program_label | SCF | text | ✔ | 1 | — | Hero pill, e.g. "Curso intermedio de canalización y sanación". Rec. ≤ 50 chars |
-| level | SCF | select | ✔ | 1 | — | `basico` "Básico", `intermedio` "Intermedio", `abierto` "Abierto a todos". ⚠ Q9 |
+| level | SCF | select | ✔ | 1 | — | `basico` "Básico", `intermedio` "Intermedio", `avanzado` "Avanzado", `abierto` "Abierto a todos". ⚠ Q9 |
 | price | SCF | number | – | 0..1 | empty = "price on request" | ≥ 0, whole MXN. Shown as "$5,900 MXN". When empty, show the global `price_on_request_text` and hide the Inversión card |
 | duration | SCF | text | ✔ if price set | 0..1 | — | Free text: "2 meses", "3 meses". Rec. ≤ 30 chars |
 | outcomes_heading | SCF | select | ✔ | 1 | `objetivos` | `objetivos`, `beneficios`, `temas` |

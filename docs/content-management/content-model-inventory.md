@@ -124,7 +124,7 @@ Production: 11 services; 6 are featured (orders 1–6).
 | Order | `menu_order` | native | – | — | Cursos page order + "01" counter; Home shows **first 3 only**; "Otros programas" order |
 | Frase del encabezado | `tagline` | text | – | maxlength 250 | Hero subtitle; falls back to excerpt |
 | Etiqueta del programa | `program_label` | text | ✔ | maxlength 80 | Pill above the hero title |
-| Nivel | `level` | select | ✔ | `basico` Básico · `intermedio` Intermedio · `abierto` Abierto a todos | **Only** on compact "Otros programas" cards |
+| Nivel | `level` | select | ✔ | `basico` Básico · `intermedio` Intermedio · `avanzado` Avanzado · `abierto` Abierto a todos | **Only** on compact "Otros programas" cards |
 | Precio | `price` | number | – | min 0, step 1 | Inversión card, formatted `$5,900 MXN` (no decimals). **Empty ⇒ Inversión card hidden; card + contact card show Ajustes → `price_on_request_text`** |
 | Duración | `duration` | text | – | maxlength 40 | Inside the Inversión card only — **not shown when Precio is empty** |
 | Encabezado de la lista | `outcomes_heading` | select | ✔ | `objetivos` Objetivos · `beneficios` Beneficios · `temas` Temas | Heading of the numbered box |
