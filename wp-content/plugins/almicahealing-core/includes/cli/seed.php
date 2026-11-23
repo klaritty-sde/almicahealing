@@ -277,13 +277,16 @@ function almicahealing_seed_run() {
 	}
 
 	// Cursos (Figma "Courses" frame, node-id 146-200), Kriutunmi first per
-	// the client (KW-177). The `riutunmi` key predates the rename.
+	// the client (KW-177). The `riutunmi` key predates the rename. Orden
+	// 3–5 belong to Cronquístara, Químxhara and Qxinntru, which the client
+	// added in wp-admin and are not seeded, so Lo Que Nadie Nos Enseñó
+	// comes last at 6 (KW-197).
 	$cursos = array(
-		array( 'riutunmi', 'Kriutunmi', 'Un espacio de formación para el desarrollo de la conciencia y la conexión con dimensiones más profundas del ser.' ),
-		array( 'clantanra', 'Clantanra', 'Un programa de alta conexión interior para quienes buscan ampliar su percepción e intuición.' ),
-		array( 'lo-que-nadie-nos-enseno', 'Lo Que Nadie Nos Enseñó', 'Herramientas prácticas para afrontar los desafíos cotidianos con mayor conciencia y equilibrio.' ),
+		array( 'riutunmi', 'Kriutunmi', 1, 'Un espacio de formación para el desarrollo de la conciencia y la conexión con dimensiones más profundas del ser.' ),
+		array( 'clantanra', 'Clantanra', 2, 'Un programa de alta conexión interior para quienes buscan ampliar su percepción e intuición.' ),
+		array( 'lo-que-nadie-nos-enseno', 'Lo Que Nadie Nos Enseñó', 6, 'Herramientas prácticas para afrontar los desafíos cotidianos con mayor conciencia y equilibrio.' ),
 	);
-	foreach ( $cursos as $order => list( $key, $title, $excerpt ) ) {
+	foreach ( $cursos as list( $key, $title, $order, $excerpt ) ) {
 		$curso_id = almicahealing_seed_post(
 			"curso-{$key}",
 			array(
@@ -291,7 +294,7 @@ function almicahealing_seed_run() {
 				'post_title'   => $title,
 				'post_excerpt' => $excerpt,
 				'post_status'  => 'publish',
-				'menu_order'   => $order + 1,
+				'menu_order'   => $order,
 			)
 		);
 		almicahealing_seed_thumbnail(

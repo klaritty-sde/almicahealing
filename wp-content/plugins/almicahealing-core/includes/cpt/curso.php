@@ -1,6 +1,7 @@
 <?php
 /**
- * "Curso" content type — Kriutunmi, Clantanra, Lo Que Nadie Nos Enseñó.
+ * "Curso" content type — Kriutunmi, Clantanra, Cronquístara, Químxhara,
+ * Qxinntru and Lo Que Nadie Nos Enseñó, listed by Orden (`menu_order`).
  *
  * @package AlmicaHealingCore
  */

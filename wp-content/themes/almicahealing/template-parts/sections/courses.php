@@ -1,7 +1,7 @@
 <?php
 /**
- * "El conocimiento también transforma" — teaser grid for the three
- * courses (Kriutunmi, Clantanra, Lo Que Nadie Nos Enseñó). Pulls from the
+ * "El conocimiento también transforma" — teaser grid for the first three
+ * courses by Orden (`menu_order`); the Cursos page lists them all. Pulls from the
  * `curso` CPT registered in almicahealing-core once that plugin exists;
  * falls back to nothing if it isn't active yet.
  *
